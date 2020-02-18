@@ -12,16 +12,26 @@
 
 </head>
 <body>
-<div id="header">
-    <div id="logo">
-        <h1><span>Flower Decoration</span></h1>
+<%@include file="userHeader.jsp" %>
+<div id="wrapper">
+    <!-- start page -->
+    <div id="page">
+        <div align="center">
+            <h3 style="color: green">${success}</h3>
+            <h3 style="color: red">${errmsg}</h3>
+        </div>
+        <!-- start content -->
+        <div id="content">
+            <div class="post">
+                <h2 class="title"></h2>
+                <p class="byline"></p>
+            </div>
+        </div>
+        <!-- end content -->
+        <!-- start sidebars -->
+        <!-- end sidebars -->
+        <div style="clear: both;">&nbsp;</div>
     </div>
-    user logged in
-
-    <div id="footer">
-        <p class="copyright">&copy;&nbsp;&nbsp;2020 All Rights Reserved &nbsp;&bull;&nbsp; Design by Flower Decoration team</a>.</p>
-    </div>
-</div>
-
+<%@include file="../footer.jsp" %>
 </body>
 </html>

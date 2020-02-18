@@ -45,29 +45,26 @@
                     </div>
 
                     <div id="dropmenu5" class="dropmenudiv_a">
-                        <a href="ManagerController?anchor=addProject">Add Flowers Details</a>
-                        <a href="ManagerController?anchor=viewProjectDetails">Modify/Delete Flowers Details</a>
+                        <a href="/addFlower?anchor=addFlower">Add Flowers Details</a>
+                        <a href="/addFlower?anchor=viewProjectDetails">Modify/Delete Flowers Details</a>
                     </div>
 
                     <div id="dropmenu3" class="dropmenudiv_a">
-                        <a href="ManagerController?anchor=addProject">Add Decoration Type</a>
-                        <a href="ManagerController?anchor=viewProjectDetails">Modify/Delete Decoration Type</a>
+                        <a href="/addDecoration?anchor=addDecoration">Add Decoration Type</a>
+                        <a href="/addDecoration?anchor=viewProjectDetails">Modify/Delete Decoration Type</a>
                     </div>
 
                     <div id="dropmenu4" class="dropmenudiv_a">
-                        <a href="ManagerController?anchor=addEmployee">View Flower Request</a>
-                        <a href="ManagerController?anchor=addEmployee">View Decoration Request</a>
-                        <a href="ManagerController?anchor=viewEmployee">Flower Request Confirmation</a>
-                        <a href="ManagerController?anchor=viewEmployee">Decoration Request Confirmation</a>
+                        <a href="/flowerRequest?anchor=flowerRequest">View Flower Request</a>
+                        <a href="/decorationRequest?anchor=decorationRequest">View Decoration Request</a>
+                        <a href="/flowerConfirm?anchor=flowerConfirm">Flower Request Confirmation</a>
+                        <a href="/decorationConfirm?anchor=decorationConfirm">Decoration Request Confirmation</a>
                     </div>
-
 
                     <script type="text/javascript">
                         //SYNTAX: tabdropdown.init("menu_id", [integer OR "auto"])
                         tabdropdown.init("colortab", 5)
                     </script>
-
-
                 </div>
             </td>
         </tr>

@@ -29,8 +29,18 @@
                         <td colspan="2" align="center"><h1>User Login page</h1></td>
                     </tr>
                     <tr>
+                        <td width="110"><div align="right">Type</div></td>
+                        <td width="213">
+                            <select name="type">
+                                <option value="-1">--select--</option>
+                                <option value="3">User</option>
+                                <option value="2">Employee</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
                         <td width="110">
-                            <div align="center">Username</div>
+                            <div align="right">Username</div>
                         </td>
                         <td width="213">
                             <input name="username" type="text" value="admin" />
@@ -38,7 +48,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <div align="center">Password</div>
+                            <div align="right">Password</div>
                         </td>
                         <td>
                             <input name="password" type="password" value="admin"/>

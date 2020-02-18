@@ -41,6 +41,8 @@
         <url-pattern>/manage</url-pattern>
         <url-pattern>/addShops</url-pattern>
         <url-pattern>/addEmployee</url-pattern>
+        <url-pattern>/addFlower</url-pattern>
+        <url-pattern>/addDecoration</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -52,5 +54,17 @@
     <servlet-mapping>
         <servlet-name>EmployeeController</servlet-name>
         <url-pattern>/employee</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>FlowerDecoratorController</display-name>
+        <servlet-name>FlowerDecoratorController</servlet-name>
+        <servlet-class>college.custom.controller.FlowerDecoratorController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FlowerDecoratorController</servlet-name>
+        <url-pattern>/flower</url-pattern>
+        <url-pattern>/decoration</url-pattern>
     </servlet-mapping>
 </web-app>

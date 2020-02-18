@@ -54,6 +54,12 @@ public class ManagerController extends HttpServlet {
         } else if(anchor.equalsIgnoreCase("addEmployee")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
             rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("addFlower")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addFlower.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("addDecoration")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addDecoration.jsp");
+            rd.forward(request, response);
         }
     }
 }

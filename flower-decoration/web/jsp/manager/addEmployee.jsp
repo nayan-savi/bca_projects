@@ -158,7 +158,7 @@
                 </tr>
 
                 <tr>
-                    <td>Level:</td>
+                    <td>Level</td>
                     <td><select name="level">
                         <option value="-1">--select--</option>
                         <option value="1">Manager</option>

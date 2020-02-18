@@ -58,3 +58,26 @@ CREATE TABLE `shopdetails` (
   UNIQUE(`SHOP_NAME`),
   PRIMARY KEY (`SHOP_ID`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `flowers`;
+CREATE TABLE `flowers` (
+  `flowerid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `flowername` VARCHAR(45) NOT NULL,
+  `flowercost` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `comment` VARCHAR(45) DEFAULT NULL,
+  UNIQUE(flowername),
+  PRIMARY KEY  (`flowerid`)
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+
+DROP TABLE IF EXISTS `decorations`;
+CREATE TABLE `decorations` (
+  `decorationid` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `decorationname` VARCHAR(45) NOT NULL,
+  `decorationcost` VARCHAR(45) NOT NULL,
+  `status` VARCHAR(45) NOT NULL,
+  `comment` VARCHAR(45) DEFAULT NULL,
+  UNIQUE(decorationname),
+  PRIMARY KEY  (`decorationid`)
+) ENGINE=INNODB DEFAULT CHARSET=latin1;
