@@ -55,6 +55,13 @@ public class FlowerDecoratorController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String anchor = request.getParameter("anchor");
+        if (anchor.equalsIgnoreCase("orderFlower")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/orderFlower.jsp");
+            rd.forward(request, response);
+        } else if (anchor.equalsIgnoreCase("orderDecoration")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/orderDecoration.jsp");
+            rd.forward(request, response);
+        }
     }
 }

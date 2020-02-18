@@ -23,7 +23,7 @@
                 <div style="background-color:#C11BC0" align="center">
                     <div id="colortab" class="navigation">
                         <ul>
-                            <li><a href="#" rel="dropmenu1"><span>Shop Details</span></a></li>
+                            <%--<li><a href="#" rel="dropmenu1"><span>Shop Details</span></a></li>--%>
                             <li><a href="#" rel="dropmenu2"><span>Employee Details</span></a></li>
                             <li><a href="#" rel="dropmenu5"><span>Flowers & Amt</span></a></li>
                             <li><a href="#" rel="dropmenu3"><span>Decoration Type & Amt</span></a></li>
@@ -34,14 +34,14 @@
                     </div>
 
                     <!--1st drop down menu -->
-                    <div id="dropmenu1" class="dropmenudiv_a">
+                    <%--<div id="dropmenu1" class="dropmenudiv_a">
                         <a href="/addShops?anchor=addShops">Add Shop Details</a>
                         <a href="/addShops?anchor=viewOrganisation">Modify/view Shop Details</a>
-                    </div>
+                    </div>--%>
 
                     <div id="dropmenu2" class="dropmenudiv_a">
                         <a href="/addEmployee?anchor=addEmployee">Add Employee details</a>
-                        <a href="/addEmployee?anchor=update">Modify/Delete Employee details</a>
+                        <a href="/addEmployee?anchor=viewEmployee">Modify/Delete Employee details</a>
                     </div>
 
                     <div id="dropmenu5" class="dropmenudiv_a">

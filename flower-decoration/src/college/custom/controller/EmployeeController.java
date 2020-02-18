@@ -15,34 +15,42 @@ import java.io.IOException;
 @WebServlet(name = "EmployeeController")
 public class EmployeeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //String anchor = request.getParameter("anchor");
-        RequestDispatcher rd;
-        Employee employee = new Employee();
-        employee.setEmployeeName(request.getParameter("employeeName"));
-        employee.setDateOfJoin(request.getParameter("dateOfJoin"));
-        employee.setQualification(request.getParameter("qualification"));
-        employee.setEmailId(request.getParameter("emailId"));
-        employee.setContactNo(request.getParameter("contactNo"));
-        employee.setFatherName(request.getParameter("fatherName"));
-        employee.setMotherName(request.getParameter("motherName"));
-        employee.setDob(request.getParameter("dob"));
-        employee.setUsername(request.getParameter("username"));
-        employee.setPassword(request.getParameter("password"));
-        employee.setDesignation(request.getParameter("designation"));
-        employee.setRelievingDate(request.getParameter("relievingDate"));
-        employee.setLevel(Integer.parseInt(request.getParameter("level")));
-        employee.setActive(request.getParameter("active"));
-
+        String anchor = request.getParameter("anchor");
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        int row = employeeDao.saveEmployee(employee);
-        if (row > 0) {
-            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
-            request.setAttribute("success", "Employee details saved successfully.");
+        RequestDispatcher rd = null;
+        if(anchor.equalsIgnoreCase("addEmployee")) {
+            Employee employee = getEmployee(request);
+
+            int row = employeeDao.saveEmployee(employee);
+            if (row > 0) {
+                rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+                request.setAttribute("success", "Employee details saved successfully.");
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
+                request.setAttribute("errmsg", "Employee already exits.");
+                rd.forward(request, response);
+            }
+        } else if(anchor.equalsIgnoreCase("modifyEmployee")) {
+            int employeeId = Integer.parseInt(request.getParameter("EMPLOYEE_ID"));
+            Employee employee = employeeDao.modifyEmployee(employeeId);
+            employee.setEmployeeId(employeeId);
+            request.setAttribute("employeeDetails", employee);
+            rd = request.getRequestDispatcher("jsp/employee/modifyEmployee.jsp");
             rd.forward(request, response);
-        } else {
-            rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
-            request.setAttribute("errmsg", "Employee already exits.");
-            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("updateEmployee")) {
+            Employee employee = getEmployee(request);
+            employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
+            int row = employeeDao.updateEmployee(employee);
+            if (row > 0) {
+                rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+                request.setAttribute("success", "Employee details updated successfully.");
+                rd.forward(request, response);
+            } else {
+                rd = request.getRequestDispatcher("jsp/employee/modifyEmployee.jsp");
+                request.setAttribute("errmsg", "Employee details update failed.");
+                rd.forward(request, response);
+            }
         }
 
         /*
@@ -98,6 +106,26 @@ public class EmployeeController extends HttpServlet {
             rd.forward(request, response);
         }*/
 
+        }
+
+    private Employee getEmployee(HttpServletRequest request) {
+        Employee employee = new Employee();
+        employee.setEmployeeName(request.getParameter("employeeName"));
+        employee.setDateOfJoin(request.getParameter("dateOfJoin"));
+        employee.setQualification(request.getParameter("qualification"));
+        employee.setEmailId(request.getParameter("emailId"));
+        employee.setContactNo(request.getParameter("contactNo"));
+        employee.setFatherName(request.getParameter("fatherName"));
+        employee.setMotherName(request.getParameter("motherName"));
+        employee.setAddress(request.getParameter("address"));
+        employee.setDob(request.getParameter("dob"));
+        employee.setUsername(request.getParameter("username"));
+        employee.setPassword(request.getParameter("password"));
+        employee.setDesignation(request.getParameter("designation"));
+        employee.setRelievingDate(request.getParameter("relievingDate"));
+        employee.setLevel(Integer.parseInt(request.getParameter("level")));
+        employee.setActive(request.getParameter("active"));
+        return employee;
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

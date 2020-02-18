@@ -17,23 +17,19 @@ public class LoginDaoImpl implements LoginDao {
     }
 
     @Override
-    public Login login(String username, String password, String type) {
+    public Login login(String username, String password) {
         Login login = new Login();
         String query;
         try {
             Statement stmt = con.createStatement();
-            if(type.equals("3")) {
-                query = "select * from registration where USERNAME='"+username+"' and PASSWORD='"+password+"' and active = 'YES'";
-            } else {
-                query = "select * from employeedetails where USERNAME='"+username+"' and PASSWORD='"+password+"' and active = 'YES'";
-            }
-
+            query = "select * from registration where USERNAME='"+username+"' and PASSWORD='"+password+"' and active = 'YES'";
             ResultSet result = stmt.executeQuery(query);
             while(result.next()) {
                 login.setUsername(username);
-                if(!type.equals("3")) {
+            /*    if(!type.equals("3")) {
                     login.setEmployeeId(result.getInt("EMPLOYEE_ID"));
-                }
+                }*/
+                login.setEmailId(result.getString("EMAIL_ID"));
                 login.setLevel(result.getInt("LEVEL"));
                 login.setActive(result.getString("ACTIVE"));
             }

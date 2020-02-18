@@ -4,6 +4,7 @@ public class Login {
     private String username;
     private String password;
     private String active;
+    private String emailId;
     private int employeeId;
     private int level;
 
@@ -45,5 +46,13 @@ public class Login {
 
     public void setLevel(int level) {
         this.level = level;
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
     }
 }

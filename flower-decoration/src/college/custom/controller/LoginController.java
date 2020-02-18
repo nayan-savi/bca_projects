@@ -21,12 +21,11 @@ public class LoginController extends HttpServlet {
         RequestDispatcher rd = null;
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        String type = request.getParameter("type");
 
         LoginDao loginDao = new LoginDaoImpl();
-        Login login = loginDao.login(username, password, type);
+        Login login = loginDao.login(username, password);
         int level = login.getLevel();
-        if (level != 0) {
+        if (level > 0) {
             if (level == 1) {
                 rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
             } else if (level == 2) {
@@ -38,7 +37,7 @@ public class LoginController extends HttpServlet {
             }
         } else {
             rd = request.getRequestDispatcher("jsp/login/login.jsp");
-            request.setAttribute("msg", "Invalid username and password ");
+            request.setAttribute("errmsg", "Invalid username and password ");
         }
         rd.forward(request, response);
     }

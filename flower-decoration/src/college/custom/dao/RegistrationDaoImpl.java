@@ -18,7 +18,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
     public int save(Registration reg) {
         try {
             Statement statement = con.createStatement();
-            String query = "INSERT INTO REGISTRATION( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, STATUS, DESCRIPTION) " +
+            String query = "INSERT INTO REGISTRATION( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION) " +
                     "VALUES('"+reg.getName()+"','"+reg.getAddress()+"','"+reg.getContactNo()+"','"
                     +reg.getEmailId()+"','"+reg.getUsername()+"','"+reg.getPassword()+"','"
                     +reg.getLevel()+"','"+reg.getStatus()+"','"+reg.getDescription()+"')";

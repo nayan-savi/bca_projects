@@ -16,29 +16,28 @@
     <div id="logo">
         <h1>Flower Decoration</h1>
     </div>
-
-
     <table align="center" bgcolor="#FFFFFF" width="100%">
         <tr>
             <td>
                 <div style="background-color:#C11BC0" align="center">
                     <div id="colortab" class="navigation">
                         <ul>
-                            <li><a href="#" rel="dropmenu1"><span>Decoration Request</span></a></li>
-                            <li><a href="#" rel="dropmenu2"><span>flower request</span></a></li>
+                            <li><a href="#" rel="dropmenu1"><span>Flower</span></a></li>
+                            <li><a href="#" rel="dropmenu2"><span>Decoration</span></a></li>
                             <li><a href="/logoff?anchor=logoff"><span>Logoff</span></a></li>
                         </ul>
                     </div>
 
                     <!--1st drop down menu -->
                     <div id="dropmenu1" class="dropmenudiv_a">
-                        <a href="EmployeeController?anchor=viewSupportRequest">Decoration Order request</a>
-                        <a href="EmployeeController?anchor=resolveSupportRequest">Confirm Order </a></div>
+                        <a href="EmployeeController?anchor=viewSupportRequest">View Decoration Request</a>
+                        <a href="EmployeeController?anchor=viewSupportRequest">Modify Decoration Request</a>
+                    </div>
 
                     <div id="dropmenu2" class="dropmenudiv_a">
-                        <a href="EmployeeController?anchor=viewSupportRequest">flower request</a>
-                        <a href="EmployeeController?anchor=resolveSupportRequest">confirm order</a></div>
-
+                        <a href="EmployeeController?anchor=viewSupportRequest">View Flower Request</a>
+                        <a href="EmployeeController?anchor=viewSupportRequest">Modify Flower Request</a>
+                    </div>
 
                     <script type="text/javascript">
                         //SYNTAX: tabdropdown.init("menu_id", [integer OR "auto"])
@@ -48,8 +47,6 @@
             </td>
         </tr>
     </table>
-
-
 </div>
 <!-- end header -->
 </body>

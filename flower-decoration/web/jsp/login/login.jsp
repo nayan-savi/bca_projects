@@ -22,6 +22,7 @@
         <div id="page">
             <div align="center">
                 <h3 style="color: green">${success}</h3>
+                <h3 style="color: red">${errmsg}</h3>
             </div>
             <form action="/login" method="post">
                 <table width="333" height="188" border="0" align="center">
@@ -29,21 +30,11 @@
                         <td colspan="2" align="center"><h1>User Login page</h1></td>
                     </tr>
                     <tr>
-                        <td width="110"><div align="right">Type</div></td>
-                        <td width="213">
-                            <select name="type">
-                                <option value="-1">--select--</option>
-                                <option value="3">User</option>
-                                <option value="2">Employee</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
                         <td width="110">
                             <div align="right">Username</div>
                         </td>
                         <td width="213">
-                            <input name="username" type="text" value="admin" />
+                            <input name="username" type="text" value="abc" />
                         </td>
                     </tr>
                     <tr>
@@ -51,7 +42,7 @@
                             <div align="right">Password</div>
                         </td>
                         <td>
-                            <input name="password" type="password" value="admin"/>
+                            <input name="password" type="password" value="abc"/>
                         </td>
                     </tr>
                     <tr>

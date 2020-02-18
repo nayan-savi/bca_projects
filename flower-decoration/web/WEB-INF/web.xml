@@ -39,7 +39,7 @@
         <servlet-name>ManagerController</servlet-name>
         <url-pattern>/logoff</url-pattern>
         <url-pattern>/manage</url-pattern>
-        <url-pattern>/addShops</url-pattern>
+        <!--<url-pattern>/addShops</url-pattern>-->
         <url-pattern>/addEmployee</url-pattern>
         <url-pattern>/addFlower</url-pattern>
         <url-pattern>/addDecoration</url-pattern>
@@ -54,6 +54,8 @@
     <servlet-mapping>
         <servlet-name>EmployeeController</servlet-name>
         <url-pattern>/employee</url-pattern>
+        <url-pattern>/modifyEmployee</url-pattern>
+        <url-pattern>/updateEmployee</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -66,5 +68,7 @@
         <servlet-name>FlowerDecoratorController</servlet-name>
         <url-pattern>/flower</url-pattern>
         <url-pattern>/decoration</url-pattern>
+        <url-pattern>/orderFlower</url-pattern>
+        <url-pattern>/orderDecoration</url-pattern>
     </servlet-mapping>
 </web-app>

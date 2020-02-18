@@ -84,7 +84,7 @@
                 return false;
             }
 
-            document.addEmployee.action = "/employee";
+            document.addEmployee.action = "/employee?anchor?addEmployee";
             document.addEmployee.submit();
         }
 
