@@ -40,4 +40,16 @@
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/registration</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <description></description>
+        <display-name>ManagerController</display-name>
+        <servlet-name>ManagerController</servlet-name>
+        <servlet-class>college.custom.controller.ManagerController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ManagerController</servlet-name>
+        <url-pattern>/logoff</url-pattern>
+        <url-pattern>/manage</url-pattern>
+    </servlet-mapping>
 </web-app>

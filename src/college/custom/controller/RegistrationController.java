@@ -34,7 +34,7 @@ public class RegistrationController extends HttpServlet {
         RegistrationDao registrationDao = new RegistrationDaoImpl();
         int row = registrationDao.save(registration);
 
-        if (row == 1) {
+        if (row > 0) {
             rd = request.getRequestDispatcher("jsp/login/login.jsp");
             request.setAttribute("success", "User registered successfully.");
             rd.forward(request, response);

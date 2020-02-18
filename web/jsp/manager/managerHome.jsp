@@ -4,9 +4,9 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Insert title here</title>
+    <title>Manager</title>
 </head>
-<%@include file="ManagerHeader.jsp" %>
+<%@include file="managerHeader.jsp" %>
 <body>
 <div id="wrapper">
     <!-- start page -->
@@ -23,7 +23,7 @@
         <!-- end sidebars -->
         <div style="clear: both;">&nbsp;</div>
     </div>
-    <%@include file="pageFooter.jsp" %>
+    <%@include file="../footer.jsp" %>
 </div>
 
 </body>

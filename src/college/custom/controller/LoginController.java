@@ -24,14 +24,14 @@ public class LoginController extends HttpServlet {
 
         LoginDao loginDao = new LoginDaoImpl();
         Login login = loginDao.login(username, password);
-        session.setAttribute("employeeId", login.getEmployeeId());
-        session.setAttribute("active", login.getActive());
         int level = login.getLevel();
         if (level != 0) {
             if (level == 1) {
-                rd = request.getRequestDispatcher("jsp/manager/managerHeader.jsp");
+                rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
             } else if (level == 2) {
-                rd = request.getRequestDispatcher("jsp/employee/employeeHeader.jsp");
+                session.setAttribute("employeeId", login.getEmployeeId());
+                session.setAttribute("active", login.getActive());
+                rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
             } else if (level == 3) {
                 rd = request.getRequestDispatcher("jsp/user/user.jsp");
             }

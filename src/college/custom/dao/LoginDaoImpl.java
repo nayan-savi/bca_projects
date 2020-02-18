@@ -25,7 +25,7 @@ public class LoginDaoImpl implements LoginDao {
             ResultSet result = stmt.executeQuery(query);
             while(result.next()) {
                 login.setUsername(username);
-                login.setEmployeeId(result.getInt("PKEMPLOYEE_ID"));
+                //login.setEmployeeId(result.getInt("PKEMPLOYEE_ID"));
                 login.setLevel(result.getInt("LEVEL"));
                 login.setActive(result.getString("ACTIVE"));
             }

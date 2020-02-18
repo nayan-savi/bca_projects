@@ -29,6 +29,29 @@ CREATE TABLE `registration` (
   `PASSWORD` VARCHAR(45) NOT NULL DEFAULT '',
   `DESCRIPTION` VARCHAR(45) DEFAULT NULL,
   `LEVEL` INT(10) UNSIGNED DEFAULT NULL,
-  `STATUS` VARCHAR(45) DEFAULT NULL,
+  `ACTIVE` VARCHAR(45) DEFAULT NULL,
   UNIQUE(USERNAME,EMAIL_ID)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
+VALUES ('admin', '', '','admin@admin.com', 'admin', 'admin', 1, 'YES', '');
+
+INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
+VALUES ('abc', '', '','abc@abc.com', 'abc', 'abc', 3, 'YES', '');
+
+INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
+VALUES ('xyz', '', '','xyz@xyz.com', 'xyz', 'xyz', 2, 'YES', '');
+
+
+DROP TABLE IF EXISTS `shopdetails`;
+CREATE TABLE `shopdetails` (
+  `PKORGANISATION_ID` int(10) NOT NULL AUTO_INCREMENT,
+  `SHOP_NAME` varchar(100) NOT NULL default '',
+  `ADDRESS` varchar(80) default NULL,
+  `CITY` varchar(45) default NULL,
+  `STATE` varchar(45) default NULL,
+  `COUNTRY` varchar(45) default NULL,
+  `PINCODE` varchar(45) default NULL,
+  `STARTDATE` varchar(45) default NULL,
+  PRIMARY KEY (PKORGANISATION_ID)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
