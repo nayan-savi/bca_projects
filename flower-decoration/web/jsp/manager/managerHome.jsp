@@ -11,6 +11,10 @@
 <div id="wrapper">
     <!-- start page -->
     <div id="page">
+        <div align="center">
+            <h3 style="color: green">${success}</h3>
+            <h3 style="color: red">${errmsg}</h3>
+        </div>
         <!-- start content -->
         <div id="content">
             <div class="post">

@@ -14,18 +14,18 @@ public class ShopDetailsDaoImpl implements ShopDetailsDao {
         try {
             Connection connection = ConnectionDb.getConnection();
             Statement statement = connection.createStatement();
-            String shopQuery;
+            String shopQuery = null;
             if(anchor.equals("save")) {
-                shopQuery = "INSERT INTO SHOPDETAILS (SHOP_NAME, ADDRESS, CITY, STATE, COUNTRY. PINCODE, STARTDATE) " +
+                shopQuery = "INSERT INTO SHOPDETAILS (SHOP_NAME, ADDRESS, CITY, STATE, COUNTRY, PINCODE, STARTDATE) " +
                         "VALUES ('" + shopDetails.getShopName() + "','" + shopDetails.getAddress()
                         + "','" + shopDetails.getCity() + "','" + shopDetails.getState()
                         + "','" + shopDetails.getCountry() + "','" + shopDetails.getPincode() + "','" + shopDetails.getStartdate() + "')";
-            } else if(anchor.equals("update")) {
-                shopQuery = "INSERT INTO SHOPDETAILS (SHOP_NAME, ADDRESS, CITY, STATE, COUNTRY. PINCODE, STARTDATE) " +
+            } /*else if(anchor.equals("update")) {
+                shopQuery = "UPDATE SHOPDETAILS (SHOP_NAME, ADDRESS, CITY, STATE, COUNTRY. PINCODE, STARTDATE) " +
                         "VALUES ('" + shopDetails.getShopName() + "','" + shopDetails.getAddress()
                         + "','" + shopDetails.getCity() + "','" + shopDetails.getState()
                         + "','" + shopDetails.getCountry() + "','" + shopDetails.getPincode() + "','" + shopDetails.getStartdate() + "')";
-            }
+            }*/
             return statement.executeUpdate(shopQuery);
         } catch (SQLException e) {
             e.printStackTrace();

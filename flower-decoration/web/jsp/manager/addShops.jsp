@@ -9,51 +9,51 @@
 
         function addValue()
         {
-            if(document.addOrganisation.ORGANISATION_NAME.value==null || document.addOrganisation.ORGANISATION_NAME.value=="")
+            if(document.addShops.shopName.value==null || document.addShops.shopName.value=="")
             {
-                alert("Please Enter ORGANISATION_NAME ");
-                document.addOrganisation.ORGANISATION_NAME.focus();
+                alert("Please Enter Shop name ");
+                document.addShops.shopName.focus();
                 return false;
             }
-            if(document.addOrganisation.ADDRESS.value==null || document.addOrganisation.ADDRESS.value=="")
+            if(document.addShops.ADDRESS.value==null || document.addShops.ADDRESS.value=="")
             {
                 alert("Please select  ADDRESS");
-                document.addOrganisation.ADDRESS.focus();
+                document.addShops.ADDRESS.focus();
                 return false;
             }
-            if(document.addOrganisation.CITY.value==null || document.addOrganisation.CITY.value=="")
+            if(document.addShops.CITY.value==null || document.addShops.CITY.value=="")
             {
                 alert("Please Enter CITY ");
-                document.addOrganisation.CITY.focus();
+                document.addShops.CITY.focus();
                 return false;
             }
-            if(document.addOrganisation.STATE.value==null || document.addOrganisation.STATE.value=="")
+            if(document.addShops.STATE.value==null || document.addShops.STATE.value=="")
             {
                 alert("Please Enter STATE ");
-                document.addOrganisation.STATE.focus();
+                document.addShops.STATE.focus();
                 return false;
             }
-            if(document.addOrganisation.COUNTRY.value==null || document.addOrganisation.COUNTRY.value=="")
+            if(document.addShops.COUNTRY.value==null || document.addShops.COUNTRY.value=="")
             {
                 alert("Please Enter COUNTRY ");
-                document.addOrganisation.COUNTRY.focus();
+                document.addShops.COUNTRY.focus();
                 return false;
             }
-            if(document.addOrganisation.PINCODE.value==null || document.addOrganisation.PINCODE.value=="")
+            if(document.addShops.PINCODE.value==null || document.addShops.PINCODE.value=="")
             {
                 alert("Please Enter PINCODE ");
-                document.addOrganisation.PINCODE.focus();
+                document.addShops.PINCODE.focus();
                 return false;
             }
-            if(document.addOrganisation.STARTDATE.value==null || document.addOrganisation.STARTDATE.value=="")
+            if(document.addShops.STARTDATE.value==null || document.addShops.STARTDATE.value=="")
             {
                 alert("Please Enter STARTDATE ");
-                document.addOrganisation.STARTDATE.focus();
+                document.addShops.STARTDATE.focus();
                 return false;
             }
 
-            document.addOrganisation.action="<%=request.getContextPath()%>/ManagerController?anchor=addOrganisation";
-            document.addOrganisation.submit();
+            document.addShops.action="<%=request.getContextPath()%>/save?anchor=save";
+            document.addShops.submit();
         }
 
     </script>
@@ -69,7 +69,7 @@
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
         </div>
-        <form action="/save?anchor=save" method="post">
+        <form action="/manage?anchor=save" method="post">
             <h1>ADD STATION DETAILS</h1>
             <table>
                 <tr><td>Shop Name</td><td><input type="text" name="shopName"/></td></tr>
@@ -79,7 +79,7 @@
                 <tr><td>Country</td><td><input type="text" name="country"/></td></tr>
                 <tr><td>Pincode</td><td><input type="text" name="pincode"/></td></tr>
                 <tr><td>Start date</td><td><input type="text" name="startdate"/></td></tr>
-                <tr ><td colspan="3" align="center"><input type="button"  value="Save" onclick="addValue()"></td></tr>
+                <tr ><td colspan="3" align="center"><input type="submit" value="Save" onclick="addValue()"></td></tr>
             </table>
         </form>
 

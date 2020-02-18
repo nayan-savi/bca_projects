@@ -1,6 +1,7 @@
 package college.custom.model;
 
 public class ShopDetails {
+    private String shopId;
     private String shopName;
     private String address;
     private String city;
@@ -8,6 +9,14 @@ public class ShopDetails {
     private String country;
     private String pincode;
     private String startdate;
+
+    public String getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(String shopId) {
+        this.shopId = shopId;
+    }
 
     public String getShopName() {
         return shopName;

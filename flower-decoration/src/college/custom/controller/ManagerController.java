@@ -36,7 +36,7 @@ public class ManagerController extends HttpServlet {
             rd.forward(request, response);
         } else {
             rd = request.getRequestDispatcher("jsp/manager/addShops.jsp");
-            request.setAttribute("errmsg", "Error while saving.");
+            request.setAttribute("errmsg", "Shop alredy exits.");
             rd.forward(request, response);
         }
 
