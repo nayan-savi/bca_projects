@@ -35,13 +35,13 @@
 
                     <!--1st drop down menu -->
                     <div id="dropmenu1" class="dropmenudiv_a">
-                        <a href="/manage?anchor=add">Add Shop Details</a>
-                        <a href="ManagerController?anchor=viewOrganisation">Modify/view Shop Details</a>
+                        <a href="/addShops?anchor=addShops">Add Shop Details</a>
+                        <a href="/addShops?anchor=viewOrganisation">Modify/view Shop Details</a>
                     </div>
 
                     <div id="dropmenu2" class="dropmenudiv_a">
-                        <a href="ManagerController?anchor=addEmployee">Add Employee details</a>
-                        <a href="ManagerController?anchor=viewEmployee">Modify/Delete Employee details</a>
+                        <a href="/addEmployee?anchor=addEmployee">Add Employee details</a>
+                        <a href="/addEmployee?anchor=update">Modify/Delete Employee details</a>
                     </div>
 
                     <div id="dropmenu5" class="dropmenudiv_a">

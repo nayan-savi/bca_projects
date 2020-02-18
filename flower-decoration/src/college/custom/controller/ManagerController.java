@@ -36,7 +36,7 @@ public class ManagerController extends HttpServlet {
             rd.forward(request, response);
         } else {
             rd = request.getRequestDispatcher("jsp/manager/addShops.jsp");
-            request.setAttribute("errmsg", "Shop alredy exits.");
+            request.setAttribute("errmsg", "Shop already exits.");
             rd.forward(request, response);
         }
 
@@ -48,10 +48,11 @@ public class ManagerController extends HttpServlet {
         if (anchor.equalsIgnoreCase("logoff")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/login/login.jsp");
             rd.forward(request, response);
-        }
-
-        if (anchor.equalsIgnoreCase("add")) {
+        } else if (anchor.equalsIgnoreCase("addShops")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addShops.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("addEmployee")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
             rd.forward(request, response);
         }
     }

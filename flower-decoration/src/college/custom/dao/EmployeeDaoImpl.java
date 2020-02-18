@@ -1,5 +1,6 @@
 package college.custom.dao;
 
+import college.custom.model.Employee;
 import college.custom.model.User;
 import college.custom.util.ConnectionDb;
 
@@ -71,5 +72,23 @@ public class EmployeeDaoImpl implements EmployeeDao {
     @Override
     public List<User> getReplies(int userId) {
         return null;
+    }
+
+    @Override
+    public int saveEmployee(Employee employee) {
+        try {
+
+            String query = "INSERT INTO EMPLOYEEDETAILS (EMPLOYEE_NAME, EMP_JOINDATE, QUALIFICATION, EMAIL_ID, CONTACTNO, " +
+                    "FATHERNAME, MOTHERNAME, ADDRESS, DOB, USERNAME, PASSWORD, DESIGNATION, RELIVINGDATE, LEVEL, ACTIVE) " +
+                    "VALUES ('"+employee.getEmployeeName()+"', '"+employee.getDateOfJoin()+"', '"+employee.getQualification()
+                    +"', '"+employee.getEmailId()+"', '"+employee.getContactNo()+"', '"+employee.getFatherName()+"', '"+
+                    employee.getMotherName()+"', '"+employee.getAddress()+"', '"+employee.getDob()+"', '"+employee.getUsername()
+                    +"', '"+employee.getPassword()+"', '"+employee.getDesignation()+"', '"+employee.getRelievingDate()+"', '"+employee.getLevel()
+                    +"', '"+employee.getActive()+"')";
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -15,44 +15,44 @@
                 document.addShops.shopName.focus();
                 return false;
             }
-            if(document.addShops.ADDRESS.value==null || document.addShops.ADDRESS.value=="")
+            if(document.addShops.address.value==null || document.addShops.address.value=="")
             {
-                alert("Please select  ADDRESS");
-                document.addShops.ADDRESS.focus();
+                alert("Please select  address");
+                document.addShops.address.focus();
                 return false;
             }
-            if(document.addShops.CITY.value==null || document.addShops.CITY.value=="")
+            if(document.addShops.city.value==null || document.addShops.city.value=="")
             {
-                alert("Please Enter CITY ");
-                document.addShops.CITY.focus();
+                alert("Please Enter city ");
+                document.addShops.city.focus();
                 return false;
             }
-            if(document.addShops.STATE.value==null || document.addShops.STATE.value=="")
+            if(document.addShops.state.value==null || document.addShops.state.value=="")
             {
-                alert("Please Enter STATE ");
-                document.addShops.STATE.focus();
+                alert("Please Enter state ");
+                document.addShops.state.focus();
                 return false;
             }
-            if(document.addShops.COUNTRY.value==null || document.addShops.COUNTRY.value=="")
+            if(document.addShops.country.value==null || document.addShops.country.value=="")
             {
-                alert("Please Enter COUNTRY ");
-                document.addShops.COUNTRY.focus();
+                alert("Please Enter country ");
+                document.addShops.country.focus();
                 return false;
             }
-            if(document.addShops.PINCODE.value==null || document.addShops.PINCODE.value=="")
+            if(document.addShops.pincode.value==null || document.addShops.pincode.value=="")
             {
-                alert("Please Enter PINCODE ");
-                document.addShops.PINCODE.focus();
+                alert("Please Enter pincode ");
+                document.addShops.pincode.focus();
                 return false;
             }
-            if(document.addShops.STARTDATE.value==null || document.addShops.STARTDATE.value=="")
+            if(document.addShops.startdate.value==null || document.addShops.startdate.value=="")
             {
-                alert("Please Enter STARTDATE ");
-                document.addShops.STARTDATE.focus();
+                alert("Please Enter startdate ");
+                document.addShops.startdate.focus();
                 return false;
             }
 
-            document.addShops.action="<%=request.getContextPath()%>/save?anchor=save";
+            document.addShops.action="/manage?anchor=save";
             document.addShops.submit();
         }
 
@@ -69,17 +69,17 @@
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
         </div>
-        <form action="/manage?anchor=save" method="post">
+        <form action="" name="addShops" method="post">
             <h1>ADD STATION DETAILS</h1>
             <table>
                 <tr><td>Shop Name</td><td><input type="text" name="shopName"/></td></tr>
-                <tr><td>Address</td><td><input type="text" name="address"/></td></tr>
-                <tr><td>City</td><td><input type="text" name="city"/></td></tr>
-                <tr><td>State</td><td><input type="text" name="state"/></td></tr>
-                <tr><td>Country</td><td><input type="text" name="country"/></td></tr>
-                <tr><td>Pincode</td><td><input type="text" name="pincode"/></td></tr>
+                <tr><td>address</td><td><input type="text" name="address"/></td></tr>
+                <tr><td>city</td><td><input type="text" name="city"/></td></tr>
+                <tr><td>state</td><td><input type="text" name="state"/></td></tr>
+                <tr><td>country</td><td><input type="text" name="country"/></td></tr>
+                <tr><td>pincode</td><td><input type="text" name="pincode"/></td></tr>
                 <tr><td>Start date</td><td><input type="text" name="startdate"/></td></tr>
-                <tr ><td colspan="3" align="center"><input type="submit" value="Save" onclick="addValue()"></td></tr>
+                <tr ><td colspan="3" align="center"><input type="button" value="Save" onclick="addValue()"></td></tr>
             </table>
         </form>
 

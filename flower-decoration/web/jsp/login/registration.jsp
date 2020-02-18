@@ -78,7 +78,7 @@
                             <input name="password" type="password" />
                         </td>
                     </tr>
-                    <tr>
+                    <%--<tr>
                         <td>Level</td>
                         <td>
                             <select name="level">
@@ -88,7 +88,7 @@
                                 <option value="3">User</option>
                             </select>
                         </td>
-                    </tr>
+                    </tr>--%>
                     <tr>
                         <td>Status</td>
                         <td>

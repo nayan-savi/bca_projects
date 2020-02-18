@@ -28,7 +28,7 @@ public class RegistrationController extends HttpServlet {
         registration.setEmailId(request.getParameter("emailId"));
         registration.setUsername(request.getParameter("username"));
         registration.setPassword(request.getParameter("password"));
-        registration.setLevel(Integer.parseInt(request.getParameter("level")));
+        registration.setLevel(3); // this is user registration
         registration.setStatus(request.getParameter("status"));
         registration.setDescription(request.getParameter("description"));
         RegistrationDao registrationDao = new RegistrationDaoImpl();

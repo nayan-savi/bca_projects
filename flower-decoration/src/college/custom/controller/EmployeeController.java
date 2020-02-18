@@ -2,6 +2,7 @@ package college.custom.controller;
 
 import college.custom.dao.EmployeeDao;
 import college.custom.dao.EmployeeDaoImpl;
+import college.custom.model.Employee;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,20 +10,49 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "EmployeeController")
 public class EmployeeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String anchor = request.getParameter("anchor");
+        //String anchor = request.getParameter("anchor");
+        RequestDispatcher rd;
+        Employee employee = new Employee();
+        employee.setEmployeeName(request.getParameter("employeeName"));
+        employee.setDateOfJoin(request.getParameter("dateOfJoin"));
+        employee.setQualification(request.getParameter("qualification"));
+        employee.setEmailId(request.getParameter("emailId"));
+        employee.setContactNo(request.getParameter("contactNo"));
+        employee.setFatherName(request.getParameter("fatherName"));
+        employee.setMotherName(request.getParameter("motherName"));
+        employee.setDob(request.getParameter("dob"));
+        employee.setUsername(request.getParameter("username"));
+        employee.setPassword(request.getParameter("password"));
+        employee.setDesignation(request.getParameter("designation"));
+        employee.setRelievingDate(request.getParameter("relievingDate"));
+        employee.setLevel(Integer.parseInt(request.getParameter("level")));
+        employee.setActive(request.getParameter("active"));
+
+        EmployeeDao employeeDao = new EmployeeDaoImpl();
+        int row = employeeDao.saveEmployee(employee);
+        if (row > 0) {
+            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+            request.setAttribute("success", "Employee details saved successfully.");
+            rd.forward(request, response);
+        } else {
+            rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
+            request.setAttribute("errmsg", "Employee already exits.");
+            rd.forward(request, response);
+        }
+
+        /*
         HttpSession sess = request.getSession(true);
         if (anchor.equalsIgnoreCase("viewSupportRequest")) {
             EmployeeDao employee = new EmployeeDaoImpl();
             request.setAttribute("supportList", employee.getSupports());
             RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/viewSupportRequest.jsp");
             rd.forward(request, response);
-        }
+        }*/
 
         /*if (anchor.equalsIgnoreCase("resolveSupportRequest")) {
             DaoEmployee du = new DaoEmployeeImpl();

@@ -23,8 +23,8 @@
         <!-- end sidebars -->
         <div style="clear: both;">&nbsp;</div>
     </div>
-    <%@include file="../footer.jsp" %>
 </div>
+<%@include file="../footer.jsp" %>
 
 
 </body>

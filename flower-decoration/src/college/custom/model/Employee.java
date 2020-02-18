@@ -1,14 +1,15 @@
 package college.custom.model;
 
-public class Manager {
+public class Employee {
     private int employeeId;
     private String employeeName;
-    private String dateofJoin;
+    private String dateOfJoin;
     private String qualification;
     private String emailId;
     private String contactNo;
     private String fatherName;
     private String motherName;
+    private String address;
     private String dob;
     private String username;
     private String password;
@@ -33,12 +34,12 @@ public class Manager {
         this.employeeName = employeeName;
     }
 
-    public String getDateofJoin() {
-        return dateofJoin;
+    public String getDateOfJoin() {
+        return dateOfJoin;
     }
 
-    public void setDateofJoin(String dateofJoin) {
-        this.dateofJoin = dateofJoin;
+    public void setDateOfJoin(String dateOfJoin) {
+        this.dateOfJoin = dateOfJoin;
     }
 
     public String getQualification() {
@@ -79,6 +80,14 @@ public class Manager {
 
     public void setMotherName(String motherName) {
         this.motherName = motherName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getDob() {
