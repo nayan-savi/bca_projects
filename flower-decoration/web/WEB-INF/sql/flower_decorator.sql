@@ -99,3 +99,17 @@ CREATE TABLE `flowerorders` (
   `comment` VARCHAR(45) DEFAULT NULL,
   PRIMARY KEY (`order_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
+
+DROP TABLE IF EXISTS `decorationorders`;
+CREATE TABLE `decorationorders` (
+  `order_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `decorationname` VARCHAR(45) NOT NULL,
+  `decorationcost` VARCHAR(45) NOT NULL,
+  `request_date` VARCHAR(45) DEFAULT NULL,
+  `delivered_date` VARCHAR(45) DEFAULT NULL,
+  `status` VARCHAR(45) DEFAULT NULL,
+  `bargaining` VARCHAR(45) DEFAULT NULL,
+  `final_rate` VARCHAR(45) DEFAULT NULL,
+  `comment` VARCHAR(45) DEFAULT NULL,
+  PRIMARY KEY  (`order_id`)
+) ENGINE=INNODB DEFAULT CHARSET=latin1;

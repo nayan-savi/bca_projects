@@ -2,8 +2,8 @@ package college.custom.controller;
 
 import college.custom.dao.DecoratorDao;
 import college.custom.dao.DecoratorDaoImpl;
-import college.custom.dao.FlowerDao;
-import college.custom.dao.FlowerDaoImpl;
+import college.custom.dao.FlowerDecorationDao;
+import college.custom.dao.FlowerDecorationDaoImpl;
 import college.custom.model.Decoration;
 import college.custom.model.Flower;
 
@@ -29,8 +29,8 @@ public class FlowerDecoratorController extends HttpServlet {
             flower.setFlowerCost(request.getParameter("flowerCost"));
             flower.setStatus(request.getParameter("status"));
             flower.setComment(request.getParameter("comment"));
-            FlowerDao flowerDao = new FlowerDaoImpl();
-            row = flowerDao.save(flower);
+            FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
+            row = flowerDecorationDao.save(flower);
             data = "Flower";
         } else if(anchor.equals("addDecoration")) {
             Decoration decoration = new Decoration();
@@ -55,13 +55,5 @@ public class FlowerDecoratorController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String anchor = request.getParameter("anchor");
-        if (anchor.equalsIgnoreCase("orderFlower")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/orderFlower.jsp");
-            rd.forward(request, response);
-        } else if (anchor.equalsIgnoreCase("orderDecoration")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/orderDecoration.jsp");
-            rd.forward(request, response);
-        }
     }
 }

@@ -31,10 +31,12 @@
                     <!--1st drop down menu -->
                     <div id="dropmenu1" class="dropmenudiv_a">
                         <a href="/orderFlower?anchor=orderFlower">Order Flower</a>
+                        <a href="/viewFlowerRequest?anchor=viewFlowerRequest">Vew Flower Request</a>
                         <%--<a href="EmployeeController?anchor=resolveSupportRequest">confirm order</a>--%>
                     </div>
                     <div id="dropmenu2" class="dropmenudiv_a">
                         <a href="/orderDecoration?anchor=orderDecoration">Order Decoration</a>
+                        <a href="/viewDecorationRequest?anchor=viewDecorationRequest">View Decoration Request</a>
                         <%--<a href="EmployeeController?anchor=resolveSupportRequest">Confirm Order </a>--%>
                     </div>
                     <script type="text/javascript">

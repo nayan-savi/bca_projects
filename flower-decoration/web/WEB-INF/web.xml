@@ -68,7 +68,22 @@
         <servlet-name>FlowerDecoratorController</servlet-name>
         <url-pattern>/flower</url-pattern>
         <url-pattern>/decoration</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <display-name>OrderController</display-name>
+        <servlet-name>OrderController</servlet-name>
+        <servlet-class>college.custom.controller.OrderController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>OrderController</servlet-name>
         <url-pattern>/orderFlower</url-pattern>
         <url-pattern>/orderDecoration</url-pattern>
+        <url-pattern>/orderFlowerRequest</url-pattern>
+        <url-pattern>/orderDecorationRequest</url-pattern>
+        <url-pattern>/viewFlowerRequest</url-pattern>
+        <url-pattern>/viewDecorationRequest</url-pattern>
     </servlet-mapping>
+
 </web-app>
