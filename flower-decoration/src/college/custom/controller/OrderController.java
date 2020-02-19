@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -20,10 +21,12 @@ import java.util.List;
 public class OrderController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
+        HttpSession session = request.getSession();
         RequestDispatcher rd;
         int row = 0;
         String data = null;
         if (anchor.equalsIgnoreCase("orderFlower")) {
+            String username = (String)session.getAttribute("username");
             FlowerOrder flowerOrder = new FlowerOrder();
             flowerOrder.setFlowerName(request.getParameter("flowerName"));
             flowerOrder.setFlowerCost(request.getParameter("flowerCost"));
@@ -31,6 +34,7 @@ public class OrderController extends HttpServlet {
             flowerOrder.setBargaining(request.getParameter("bargaining"));
             flowerOrder.setFinalRate(request.getParameter("finalRate"));
             flowerOrder.setComment(request.getParameter("comment"));
+            flowerOrder.setUsername(username);
             flowerOrder.setStatus("Pending");
             FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
             row = flowerDecorationDao.saveFlowerRequest(flowerOrder);
@@ -63,6 +67,7 @@ public class OrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
         FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
+        HttpSession session = request.getSession();
         if (anchor.equalsIgnoreCase("orderFlower")) {
             List<Flower> flowers = flowerDecorationDao.getAllFlowers();
             RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/orderFlower.jsp");
@@ -74,7 +79,8 @@ public class OrderController extends HttpServlet {
             request.setAttribute("decorations", decorations);
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("viewFlowerRequest")) {
-            List<FlowerOrder> flowers = flowerDecorationDao.viewFlowerOrder();
+            String username = (String)session.getAttribute("username");
+            List<FlowerOrder> flowers = flowerDecorationDao.viewFlowerOrder(username);
             RequestDispatcher rd = request.getRequestDispatcher("jsp/orders/viewFlowerOrder.jsp");
             request.setAttribute("orderedFlowers", flowers);
             rd.forward(request, response);

@@ -76,10 +76,11 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     @Override
     public int saveFlowerRequest(FlowerOrder flowerOrder) {
         try {
-            String query = "INSERT INTO FLOWERORDERS (FLOWERNAME, FLOWERCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS) " +
+            String query = "INSERT INTO FLOWERORDERS (FLOWERNAME, FLOWERCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS, USERNAME) " +
                     "VALUES ('" + flowerOrder.getFlowerName() + "','" + flowerOrder.getFlowerCost()
                     + "','" + flowerOrder.getRequestDate() + "','" + flowerOrder.getBargaining()
-                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "','"+flowerOrder.getStatus()+"')";
+                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "','"+flowerOrder.getStatus()+"','"+
+                    flowerOrder.getUsername()+"')";
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -102,10 +103,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
-    public List<FlowerOrder> viewFlowerOrder() {
+    public List<FlowerOrder> viewFlowerOrder(String username) {
         List<FlowerOrder> flowerOrders = new ArrayList<>();
         try {
-            String query = "SELECT * FROM FLOWERORDERS";
+            String query = "SELECT * FROM FLOWERORDERS WHERE USERNAME = '"+username+"'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 FlowerOrder flowerOrder = new FlowerOrder();

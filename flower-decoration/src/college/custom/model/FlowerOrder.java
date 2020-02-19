@@ -6,6 +6,8 @@ public class FlowerOrder {
     private String flowerCost;
     private String requestDate;
     private String deliveredDate;
+    private String username;
+    private int employeeId;
     private String status;
     private String bargaining;
     private String finalRate;
@@ -81,5 +83,21 @@ public class FlowerOrder {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public int getEmployeeId() {
+        return employeeId;
+    }
+
+    public void setEmployeeId(int employeeId) {
+        this.employeeId = employeeId;
     }
 }

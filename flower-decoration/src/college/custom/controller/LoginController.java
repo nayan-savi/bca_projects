@@ -33,6 +33,7 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("active", login.getActive());
                 rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
             } else if (level == 3) {
+                session.setAttribute("username", login.getUsername());
                 rd = request.getRequestDispatcher("jsp/user/userHome.jsp");
             }
         } else {
