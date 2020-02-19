@@ -49,7 +49,7 @@
 
                 <tr>
                     <td>Decoration Cost</td>
-                    <td><input type="text" name="decorationNameCost" /></td>
+                    <td><input type="text" name="decorationCost" /></td>
                 </tr>
                 <tr>
                     <td>Requested Date</td>

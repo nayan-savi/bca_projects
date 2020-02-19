@@ -76,10 +76,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     @Override
     public int saveFlowerRequest(FlowerOrder flowerOrder) {
         try {
-            String query = "INSERT INTO FLOWERORDERS (FLOWERNAME, FLOWERCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT) " +
+            String query = "INSERT INTO FLOWERORDERS (FLOWERNAME, FLOWERCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS) " +
                     "VALUES ('" + flowerOrder.getFlowerName() + "','" + flowerOrder.getFlowerCost()
                     + "','" + flowerOrder.getRequestDate() + "','" + flowerOrder.getBargaining()
-                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "')";
+                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "','"+flowerOrder.getStatus()+"')";
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -90,10 +90,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     @Override
     public int saveDecorationRequest(DecorationOrder decorationOrder) {
         try {
-            String query = "INSERT INTO DECORATIONORDERS (DECORATIONNAME, DECORATIONCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT) " +
+            String query = "INSERT INTO DECORATIONORDERS (DECORATIONNAME, DECORATIONCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS) " +
                     "VALUES ('" + decorationOrder.getDecorationName()+ "','" + decorationOrder.getDecorationCost()
                     + "','" + decorationOrder.getRequestDate() + "','" + decorationOrder.getBargaining()
-                    + "','" + decorationOrder.getFinalRate() + "','" + decorationOrder.getComment() + "')";
+                    + "','" + decorationOrder.getFinalRate() + "','" + decorationOrder.getComment() + "','"+decorationOrder.getStatus()+"')";
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
