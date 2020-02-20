@@ -21,6 +21,7 @@
 <%@include file="../user/userHeader.jsp" %>
 <div id="wrapper">
     <div id="page">
+        <%@include file="../login/loginDetails.jsp" %>
         <div align="center">
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
@@ -61,7 +62,7 @@
                 </tr>
                 <tr>
                     <td>Final Rate</td>
-                    <td><input type="text" name="finalRate"/></td>
+                    <td><input disabled type="text" name="finalRate"/></td>
                 </tr>
                 <tr>
                     <td>Comment</td>

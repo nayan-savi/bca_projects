@@ -55,10 +55,10 @@
                     </div>
 
                     <div id="dropmenu4" class="dropmenudiv_a">
-                        <a href="/flowerRequest?anchor=flowerRequest">View Flower Request</a>
-                        <a href="/decorationRequest?anchor=decorationRequest">View Decoration Request</a>
-                        <a href="/flowerConfirm?anchor=flowerConfirm">Flower Request Confirmation</a>
-                        <a href="/decorationConfirm?anchor=decorationConfirm">Decoration Request Confirmation</a>
+                        <a href="/viewAssignFlower?anchor=viewAssignFlower">View/Assign Flower Order</a>
+                        <a href="/viewAssignDecoration?anchor=viewAssignDecoration">View/Assign Decoration Order</a>
+                        <%--<a href="/flowerConfirm?anchor=flowerConfirm">Flower Request Confirmation</a>
+                        <a href="/decorationConfirm?anchor=decorationConfirm">Decoration Request Confirmation</a>--%>
                     </div>
 
                     <script type="text/javascript">

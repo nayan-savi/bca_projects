@@ -13,6 +13,12 @@ public interface FlowerDecorationDao {
     int saveDecorationRequest(DecorationOrder decorationOrder);
     List<Flower> getAllFlowers();
     List<Decoration> getAllDecorations();
-    List<FlowerOrder> viewFlowerOrder(String username);
-    List<DecorationOrder> viewDecorationOrder();
+    List<FlowerOrder> viewFlowerOrder(String username, int employeeId);
+    List<DecorationOrder> viewDecorationOrder(String username, int employeeId);
+    List<FlowerOrder> getPendingFlowerOrderManager();
+    List<DecorationOrder> getPendingDecorationOrderManager();
+    int modifyFlowerOrderManager(FlowerOrder flowerOrder);
+    FlowerOrder getFlowerOrder(int orderId);
+    DecorationOrder getDecorationOrder(int orderId);
+    int modifyDecorationOrderManager(DecorationOrder decorationUpdateOrder);
 }

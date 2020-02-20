@@ -15,6 +15,7 @@
         <br/>
         <br/>
         <br/>
+        <%@include file="../login/loginDetails.jsp" %>
         <center>
             <form action="<%=request.getContextPath()%>/update?anchor=update" method="post">
                 <h1>Modify Station details</h1>

@@ -26,6 +26,7 @@ public class LoginController extends HttpServlet {
         Login login = loginDao.login(username, password);
         int level = login.getLevel();
         if (level > 0) {
+            session.setAttribute("username", login.getUsername());
             if (level == 1) {
                 rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
             } else if (level == 2) {
@@ -33,7 +34,6 @@ public class LoginController extends HttpServlet {
                 session.setAttribute("active", login.getActive());
                 rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
             } else if (level == 3) {
-                session.setAttribute("username", login.getUsername());
                 rd = request.getRequestDispatcher("jsp/user/userHome.jsp");
             }
         } else {

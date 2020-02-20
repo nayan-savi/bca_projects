@@ -84,7 +84,7 @@
                 return false;
             }
 
-            document.addEmployee.action = "/employee?anchor?addEmployee";
+            document.addEmployee.action = "/employee?anchor=addEmployee";
             document.addEmployee.submit();
         }
 
@@ -96,6 +96,7 @@
 <div id="wrapper">
 
     <div id="page">
+        <%@include file="../login/loginDetails.jsp" %>
         <div align="center">
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>

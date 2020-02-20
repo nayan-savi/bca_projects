@@ -16,6 +16,7 @@
 <div id="wrapper">
     <!-- start page -->
     <div id="page">
+        <%@include file="../login/loginDetails.jsp" %>
         <div align="center">
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>

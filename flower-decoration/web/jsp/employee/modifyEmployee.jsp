@@ -6,7 +6,12 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Modify Employee</title>
-
+    <script type="text/javascript">
+        function navigate() {
+            document.updateEmployee.action = "/cancelEmployee?anchor=cancelEmployee";
+            document.updateEmployee.submit();
+        }
+    </script>
 </head>
 <body>
 <%@include file="../manager/managerHeader.jsp" %>
@@ -16,7 +21,7 @@
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
         </div>
-        <form action="/updateEmployee?anchor=updateEmployee" method="post">
+        <form action="/updateEmployee?anchor=updateEmployee" name="updateEmployee" method="post">
             <h3>Modify Employee details</h3>
             <% Employee employee = (Employee) request.getAttribute("employeeDetails"); %>
             <table>
@@ -101,7 +106,7 @@
                 <tr>
                     <td></td>
                     <td><input type="submit" value="Update"/>
-                        <input type="button" value="Cancel"/>
+                        <input type="button" value="Cancel" onclick="navigate()"/>
                     </td>
                 </tr>
             </table>

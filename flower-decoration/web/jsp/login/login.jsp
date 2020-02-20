@@ -34,7 +34,7 @@
                             <div align="right">Username</div>
                         </td>
                         <td width="213">
-                            <input name="username" type="text" value="abc" />
+                            <input name="username" type="text" value="xyz" />
                         </td>
                     </tr>
                     <tr>
@@ -42,7 +42,7 @@
                             <div align="right">Password</div>
                         </td>
                         <td>
-                            <input name="password" type="password" value="abc"/>
+                            <input name="password" type="password" value="xyz"/>
                         </td>
                     </tr>
                     <tr>

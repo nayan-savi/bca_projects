@@ -1,10 +1,9 @@
 package college.custom.controller;
 
-import college.custom.dao.EmployeeDao;
-import college.custom.dao.EmployeeDaoImpl;
-import college.custom.dao.ShopDetailsDao;
-import college.custom.dao.ShopDetailsDaoImpl;
+import college.custom.dao.*;
+import college.custom.model.DecorationOrder;
 import college.custom.model.Employee;
+import college.custom.model.FlowerOrder;
 import college.custom.model.ShopDetails;
 
 import javax.servlet.RequestDispatcher;
@@ -13,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,14 +49,14 @@ public class ManagerController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
-        EmployeeDao employeeDao = null;
+        HttpSession session = request.getSession();
+        String username = (String)session.getAttribute("username");
+        EmployeeDao employeeDao;
+        FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
         if (anchor.equalsIgnoreCase("logoff")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/login/login.jsp");
             rd.forward(request, response);
-        } /*else if (anchor.equalsIgnoreCase("addShops")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addShops.jsp");
-            rd.forward(request, response);
-        }*/ else if (anchor.equalsIgnoreCase("addEmployee")) {
+        } else if (anchor.equalsIgnoreCase("addEmployee")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("addFlower")) {
@@ -70,6 +70,16 @@ public class ManagerController extends HttpServlet {
             List<Employee> employees = employeeDao.viewEmployee();
             rd = request.getRequestDispatcher("jsp/employee/viewEmployee.jsp");
             request.setAttribute("employees", employees);
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewAssignFlower")) {
+            List<FlowerOrder> flowers = flowerDecorationDao.getPendingFlowerOrderManager();
+            request.setAttribute("orderedFlowers", flowers);
+            rd = request.getRequestDispatcher("jsp/manager/viewAssignFlower.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewAssignDecoration")) {
+            List<DecorationOrder> decorations = flowerDecorationDao.getPendingDecorationOrderManager();
+            request.setAttribute("orderedDecorations", decorations);
+            rd = request.getRequestDispatcher("jsp/manager/viewAssignDecoration.jsp");
             rd.forward(request, response);
         }
     }

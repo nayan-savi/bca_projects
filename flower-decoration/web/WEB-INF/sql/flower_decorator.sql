@@ -30,20 +30,15 @@ CREATE TABLE `registration` (
   `ADDRESS` VARCHAR(200) DEFAULT NULL,
   `USERNAME` VARCHAR(45) NOT NULL DEFAULT '',
   `PASSWORD` VARCHAR(45) NOT NULL DEFAULT '',
+  `EMPLOYEE_ID` INT(10) UNSIGNED DEFAULT NULL,
   `DESCRIPTION` VARCHAR(45) DEFAULT NULL,
   `LEVEL` INT(10) UNSIGNED DEFAULT NULL,
   `ACTIVE` VARCHAR(45) DEFAULT NULL,
   UNIQUE(USERNAME,EMAIL_ID)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
 
-INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
-VALUES ('admin', '', '','admin@admin.com', 'admin', 'admin', 1, 'YES', '');
-
-INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
-VALUES ('abc', '', '','abc@abc.com', 'abc', 'abc', 3, 'YES', '');
-
-INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE, DESCRIPTION)
-VALUES ('xyz', '', '','xyz@xyz.com', 'xyz', 'xyz', 2, 'YES', '');
+INSERT INTO registration( NAME, ADDRESS, CONTACT_NO, EMAIL_ID, USERNAME, PASSWORD, EMPLOYEE_ID, LEVEL, ACTIVE, DESCRIPTION)
+VALUES ('admin', '', '','admin@admin.com', 'admin', 'admin', 0, 1, 'YES', '');
 
 INSERT INTO employeedetails (EMPLOYEE_NAME, EMAIL_ID, USERNAME, PASSWORD, LEVEL, ACTIVE)
 VALUES ('admin', 'admin@admin.com', 'admin', 'admin', '1', 'YES');
@@ -89,16 +84,16 @@ CREATE TABLE `decorations` (
 DROP TABLE IF EXISTS `flowerorders`;
 CREATE TABLE `flowerorders` (
   `order_id` INT(10) AUTO_INCREMENT,
-  `flowername` VARCHAR(45) DEFAULT NULL,
+  `flowername` VARCHAR(45) NOT NULL DEFAULT '',
   `flowercost` VARCHAR(45) NOT NULL,
-  `request_date` VARCHAR(45) DEFAULT NULL,
-  `username` VARCHAR(45) DEFAULT NULL,
-  `employeeId` VARCHAR(45) DEFAULT NULL,
-  `delivered_date` VARCHAR(45) DEFAULT NULL,
-  `status` VARCHAR(45) DEFAULT NULL,
-  `bargaining` VARCHAR(45) DEFAULT NULL,
-  `final_rate` VARCHAR(45) DEFAULT NULL,
-  `comment` VARCHAR(45) DEFAULT NULL,
+  `request_date` VARCHAR(45) NOT NULL DEFAULT '',
+  `orderby` VARCHAR(45) NOT NULL DEFAULT '',
+  `assignedto` VARCHAR(45) NOT NULL DEFAULT '',
+  `delivered_date` VARCHAR(45) NOT NULL DEFAULT '',
+  `status` VARCHAR(45) NOT NULL DEFAULT '',
+  `bargaining` VARCHAR(45) NOT NULL DEFAULT '',
+  `final_rate` VARCHAR(45) NOT NULL DEFAULT '',
+  `comment` VARCHAR(45) NOT NULL DEFAULT '',
   PRIMARY KEY (`order_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;
 
@@ -107,13 +102,13 @@ CREATE TABLE `decorationorders` (
   `order_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `decorationname` VARCHAR(45) NOT NULL,
   `decorationcost` VARCHAR(45) NOT NULL,
-  `request_date` VARCHAR(45) DEFAULT NULL,
-  `username` VARCHAR(45) DEFAULT NULL,
-  `employeeId` VARCHAR(45) DEFAULT NULL,
-  `delivered_date` VARCHAR(45) DEFAULT NULL,
-  `status` VARCHAR(45) DEFAULT NULL,
-  `bargaining` VARCHAR(45) DEFAULT NULL,
-  `final_rate` VARCHAR(45) DEFAULT NULL,
-  `comment` VARCHAR(45) DEFAULT NULL,
+  `request_date` VARCHAR(45) NOT NULL DEFAULT '',
+  `orderby` VARCHAR(45) NOT NULL DEFAULT '',
+  `assignedto` VARCHAR(45) NOT NULL DEFAULT '',
+  `delivered_date` VARCHAR(45) NOT NULL DEFAULT '',
+  `status` VARCHAR(45) NOT NULL DEFAULT '',
+  `bargaining` VARCHAR(45) NOT NULL DEFAULT '',
+  `final_rate` VARCHAR(45) NOT NULL DEFAULT '',
+  `comment` VARCHAR(45) NOT NULL DEFAULT '',
   PRIMARY KEY  (`order_id`)
 ) ENGINE=INNODB DEFAULT CHARSET=latin1;

@@ -11,6 +11,8 @@ public class DecorationOrder {
     private String bargaining;
     private String finalRate;
     private String comment;
+    private String orderBy;
+    private String assignedTo;
 
     public int getOrderId() {
         return orderId;
@@ -82,5 +84,21 @@ public class DecorationOrder {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
+    }
+
+    public String getAssignedTo() {
+        return assignedTo;
+    }
+
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }

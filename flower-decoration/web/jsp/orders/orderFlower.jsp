@@ -25,6 +25,7 @@
 <%@include file="../user/userHeader.jsp" %>
 <div id="wrapper">
     <div id="page">
+        <%@include file="../login/loginDetails.jsp" %>
         <div align="center">
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
@@ -33,10 +34,6 @@
             <h1>Request Flowers</h1>
             <% List<Flower> flowers = (List<Flower>) request.getAttribute("flowers"); %>
             <table>
-                <%--<tr>
-                    <td>Flower Name</td>
-                    <td><input type="text" name="flowername"/></td>
-                </tr>--%>
                 <tr>
                     <td>Flower Name</td>
                     <td width="172px">
@@ -65,19 +62,8 @@
                 </tr>
                 <tr>
                     <td>Final Rate</td>
-                    <td><input type="text" name="finalRate"/></td>
+                    <td><input disabled type="text" name="finalRate"/></td>
                 </tr>
-                <%--<tr>
-                    <td>Status</td>
-                    <td width="172px">
-                        <select name="status" style="width: 172px">
-                            <option value="-1"></option>
-                            <option value="inprogress">Inprogress</option>
-                            <option value="done">Done</option>
-                            <option value="rejected">Rejected</option>
-                        </select>
-                    </td>
-                </tr>--%>
                 <tr>
                     <td>Comment</td>
                     <td><input type="text" name="comment"/></td>

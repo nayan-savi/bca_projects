@@ -6,8 +6,8 @@ public class FlowerOrder {
     private String flowerCost;
     private String requestDate;
     private String deliveredDate;
-    private String username;
-    private int employeeId;
+    private String orderBy;
+    private String assignedTo;
     private String status;
     private String bargaining;
     private String finalRate;
@@ -85,19 +85,19 @@ public class FlowerOrder {
         this.comment = comment;
     }
 
-    public String getUsername() {
-        return username;
+    public String getOrderBy() {
+        return orderBy;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy;
     }
 
-    public int getEmployeeId() {
-        return employeeId;
+    public String getAssignedTo() {
+        return assignedTo;
     }
 
-    public void setEmployeeId(int employeeId) {
-        this.employeeId = employeeId;
+    public void setAssignedTo(String assignedTo) {
+        this.assignedTo = assignedTo;
     }
 }

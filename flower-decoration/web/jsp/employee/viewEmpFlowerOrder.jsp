@@ -31,11 +31,10 @@
     }
 </style>
 <body>
-<%@include file="../user/userHeader.jsp" %>
+<%@include file="employeeHeader.jsp" %>
 <div id="wrapper">
 
     <div id="page">
-        <%@include file="../login/loginDetails.jsp" %>
         <% List<FlowerOrder> flowerOrders = (List<FlowerOrder>) request.getAttribute("orderedFlowers"); %>
         <div style="height:auto;width:auto;border:1px solid #ccc;overflow:auto;">
             <table border="0">

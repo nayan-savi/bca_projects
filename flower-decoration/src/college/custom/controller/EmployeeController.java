@@ -2,7 +2,11 @@ package college.custom.controller;
 
 import college.custom.dao.EmployeeDao;
 import college.custom.dao.EmployeeDaoImpl;
+import college.custom.dao.FlowerDecorationDao;
+import college.custom.dao.FlowerDecorationDaoImpl;
+import college.custom.model.DecorationOrder;
 import college.custom.model.Employee;
+import college.custom.model.FlowerOrder;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,15 +14,17 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "EmployeeController")
 public class EmployeeController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        RequestDispatcher rd = null;
-        if(anchor.equalsIgnoreCase("addEmployee")) {
+        RequestDispatcher rd;
+        if (anchor.equalsIgnoreCase("addEmployee")) {
             Employee employee = getEmployee(request);
 
             int row = employeeDao.saveEmployee(employee);
@@ -31,14 +37,15 @@ public class EmployeeController extends HttpServlet {
                 request.setAttribute("errmsg", "Employee already exits.");
                 rd.forward(request, response);
             }
-        } else if(anchor.equalsIgnoreCase("modifyEmployee")) {
+        } else if (anchor.equalsIgnoreCase("modifyEmployee")) {
             int employeeId = Integer.parseInt(request.getParameter("EMPLOYEE_ID"));
             Employee employee = employeeDao.modifyEmployee(employeeId);
             employee.setEmployeeId(employeeId);
             request.setAttribute("employeeDetails", employee);
             rd = request.getRequestDispatcher("jsp/employee/modifyEmployee.jsp");
             rd.forward(request, response);
-        } else if(anchor.equalsIgnoreCase("updateEmployee")) {
+
+        } else if (anchor.equalsIgnoreCase("updateEmployee")) {
             Employee employee = getEmployee(request);
             employee.setEmployeeId(Integer.parseInt(request.getParameter("employeeId")));
             int row = employeeDao.updateEmployee(employee);
@@ -51,62 +58,11 @@ public class EmployeeController extends HttpServlet {
                 request.setAttribute("errmsg", "Employee details update failed.");
                 rd.forward(request, response);
             }
-        }
-
-        /*
-        HttpSession sess = request.getSession(true);
-        if (anchor.equalsIgnoreCase("viewSupportRequest")) {
-            EmployeeDao employee = new EmployeeDaoImpl();
-            request.setAttribute("supportList", employee.getSupports());
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/viewSupportRequest.jsp");
-            rd.forward(request, response);
-        }*/
-
-        /*if (anchor.equalsIgnoreCase("resolveSupportRequest")) {
-            DaoEmployee du = new DaoEmployeeImpl();
-            request.setAttribute("supportList", du.getResolveSupportList(Integer.parseInt(sess.getAttribute("PKEMPLOYEE_ID").toString())));
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/resolveSupportRequest.jsp");
+        } else if (anchor.equalsIgnoreCase("cancelEmployee")) {
+            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
             rd.forward(request, response);
         }
-
-        if (anchor.equalsIgnoreCase("startSupportRequest")) {
-            DaoEmployee du = new DaoEmployeeImpl();
-            du.startSupportRequest(Integer.parseInt(sess.getAttribute("PKEMPLOYEE_ID").toString()), Integer.parseInt(request.getParameter("PK_USER_SUPPORT_ID")));
-            request.setAttribute("supportList", du.getSupportList());
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/viewSupportRequest.jsp");
-            rd.forward(request, response);
-        }
-
-        if (anchor.equalsIgnoreCase("modifySupportRequest")) {
-            DaoEmployee du = new DaoEmployeeImpl();
-            User user = du.modifySupportRequest(Integer.parseInt(request.getParameter("PK_USER_SUPPORT_ID")));
-            request.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/UpdateSupportRequest.jsp");
-            rd.forward(request, response);
-        }
-
-        if (anchor.equalsIgnoreCase("updateSupportRequest")) {
-            DaoEmployee du = new DaoEmployeeImpl();
-            int supportid = Integer.parseInt(request.getParameter("PK_USER_SUPPORT_ID"));
-            if (du.updateSupportRequest(supportid, request.getParameter("reply")) == 1) {
-                request.setAttribute("success", "Resolve");
-            } else {
-                request.setAttribute("success", "Resolve failed");
-            }
-            User user = du.modifySupportRequest(supportid);
-            request.setAttribute("user", user);
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/UpdateSupportRequest.jsp");
-            rd.forward(request, response);
-        }
-
-        if (anchor.equalsIgnoreCase("managerreply")) {
-            DaoEmployee du = new DaoEmployeeImpl();
-            request.setAttribute("replyList", du.getReplyList(Integer.parseInt(sess.getAttribute("PKEMPLOYEE_ID").toString())));
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/Employee/viewManagerReply.jsp");
-            rd.forward(request, response);
-        }*/
-
-        }
+    }
 
     private Employee getEmployee(HttpServletRequest request) {
         Employee employee = new Employee();
@@ -129,6 +85,22 @@ public class EmployeeController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String anchor = request.getParameter("anchor");
+        RequestDispatcher rd;
+        HttpSession session = request.getSession();
+        String username = (String) session.getAttribute("username");
+        int employeeId = Integer.parseInt(session.getAttribute("employeeId").toString());
+        FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
+        if(anchor.equalsIgnoreCase("viewEmpFlowerOrder")) {
+            List<FlowerOrder> flowers = flowerDecorationDao.viewFlowerOrder(username, employeeId);
+            request.setAttribute("orderedFlowers", flowers);
+            rd = request.getRequestDispatcher("jsp/employee/viewEmpFlowerOrder.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewEmpDecorationOrder")) {
+            List<DecorationOrder> decorations = flowerDecorationDao.viewDecorationOrder(username, employeeId);
+            request.setAttribute("orderedDecorations", decorations);
+            rd = request.getRequestDispatcher("jsp/employee/viewEmpDecorationOrder.jsp");
+            rd.forward(request, response);
+        }
     }
 }

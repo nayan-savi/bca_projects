@@ -34,7 +34,7 @@
             document.employee.submit();
         }
 
-        function deleteEmployee() {
+        function inactiveEmployee() {
             var chk = document.employee.EMPLOYEE_ID;
             var count = 0;
             if (chk.length == undefined) {
@@ -50,20 +50,20 @@
             //alert(count);
 
             if (count == 0) {
-                alert("Please select atlest one record");
+                alert("Please select at least one record");
                 return false;
             }
 
-            var res = confirm("Are you sure to delete this record");
+            var res = confirm("Are you sure to inactive this record");
 
             if (res == true) {
-                document.employee.action = "<%= request.getContextPath()%>/deleteEmployee?anchor=deleteEmployee";
+                document.employee.action = "/inactiveEmployee?anchor=inactiveEmployee";
                 document.employee.submit();
             }
             else {
                 return false;
             }
-            document.employee.action = "<%= request.getContextPath()%>/deleteEmployee?anchor=deleteEmployee";
+            document.employee.action = "/inactiveEmployee?anchor=inactiveEmployee";
             document.employee.submit();
 
         }
@@ -124,7 +124,7 @@
             <table>
                 <tr>
                     <td><input type="button" value="Modify" onclick="modifyEmployee()"></td>
-                    <td><input type="button" value="Delete" onclick="deleteEmployee()"/></td>
+                    <td><input type="button" value="Inactive" onclick="inactiveEmployee()"/></td>
                 </tr>
             </table>
         </form>
