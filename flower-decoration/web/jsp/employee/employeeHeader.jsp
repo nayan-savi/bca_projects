@@ -30,13 +30,13 @@
 
                     <!--1st drop down menu -->
                     <div id="dropmenu1" class="dropmenudiv_a">
-                        <a href="/viewEmpFlowerOrder?anchor=viewEmpFlowerOrder">View Flower Request</a>
-                        <a href="EmployeeController?anchor=viewSupportRequest">Modify Flower Request</a>
+                        <a href="/viewEmpFlowerOrder?anchor=viewEmpFlowerOrder">View/Modify Flower Request</a>
+                        <%--<a href="EmployeeController?anchor=viewSupportRequest">Modify Flower Request</a>--%>
                     </div>
 
                     <div id="dropmenu2" class="dropmenudiv_a">
-                        <a href="/viewEmpDecorationOrder?anchor=viewEmpDecorationOrder">View Decoration Request</a>
-                        <a href="EmployeeController?anchor=viewSupportRequest">Modify Decoration Request</a>
+                        <a href="/viewEmpDecorationOrder?anchor=viewEmpDecorationOrder">View/Modify Decoration Request</a>
+                        <%--<a href="EmployeeController?anchor=viewSupportRequest">Modify Decoration Request</a>--%>
                     </div>
 
                     <script type="text/javascript">
