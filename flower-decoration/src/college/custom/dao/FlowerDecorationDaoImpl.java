@@ -224,7 +224,7 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     public int modifyDecorationOrderManager(DecorationOrder decorationOrder) {
         try {
             String query = "UPDATE DECORATIONORDERS SET STATUS = '"+decorationOrder.getStatus()+"', ASSIGNEDTO = '"+decorationOrder.getAssignedTo()
-                    +"', FINAL_RATE = '"+decorationOrder.getFinalRate()+"' COMMENT = '"+decorationOrder.getComment()+"' WHERE ORDER_ID = '"+decorationOrder.getOrderId()+"'";
+                    +"', FINAL_RATE = '"+decorationOrder.getFinalRate()+"', COMMENT = '"+decorationOrder.getComment()+"' WHERE ORDER_ID = '"+decorationOrder.getOrderId()+"'";
             return stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
