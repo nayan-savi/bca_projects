@@ -13,7 +13,13 @@
             document.orderDecoration.action = "/orderDecoration?anchor=orderDecoration";
             document.orderDecoration.submit();
         }
-
+             
+function setCost() {
+ selectElement= document.querySelector('#decorationName');
+                 output =  
+selectElement.options[selectElement.selectedIndex].value; 
+document.getElementById('decorationCost').value = output;
+        }
     </script>
 
 </head>
@@ -37,12 +43,14 @@
                 <tr>
                     <td>Decoration Name</td>
                     <td width="172px">
-                        <select name="decorationName" style="width: 172px" onclick="setCost()">
+                        <select name="decorationName" id="decorationName
+                                                  " style="width: 172px" onchange="setCost()">
                             <option></option>
                             <%for (int i = 0; i < decorations.size(); i++) {
                                 String decorationName = decorations.get(i).getDecorationName();
+                                String cost = decorations.get(i).getDecorationCost();
                             %>
-                            <option value="<%=decorationName%>"><%=decorationName%></option>
+                            <option value="<%=cost%>"><%=decorationName%></option>
                             <% } %>
                         </select>
                     </td>
@@ -50,7 +58,7 @@
 
                 <tr>
                     <td>Decoration Cost</td>
-                    <td><input type="text" name="decorationCost" /></td>
+                    <td><input type="text" name="decorationCost" id="decorationCost"/></td>
                 </tr>
                 <tr>
                     <td>Requested Date</td>
