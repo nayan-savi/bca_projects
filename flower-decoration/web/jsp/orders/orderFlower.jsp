@@ -15,7 +15,11 @@
         }
 
         function setCost() {
+ selectElement= document.querySelector('#flowerName');
+                 output =  
 
+selectElement.options[selectElement.selectedIndex].value; 
+document.getElementById('flowerCost').value = output;
         }
 
     </script>
@@ -37,12 +41,14 @@
                 <tr>
                     <td>Flower Name</td>
                     <td width="172px">
-                        <select name="flowerName" style="width: 172px" onclick="setCost()">
+                        <select name="flowerName" id="flowerName" 
+                             style="width: 172px" onchange="setCost()">
                             <option></option>
                             <%for (int i = 0; i < flowers.size(); i++) {
                                 String flower = flowers.get(i).getFlowerName();
+                                String cost = flowers.get(i).getFlowerCost();
                             %>
-                                <option value="<%=flower%>"><%=flower%></option>
+                                <option value="<%=cost%>"><%=flower%></option>
                             <% } %>
                         </select>
                     </td>
@@ -50,7 +56,7 @@
 
                 <tr>
                     <td>Flower Cost</td>
-                    <td><input type="text" name="flowerCost" /></td>
+                    <td><input type="text" name="flowerCost" id="flowerCost"/></td>
                 </tr>
                 <tr>
                     <td>Requested Date</td>
