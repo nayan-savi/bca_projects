@@ -86,7 +86,8 @@
                     <tr>
                         <td>Status</td>
                         <td>
-                            <select name="status" value="<%=flower.getStatus()%>">
+                            <select name="status">
+                                <option value="<%=flower.getStatus()%>" hidden selected><%=flower.getStatus()%></option>
                                 <option value=""></option>
                                 <option value="YES">YES</option>
                                 <option value="NO">NO</option>

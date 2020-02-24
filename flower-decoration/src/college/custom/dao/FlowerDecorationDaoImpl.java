@@ -77,7 +77,7 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     public List<Decoration> getAllDecorations() {
         List<Decoration> decorations = new ArrayList<>();
         try {
-            String query = "SELECT * FROM DECORATIONS WHERE STATUS = 'YES'";
+            String query = "SELECT * FROM DECORATIONS";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 Decoration decoration = getDecoration(rs);

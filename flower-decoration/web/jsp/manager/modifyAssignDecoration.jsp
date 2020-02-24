@@ -56,6 +56,7 @@
                     <td>Assigned To</td>
                     <td width="172px">
                         <select name="assignedTo" style="width: 172px">
+                            <option value="<%=decorationOrder.getAssignedTo()%>" hidden selected><%=decorationOrder.getAssignedTo()%></option>
                             <option></option>
                             <%for (int i = 0; i < employees.size(); i++) {
                                 String employeeName = employees.get(i).getEmployeeName();
@@ -75,6 +76,7 @@
                     <td>
                         <select name="status">
                             <option></option>
+                            <option value="<%=decorationOrder.getStatus()%>" hidden selected><%=decorationOrder.getStatus()%></option>
                             <option value="Pending">Pending</option>
                             <option value="Inprogress">Inprogress</option>
                             <option value="Done">Done</option>

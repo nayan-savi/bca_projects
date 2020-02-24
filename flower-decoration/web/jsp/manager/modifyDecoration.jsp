@@ -9,7 +9,7 @@
     <title>View Decoration</title>
     <script type="text/javascript">
         function cancelDecoration() {
-            var chk = document.decorations.DecorationId;
+            var chk = document.decorations.decorationId;
             var count = 0;
             var id = 0;
             if (chk.length == undefined) {
@@ -76,7 +76,8 @@
                     <tr>
                         <td>Status</td>
                         <td>
-                            <select name="status" value="<%=decoration.getStatus()%>">
+                            <select name="status">
+                                <option value="<%=decoration.getStatus()%>" hidden selected><%=decoration.getStatus()%></option>
                                 <option value=""></option>
                                 <option value="YES">YES</option>
                                 <option value="NO">NO</option>
