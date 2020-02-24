@@ -101,6 +101,16 @@ public class EmployeeController extends HttpServlet {
             request.setAttribute("orderedDecorations", decorations);
             rd = request.getRequestDispatcher("jsp/employee/viewEmpDecorationOrder.jsp");
             rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewEmpDoneFlowerOrder")) {
+            List<FlowerOrder> flowers = flowerDecorationDao.viewDoneFlowerOrder(username, employeeId);
+            request.setAttribute("orderedFlowers", flowers);
+            rd = request.getRequestDispatcher("jsp/employee/viewEmpDoneFlowerOrder.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewEmpDoneDecorationOrder")) {
+            List<DecorationOrder> decorations = flowerDecorationDao.viewDoneDecorationOrder(username, employeeId);
+            request.setAttribute("orderedDecorations", decorations);
+            rd = request.getRequestDispatcher("jsp/employee/viewEmpDoneDecorationOrder.jsp");
+            rd.forward(request, response);
         }
     }
 }

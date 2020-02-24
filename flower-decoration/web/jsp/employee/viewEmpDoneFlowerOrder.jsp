@@ -7,32 +7,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>View Flower</title>
-    <script type="text/javascript">
-        function modifyFlower() {
-            var chk = document.flowerOrder.orderId;
-            var count = 0;
-            if (chk.length == undefined) {
-                if (chk.checked == true) {
-                    count++;
-                }
-            }
-            for (var i = 0; i < chk.length; i++) {
-                if (chk[i].checked == true) {
-                    count++;
-                }
-            }
-            if (count == 0) {
-                alert("Please selected at least one checkbox");
-                return false;
-            }
-            if (count > 1) {
-                alert("Please select only one checkbox");
-                return false;
-            }
-            document.flowerOrder.action = "/modifyEmpFlowerOrder?anchor=modifyEmpFlowerOrder";
-            document.flowerOrder.submit();
-        }
-    </script>
+
 </head>
 
 
@@ -62,7 +37,6 @@
 
     <div id="page">
         <% List<FlowerOrder> flowerOrders = (List<FlowerOrder>) request.getAttribute("orderedFlowers"); %>
-        <form action="" name="flowerOrder" method="post">
             <div style="height:auto;width:auto;border:1px solid #ccc;overflow:auto;">
                 <table border="0">
                     <tr class="viewHeader">
@@ -80,10 +54,7 @@
                         String status = flowerOrders.get(i).getStatus();
                     %>
                     <tr class="viewData">
-                        <td>
-                            <input type="checkbox" name="orderId" value="<%=flowerOrders.get(i).getOrderId() %>"/>
-                            <%=flowerOrders.get(i).getOrderId()%>
-                        </td>
+                        <td><%=flowerOrders.get(i).getOrderId()%></td>
                         <td><%=flowerOrders.get(i).getFlowerName()%></td>
                         <td><%=flowerOrders.get(i).getFlowerCost()%></td>
                         <td><%=flowerOrders.get(i).getRequestDate() %></td>
@@ -104,12 +75,6 @@
                     <% } %>
                 </table>
             </div>
-        </form>
-        <table>
-            <tr>
-                <td><input type="button" value="Modify" onclick="modifyFlower()"></td>
-            </tr>
-        </table>
     </div>
 </div>
 <%@include file="../footer.jsp" %>

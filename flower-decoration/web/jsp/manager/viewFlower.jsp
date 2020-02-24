@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="java.util.List" %>
-<%@ page import="college.custom.model.FlowerOrder" %>
+<%@ page import="college.custom.model.Flower" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>View Flower</title>
     <script type="text/javascript">
-        function deleteFlowerRequest() {
-            var chk = document.flowerOrder.orderId;
+        function modifyFlower() {
+            var chk = document.flowers.flowerId;
             var count = 0;
             var id = 0;
             if (chk.length == undefined) {
@@ -33,8 +33,37 @@
                 return false;
             }
 
-            document.flowerOrder.action = "/deleteFlowerRequest?anchor=deleteFlowerRequest&id="+id;
-            document.flowerOrder.submit();
+            document.flowers.action = "/modifyFlower?anchor=modifyFlower&id="+id;
+            document.flowers.submit();
+        }
+
+        function deleteFlower() {
+            var chk = document.flowers.flowerId;
+            var count = 0;
+            var id = 0;
+            if (chk.length == undefined) {
+                if (chk.checked == true) {
+                    count++;
+                }
+            }
+            for (var i = 0; i < chk.length; i++) {
+                if (chk[i].checked == true) {
+                    id = chk[i].value;
+                    count++;
+                }
+            }
+
+            if (count == 0) {
+                alert("Please selected at least one checkbox");
+                return false;
+            }
+            if (count > 1) {
+                alert("Please select only one checkbox");
+                return false;
+            }
+
+            document.flowers.action = "/deleteFlower?anchor=deleteFlower";
+            document.flowers.submit();
         }
     </script>
 </head>
@@ -59,57 +88,45 @@
     }
 </style>
 <body>
-<%@include file="../user/userHeader.jsp" %>
+<%@include file="managerHeader.jsp" %>
 <div id="wrapper">
 
     <div id="page">
         <%@include file="../login/loginDetails.jsp" %>
-        <% List<FlowerOrder> flowerOrders = (List<FlowerOrder>) request.getAttribute("orderedFlowers"); %>
-        <form action="" name="flowerOrder" method="post">
+        <% List<Flower> flowers = (List<Flower>) request.getAttribute("flowers"); %>
+        <form action="" name="flowers" method="post">
             <div style="height:auto;width:auto;border:1px solid #ccc;overflow:auto;">
                 <table border="0">
                     <tr class="viewHeader">
-                        <td>Order Id</td>
+                        <td>Flower Id</td>
                         <td>Flower Name</td>
                         <td>Flower Cost</td>
-                        <td>Request Date</td>
-                        <td>Bargaining</td>
-                        <td>Delivered Date</td>
                         <td>Status</td>
-                        <td>Final Rate</td>
                         <td>Comment</td>
                     </tr>
-                    <%for (int i = 0; i < flowerOrders.size(); i++) {
-                        String status = flowerOrders.get(i).getStatus();
+                    <%for (int i = 0; i < flowers.size(); i++) {
+                        String status = flowers.get(i).getStatus();
                     %>
                     <tr class="viewData">
                         <td>
-                            <input type="checkbox" name="orderId" value="<%=flowerOrders.get(i).getOrderId() %>"/>
-                            <%=flowerOrders.get(i).getOrderId()%>
+                            <input type="checkbox" name="flowerId" value="<%=flowers.get(i).getFlowerId() %>"/>
+                            <%=flowers.get(i).getFlowerId()%>
                         </td>
-                        <td><%=flowerOrders.get(i).getFlowerName()%></td>
-                        <td><%=flowerOrders.get(i).getFlowerCost()%></td>
-                        <td><%=flowerOrders.get(i).getRequestDate() %></td>
-                        <td><%=flowerOrders.get(i).getBargaining() %></td>
-                        <td><%=flowerOrders.get(i).getDeliveredDate() %></td>
-                        <% if(status.equalsIgnoreCase("Pending")) {%>
-                        <td style="color:yellowgreen"><%= status%></td>
-                        <%} else if(status.equalsIgnoreCase("Inprogress")) {%>
-                        <td style="color:blue"><%= status%></td>
-                        <%} else if(status.equalsIgnoreCase("Done")) {%>
-                        <td style="color:green"><%= status%></td>
-                        <%} else if(status.equalsIgnoreCase("Rejected")) {%>
-                        <td style="color:red"><%= status%></td>
-                        <%}%>
-                        <td><%=flowerOrders.get(i).getFinalRate()%></td>
-                        <td><%=flowerOrders.get(i).getComment()%></td>
+                        <td><%=flowers.get(i).getFlowerName()%></td>
+                        <td><%=flowers.get(i).getFlowerCost()%></td>
+
+                        <td>
+                            <%=status%>
+                        </td>
+                        <td><%=flowers.get(i).getComment()%></td>
                     </tr>
                     <% } %>
                 </table>
             </div>
             <table>
                 <tr>
-                    <td><input type="button" value="Delete" onclick="deleteFlowerRequest()"></td>
+                    <td><input type="button" value="Modify" onclick="modifyFlower()"></td>
+                    <td><input type="button" value="Delete" onclick="deleteFlower()"></td>
                 </tr>
             </table>
         </form>

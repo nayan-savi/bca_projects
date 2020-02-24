@@ -44,7 +44,7 @@
                 </tr>
                 <tr>
                     <td>Email Id</td>
-                    <td><input disabled type="text" name="emailId" value="<%=employee.getEmailId() %>"/></td>
+                    <td><input readonly="true" type="text" name="emailId" value="<%=employee.getEmailId() %>"/></td>
                 </tr>
                 <tr>
                     <td>Contact No</td>
@@ -68,7 +68,7 @@
                 </tr>
                 <tr>
                     <td>Username</td>
-                    <td><input disabled type="text" name="username" value="<%=employee.getUsername()%>"/></td>
+                    <td><input readonly="true" type="text" name="username" value="<%=employee.getUsername()%>"/></td>
                 </tr>
                 <tr>
                     <td>password</td>

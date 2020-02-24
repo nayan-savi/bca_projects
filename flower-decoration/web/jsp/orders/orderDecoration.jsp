@@ -13,12 +13,11 @@
             document.orderDecoration.action = "/orderDecoration?anchor=orderDecoration";
             document.orderDecoration.submit();
         }
-             
-function setCost() {
- selectElement= document.querySelector('#decorationName');
-                 output =  
-selectElement.options[selectElement.selectedIndex].value; 
-document.getElementById('decorationCost').value = output;
+
+        function setCost() {
+            /*selectElement = document.querySelector('#decorationName');
+            output = selectElement.options[selectElement.selectedIndex].value;
+            document.getElementById('decorationCost').value = output;*/
         }
     </script>
 
@@ -36,21 +35,17 @@ document.getElementById('decorationCost').value = output;
             <h1>Request Flowers</h1>
             <% List<Decoration> decorations = (List<Decoration>) request.getAttribute("decorations"); %>
             <table>
-                <%--<tr>
-                    <td>Flower Name</td>
-                    <td><input type="text" name="flowername"/></td>
-                </tr>--%>
                 <tr>
                     <td>Decoration Name</td>
                     <td width="172px">
-                        <select name="decorationName" id="decorationName
-                                                  " style="width: 172px" onchange="setCost()">
+                        <select name="decorationName" id="decorationName" style="width: 172px" onchange="setCost()">
                             <option></option>
-                            <%for (int i = 0; i < decorations.size(); i++) {
-                                String decorationName = decorations.get(i).getDecorationName();
-                                String cost = decorations.get(i).getDecorationCost();
+                            <%
+                                for (int i = 0; i < decorations.size(); i++) {
+                                    String decorationName = decorations.get(i).getDecorationName();
+                                    String cost = decorations.get(i).getDecorationCost();
                             %>
-                            <option value="<%=cost%>"><%=decorationName%></option>
+                            <option value="<%=decorationName%>"><%=decorationName%></option>
                             <% } %>
                         </select>
                     </td>
@@ -70,7 +65,7 @@ document.getElementById('decorationCost').value = output;
                 </tr>
                 <tr>
                     <td>Final Rate</td>
-                    <td><input disabled type="text" name="finalRate"/></td>
+                    <td><input readonly="true" type="text" name="finalRate"/></td>
                 </tr>
                 <tr>
                     <td>Comment</td>

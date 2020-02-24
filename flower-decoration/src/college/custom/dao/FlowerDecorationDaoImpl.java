@@ -36,7 +36,7 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
-    public List<Flower> getAllFlowers() {
+    public List<Flower> getActiveFlowers() {
         List<Flower> flowers = new ArrayList<>();
         try {
             String query = "SELECT * FROM FLOWERS WHERE STATUS = 'YES'";
@@ -55,7 +55,7 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
-    public List<Decoration> getAllDecorations() {
+    public List<Decoration> getActiveDecorations() {
         List<Decoration> decorations = new ArrayList<>();
         try {
             String query = "SELECT * FROM DECORATIONS WHERE STATUS = 'YES'";
@@ -74,13 +74,39 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
+    public List<Decoration> getAllDecorations() {
+        List<Decoration> decorations = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM DECORATIONS WHERE STATUS = 'YES'";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Decoration decoration = getDecoration(rs);
+                decorations.add(decoration);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return decorations;
+    }
+
+    private Decoration getDecoration(ResultSet rs) throws SQLException {
+        Decoration decoration = new Decoration();
+        decoration.setDecorationId(rs.getInt("decorationid"));
+        decoration.setDecorationName(rs.getString("decorationname"));
+        decoration.setDecorationCost(rs.getString("decorationcost"));
+        decoration.setStatus(rs.getString("status"));
+        decoration.setComment(rs.getString("comment"));
+        return decoration;
+    }
+
+    @Override
     public int saveFlowerRequest(FlowerOrder flowerOrder) {
         try {
             String query = "INSERT INTO FLOWERORDERS (FLOWERNAME, FLOWERCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS, ORDERBY) " +
                     "VALUES ('" + flowerOrder.getFlowerName() + "','" + flowerOrder.getFlowerCost()
                     + "','" + flowerOrder.getRequestDate() + "','" + flowerOrder.getBargaining()
-                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "','"+flowerOrder.getStatus()+"','"+
-                    flowerOrder.getOrderBy()+"')";
+                    + "','" + flowerOrder.getFinalRate() + "','" + flowerOrder.getComment() + "','" + flowerOrder.getStatus() + "','" +
+                    flowerOrder.getOrderBy() + "')";
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -92,10 +118,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     public int saveDecorationRequest(DecorationOrder decorationOrder) {
         try {
             String query = "INSERT INTO DECORATIONORDERS (DECORATIONNAME, DECORATIONCOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS, ORDERBY) " +
-                    "VALUES ('" + decorationOrder.getDecorationName()+ "','" + decorationOrder.getDecorationCost()
+                    "VALUES ('" + decorationOrder.getDecorationName() + "','" + decorationOrder.getDecorationCost()
                     + "','" + decorationOrder.getRequestDate() + "','" + decorationOrder.getBargaining()
-                    + "','" + decorationOrder.getFinalRate() + "','" + decorationOrder.getComment() + "','"+decorationOrder.getStatus()+"','"+
-                    decorationOrder.getOrderBy()+"')";
+                    + "','" + decorationOrder.getFinalRate() + "','" + decorationOrder.getComment() + "','" + decorationOrder.getStatus() + "','" +
+                    decorationOrder.getOrderBy() + "')";
             return stmt.executeUpdate(query);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -108,10 +134,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
         List<FlowerOrder> flowerOrders = new ArrayList<>();
         String query;
         try {
-            if(employeeId > 0) {
-                query = "SELECT * FROM FLOWERORDERS WHERE ASSIGNEDTO = '"+username+"'";
+            if (employeeId > 0) {
+                query = "SELECT * FROM FLOWERORDERS WHERE ASSIGNEDTO = '" + username + "' AND STATUS NOT IN ('Done')";
             } else {
-                query = "SELECT * FROM FLOWERORDERS WHERE ORDERBY = '"+username+"'";
+                query = "SELECT * FROM FLOWERORDERS WHERE ORDERBY = '" + username + "'";
             }
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -129,10 +155,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
         List<DecorationOrder> decorationOrders = new ArrayList<>();
         String query;
         try {
-            if(employeeId > 0) {
-                query = "SELECT * FROM DECORATIONORDERS WHERE ASSIGNEDTO = '"+username+"'";
+            if (employeeId > 0) {
+                query = "SELECT * FROM DECORATIONORDERS WHERE ASSIGNEDTO = '" + username + "' AND STATUS NOT IN ('Done')";
             } else {
-                query = "SELECT * FROM DECORATIONORDERS WHERE ORDERBY = '"+username+"'";
+                query = "SELECT * FROM DECORATIONORDERS WHERE ORDERBY = '" + username + "'";
             }
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
@@ -209,10 +235,11 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
-    public int modifyFlowerOrderManager(FlowerOrder flowerOrder) {
+    public int modifyFlowerOrderEmployee(FlowerOrder flowerOrder) {
         try {
-            String query = "UPDATE FLOWERORDERS SET STATUS = '"+flowerOrder.getStatus()+"', ASSIGNEDTO = '"+flowerOrder.getAssignedTo()
-                    +"', FINAL_RATE = '"+flowerOrder.getFinalRate()+"', COMMENT = '"+flowerOrder.getComment()+"' WHERE ORDER_ID = '"+flowerOrder.getOrderId()+"'";
+            String query = "UPDATE FLOWERORDERS SET STATUS = '" + flowerOrder.getStatus() + "', ASSIGNEDTO = '" + flowerOrder.getAssignedTo()
+                    + "', FINAL_RATE = '" + flowerOrder.getFinalRate() + "', COMMENT = '" + flowerOrder.getComment() + "', DELIVERED_DATE = '" + flowerOrder.getDeliveredDate()
+                    + "' WHERE ORDER_ID = '" + flowerOrder.getOrderId() + "'";
             return stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -221,10 +248,11 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     }
 
     @Override
-    public int modifyDecorationOrderManager(DecorationOrder decorationOrder) {
+    public int modifyDecorationOrderEmployee(DecorationOrder decorationOrder) {
         try {
-            String query = "UPDATE DECORATIONORDERS SET STATUS = '"+decorationOrder.getStatus()+"', ASSIGNEDTO = '"+decorationOrder.getAssignedTo()
-                    +"', FINAL_RATE = '"+decorationOrder.getFinalRate()+"', COMMENT = '"+decorationOrder.getComment()+"' WHERE ORDER_ID = '"+decorationOrder.getOrderId()+"'";
+            String query = "UPDATE DECORATIONORDERS SET STATUS = '" + decorationOrder.getStatus() + "', ASSIGNEDTO = '" + decorationOrder.getAssignedTo()
+                    + "', FINAL_RATE = '" + decorationOrder.getFinalRate() + "', COMMENT = '" + decorationOrder.getComment() + "', DELIVERED_DATE = '" + decorationOrder.getDeliveredDate()
+                    + "' WHERE ORDER_ID = '" + decorationOrder.getOrderId() + "'";
             return stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -235,10 +263,10 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     @Override
     public FlowerOrder getFlowerOrder(int orderId) {
         try {
-            String query = "SELECT * FROM FLOWERORDERS WHERE ORDER_ID = '"+orderId+"'";
+            String query = "SELECT * FROM FLOWERORDERS WHERE ORDER_ID = '" + orderId + "'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-               return getFlowerDetails(rs);
+                return getFlowerDetails(rs);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -249,7 +277,7 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
     @Override
     public DecorationOrder getDecorationOrder(int orderId) {
         try {
-            String query = "SELECT * FROM DECORATIONORDERS WHERE ORDER_ID = '"+orderId+"'";
+            String query = "SELECT * FROM DECORATIONORDERS WHERE ORDER_ID = '" + orderId + "'";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 return getDecorationDetails(rs);
@@ -259,4 +287,141 @@ public class FlowerDecorationDaoImpl implements FlowerDecorationDao {
         }
         return null;
     }
+
+    @Override
+    public int deleteFlowerOrderById(String orderId) {
+        try {
+            String query = "DELETE FROM FLOWERORDERS WHERE ORDER_ID = " + Integer.parseInt(orderId);
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int deleteDecorationOrderById(String orderIdQuery) {
+        try {
+            String query = "DELETE FROM DECORATIONORDERS WHERE ORDER_ID = " + Integer.parseInt(orderIdQuery);
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public List<FlowerOrder> viewDoneFlowerOrder(String username, int employeeId) {
+        List<FlowerOrder> flowerOrders = new ArrayList<>();
+        String query;
+        try {
+            query = "SELECT * FROM FLOWERORDERS WHERE ASSIGNEDTO = '" + username + "' AND STATUS IN ('Done')";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                FlowerOrder flowerOrder = getFlowerDetails(rs);
+                flowerOrders.add(flowerOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return flowerOrders;
+    }
+
+    @Override
+    public List<DecorationOrder> viewDoneDecorationOrder(String username, int employeeId) {
+        List<DecorationOrder> decorationOrders = new ArrayList<>();
+        String query;
+        try {
+            query = "SELECT * FROM DECORATIONORDERS WHERE ASSIGNEDTO = '" + username + "' AND STATUS IN ('Done')";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                DecorationOrder decorationOrder = getDecorationDetails(rs);
+                decorationOrders.add(decorationOrder);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return decorationOrders;
+    }
+
+    @Override
+    public List<Flower> getAllFlowers() {
+        List<Flower> flowers = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM FLOWERS";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Flower flower = getFlower(rs);
+                flowers.add(flower);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return flowers;
+    }
+
+    private Flower getFlower(ResultSet rs) throws SQLException {
+        Flower flower = new Flower();
+        flower.setFlowerId(rs.getInt("flowerid"));
+        flower.setFlowerName(rs.getString("flowername"));
+        flower.setFlowerCost(rs.getString("flowercost"));
+        flower.setStatus(rs.getString("status"));
+        flower.setComment(rs.getString("comment"));
+        return flower;
+    }
+
+    @Override
+    public int updateFlower(Flower flower, String id) {
+        try {
+            String query = "UPDATE FLOWERS SET FLOWERCOST = '"+flower.getFlowerCost()+"', STATUS ='"+flower.getStatus()+"', COMMENT = '"+flower.getComment()+"' WHERE FLOWERID = "+id;
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public int updateDecoration(Decoration decoration, String id) {
+        try {
+            String query = "UPDATE DECORATIONS SET DECORATIONCOST = '"+decoration.getDecorationCost()+"', STATUS ='"+decoration.getStatus()+"', COMMENT = '"+decoration.getComment()+"' WHERE DECORATIONID = "+id;
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+    @Override
+    public Flower getFlowerById(String flowerId) {
+        try {
+            String query = "SELECT * FROM FLOWERS WHERE flowerid = '" + Integer.parseInt(flowerId) + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                return getFlower(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
+
+
+    @Override
+    public Decoration getDecorationById(String decorationId) {
+        try {
+            String query = "SELECT * FROM DECORATIONS WHERE decorationid = '" + Integer.parseInt(decorationId) + "'";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                return getDecoration(rs);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+
 }

@@ -4,6 +4,7 @@
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
+<% List<Flower> flowers = (List<Flower>) request.getAttribute("flowers"); %>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Insert title here</title>
@@ -15,11 +16,12 @@
         }
 
         function setCost() {
- selectElement= document.querySelector('#flowerName');
-                 output =  
 
-selectElement.options[selectElement.selectedIndex].value; 
-document.getElementById('flowerCost').value = output;
+            /*selectElement = document.querySelector('#flowerName');
+            output = selectElement.options[selectElement.selectedIndex].value;
+            var cost = document.getElementById('cost');
+            document.orderFlower.flowerCost = cost;*/
+
         }
 
     </script>
@@ -36,21 +38,22 @@ document.getElementById('flowerCost').value = output;
         </div>
         <form action="/orderFlower?anchor=orderFlower" name="orderFlower" method="post">
             <h1>Request Flowers</h1>
-            <% List<Flower> flowers = (List<Flower>) request.getAttribute("flowers"); %>
+
             <table>
                 <tr>
                     <td>Flower Name</td>
                     <td width="172px">
-                        <select name="flowerName" id="flowerName" 
-                             style="width: 172px" onchange="setCost()">
+                        <select name="flowerName" id="flowerName" style="width: 172px" onchange="setCost()">
                             <option></option>
-                            <%for (int i = 0; i < flowers.size(); i++) {
-                                String flower = flowers.get(i).getFlowerName();
-                                String cost = flowers.get(i).getFlowerCost();
+                            <%
+                                for (int i = 0; i < flowers.size(); i++) {
+                                    String flower = flowers.get(i).getFlowerName();
+                                    String cost = flowers.get(i).getFlowerCost();
                             %>
-                                <option value="<%=cost%>"><%=flower%></option>
+                            <option value="<%=flower%>"><%=flower%></option>
                             <% } %>
                         </select>
+
                     </td>
                 </tr>
 
@@ -68,7 +71,7 @@ document.getElementById('flowerCost').value = output;
                 </tr>
                 <tr>
                     <td>Final Rate</td>
-                    <td><input disabled type="text" name="finalRate"/></td>
+                    <td><input readonly="true" type="text" name="finalRate" value=""/></td>
                 </tr>
                 <tr>
                     <td>Comment</td>

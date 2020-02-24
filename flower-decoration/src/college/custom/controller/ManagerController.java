@@ -1,10 +1,7 @@
 package college.custom.controller;
 
 import college.custom.dao.*;
-import college.custom.model.DecorationOrder;
-import college.custom.model.Employee;
-import college.custom.model.FlowerOrder;
-import college.custom.model.ShopDetails;
+import college.custom.model.*;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ManagerController")
@@ -23,38 +19,68 @@ public class ManagerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
+        FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
+        int row = 0;
+        String data = "";
+        if(anchor.equalsIgnoreCase("updateFlower")) {
+            Flower flower = getFlower(request);
+            row = flowerDecorationDao.updateFlower(flower, request.getParameter("flowerId"));
+            data = "Flower";
+        } else if(anchor.equalsIgnoreCase("updateDecoration")) {
+            Decoration decoration = getDecoration(request);
+            row = flowerDecorationDao.updateDecoration(decoration, request.getParameter("decorationId"));
+            data = "Decoration";
+        } else if(anchor.equalsIgnoreCase("modifyFlower")) {
+            Flower flower = flowerDecorationDao.getFlowerById(request.getParameter("flowerId"));
+            request.setAttribute("flower", flower);
+            rd = request.getRequestDispatcher("jsp/manager/modifyFlower.jsp");
+            rd.forward(request, response);
+            data = "Flower";
+        } else if(anchor.equalsIgnoreCase("modifyDecoration")) {
+            Decoration decoration = flowerDecorationDao.getDecorationById(request.getParameter("decorationId"));
+            request.setAttribute("decoration", decoration);
+            rd = request.getRequestDispatcher("jsp/manager/modifyDecoration.jsp");
+            rd.forward(request, response);
+            data = "Decoration";
+        }
 
-        ShopDetails details = new ShopDetails();
-        details.setShopName(request.getParameter("shopName"));
-        details.setAddress(request.getParameter("address"));
-        details.setCity(request.getParameter("city"));
-        details.setState(request.getParameter("state"));
-        details.setCountry(request.getParameter("country"));
-        details.setPincode(request.getParameter("pincode"));
-        details.setStartdate(request.getParameter("startdate"));
-
-        ShopDetailsDao detailsDao = new ShopDetailsDaoImpl();
-        int row = detailsDao.save(details, anchor);
         if (row > 0) {
             rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
-            request.setAttribute("success", "Shop details saved successfully.");
+            request.setAttribute("success", data +" details saved successfully.");
             rd.forward(request, response);
         } else {
-            rd = request.getRequestDispatcher("jsp/manager/addShops.jsp");
-            request.setAttribute("errmsg", "Shop already exits.");
+            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+            request.setAttribute("errmsg", data+ " already exits.");
             rd.forward(request, response);
         }
 
     }
 
+    private Decoration getDecoration(HttpServletRequest request) {
+        Decoration decoration = new Decoration();
+        decoration.setDecorationName(request.getParameter("decorationName"));
+        decoration.setDecorationCost(request.getParameter("decorationCost"));
+        decoration.setStatus(request.getParameter("status"));
+        decoration.setComment(request.getParameter("comment"));
+        return decoration;
+    }
+
+    private Flower getFlower(HttpServletRequest request) {
+        Flower flower = new Flower();
+        flower.setFlowerName(request.getParameter("flowerName"));
+        flower.setFlowerCost(request.getParameter("flowerCost"));
+        flower.setStatus(request.getParameter("status"));
+        flower.setComment(request.getParameter("comment"));
+        return flower;
+    }
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String anchor = request.getParameter("anchor");
         HttpSession session = request.getSession();
-        String username = (String)session.getAttribute("username");
         EmployeeDao employeeDao;
         FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
         if (anchor.equalsIgnoreCase("logoff")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/login/login.jsp");
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/logout.jsp");
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("addEmployee")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
@@ -80,6 +106,16 @@ public class ManagerController extends HttpServlet {
             List<DecorationOrder> decorations = flowerDecorationDao.getPendingDecorationOrderManager();
             request.setAttribute("orderedDecorations", decorations);
             rd = request.getRequestDispatcher("jsp/manager/viewAssignDecoration.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewFlower")) {
+            List<Flower> flowers = flowerDecorationDao.getAllFlowers();
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/viewFlower.jsp");
+            request.setAttribute("flowers", flowers);
+            rd.forward(request, response);
+        } else if(anchor.equalsIgnoreCase("viewDecoration")) {
+            List<Decoration> decorations = flowerDecorationDao.getAllDecorations();
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/viewDecoration.jsp");
+            request.setAttribute("decorations", decorations);
             rd.forward(request, response);
         }
     }

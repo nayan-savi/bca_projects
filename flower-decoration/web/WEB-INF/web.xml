@@ -43,7 +43,13 @@
         <url-pattern>/viewAssignDecoration</url-pattern>
         <url-pattern>/addEmployee</url-pattern>
         <url-pattern>/addFlower</url-pattern>
+        <url-pattern>/viewFlower</url-pattern>
+        <url-pattern>/modifyFlower</url-pattern>
+        <url-pattern>/updateFlower</url-pattern>
         <url-pattern>/addDecoration</url-pattern>
+        <url-pattern>/viewDecoration</url-pattern>
+        <url-pattern>/modifyDecoration</url-pattern>
+        <url-pattern>/updateDecoration</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -60,7 +66,8 @@
         <url-pattern>/cancelEmployee</url-pattern>
         <url-pattern>/viewEmpFlowerOrder</url-pattern>
         <url-pattern>/viewEmpDecorationOrder</url-pattern>
-
+        <url-pattern>/viewEmpDoneFlowerOrder</url-pattern>
+        <url-pattern>/viewEmpDoneDecorationOrder</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -77,6 +84,10 @@
         <url-pattern>/modifyDecorationManager</url-pattern>
         <url-pattern>/updateFlowerOrder</url-pattern>
         <url-pattern>/updateDecorationOrder</url-pattern>
+        <url-pattern>/modifyEmpFlowerOrder</url-pattern>
+        <url-pattern>/modifyEmpDecorationOrder</url-pattern>
+        <url-pattern>/updateEmpFlowerOrder</url-pattern>
+        <url-pattern>/updateEmpDecorationOrder</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -93,6 +104,9 @@
         <url-pattern>/orderDecorationRequest</url-pattern>
         <url-pattern>/viewFlowerRequest</url-pattern>
         <url-pattern>/viewDecorationRequest</url-pattern>
+        <url-pattern>/deleteFlowerRequest</url-pattern>
+        <url-pattern>/deleteDecorationRequest</url-pattern>
+
     </servlet-mapping>
 
 </web-app>

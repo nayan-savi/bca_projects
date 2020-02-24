@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @WebServlet(name = "FlowerDecoratorController")
@@ -20,8 +22,12 @@ public class FlowerDecoratorController extends HttpServlet {
         RequestDispatcher rd;
         FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
         EmployeeDao employeeDao = new EmployeeDaoImpl();
+        String pattern = "yyyy-mm-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        String date = simpleDateFormat.format(new Date());
         int row = 0;
         String data = null;
+        String fromData = "";
         if(anchor.equals("addFlower")) {
             Flower flower = new Flower();
             flower.setFlowerName(request.getParameter("flowerName"));
@@ -58,16 +64,51 @@ public class FlowerDecoratorController extends HttpServlet {
             rd.forward(request, response);
         } else if(anchor.equals("updateFlowerOrder")) {
             FlowerOrder flowerOrder = getFlowerUpdatedOrder(request);
-            row = flowerDecorationDao.modifyFlowerOrderManager(flowerOrder);
+            flowerOrder.setDeliveredDate(date);
+            row = flowerDecorationDao.modifyFlowerOrderEmployee(flowerOrder);
             data = "Flower";
         } else if(anchor.equals("updateDecorationOrder")) {
-            DecorationOrder decorationUpdateOrder = getDecorationUpdateOrder(request);
-            row = flowerDecorationDao.modifyDecorationOrderManager(decorationUpdateOrder);
+            DecorationOrder decorationOrder = getDecorationUpdateOrder(request);
+            decorationOrder.setDeliveredDate(date);
+            row = flowerDecorationDao.modifyDecorationOrderEmployee(decorationOrder);
             data = "Decoration";
+        } else if (anchor.equalsIgnoreCase("modifyEmpFlowerOrder")) {
+            FlowerOrder flowerOrder = flowerDecorationDao.getFlowerOrder(Integer.parseInt(request.getParameter("orderId")));
+            rd = request.getRequestDispatcher("jsp/employee/modifyEmpFlowerOrder.jsp");
+            request.setAttribute("flowerDetails", flowerOrder);
+            rd.forward(request, response);
+            data = "Flower";
+        } else if (anchor.equalsIgnoreCase("modifyEmpDecorationOrder")) {
+            DecorationOrder decorationOrder = flowerDecorationDao.getDecorationOrder(Integer.parseInt(request.getParameter("orderId")));
+            rd = request.getRequestDispatcher("jsp/employee/modifyEmpDecorationOrder.jsp");
+            request.setAttribute("decorationDetails", decorationOrder);
+            rd.forward(request, response);
+            data = "Decoration";
+        } else if(anchor.equals("updateEmpFlowerOrder")) {
+            FlowerOrder flowerOrder = getFlowerUpdatedOrder(request);
+            flowerOrder.setDeliveredDate(date);
+            row = flowerDecorationDao.modifyFlowerOrderEmployee(flowerOrder);
+            data = "Flower";
+            fromData = "empData";
+        } else if(anchor.equals("updateEmpDecorationOrder")) {
+            DecorationOrder decorationUpdateOrder = getDecorationUpdateOrder(request);
+            decorationUpdateOrder.setDeliveredDate(date);
+            row = flowerDecorationDao.modifyDecorationOrderEmployee(decorationUpdateOrder);
+            data = "Decoration";
+            fromData = "empData";
+        } else if (anchor.equalsIgnoreCase("updateEmpFlowerOrder")) {
+            FlowerOrder flowerOrder = getFlowerUpdatedOrder(request);
+            row = flowerDecorationDao.modifyFlowerOrderEmployee(flowerOrder);
+            fromData = "empData";
+            data = "Flower";
         }
 
         if (row > 0) {
-            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+            if(fromData.equals("empData")) {
+                rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
+            } else {
+                rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+            }
             request.setAttribute("success", data + " details saved successfully.");
             rd.forward(request, response);
         } else {

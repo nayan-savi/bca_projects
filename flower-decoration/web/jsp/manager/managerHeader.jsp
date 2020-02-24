@@ -46,12 +46,12 @@
 
                     <div id="dropmenu5" class="dropmenudiv_a">
                         <a href="/addFlower?anchor=addFlower">Add Flowers Details</a>
-                        <a href="/addFlower?anchor=viewProjectDetails">Modify/Delete Flowers Details</a>
+                        <a href="/viewFlower?anchor=viewFlower">Modify/Delete Flowers Details</a>
                     </div>
 
                     <div id="dropmenu3" class="dropmenudiv_a">
                         <a href="/addDecoration?anchor=addDecoration">Add Decoration Type</a>
-                        <a href="/addDecoration?anchor=viewProjectDetails">Modify/Delete Decoration Type</a>
+                        <a href="/viewDecoration?anchor=viewDecoration">Modify/Delete Decoration Type</a>
                     </div>
 
                     <div id="dropmenu4" class="dropmenudiv_a">
