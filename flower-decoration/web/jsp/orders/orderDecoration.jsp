@@ -15,9 +15,10 @@
         }
 
         function setCost() {
-            /*selectElement = document.querySelector('#decorationName');
+            selectElement = document.querySelector('#decorationShowName');
             output = selectElement.options[selectElement.selectedIndex].value;
-            document.getElementById('decorationCost').value = output;*/
+            document.getElementById('decorationCost').value = output.split('-')[1].trim();
+            document.getElementById('decorationName').value = output.split('-')[0].trim();
         }
     </script>
 
@@ -38,26 +39,30 @@
                 <tr>
                     <td>Decoration Name</td>
                     <td width="172px">
-                        <select name="decorationName" id="decorationName" style="width: 172px" onchange="setCost()">
+                        <select name="decorationShowName" id="decorationShowName" style="width: 172px" onchange="setCost()">
                             <option></option>
                             <%
                                 for (int i = 0; i < decorations.size(); i++) {
                                     String decorationName = decorations.get(i).getDecorationName();
                                     String cost = decorations.get(i).getDecorationCost();
                             %>
-                            <option value="<%=decorationName%>"><%=decorationName%></option>
+                                <option value="<%=decorationName%> - <%=cost%>"><%=decorationName%></option>
                             <% } %>
                         </select>
                     </td>
                 </tr>
 
+                <tr style="display:none;">
+                    <td><input type="hidden" id="decorationName" name="decorationName" /> </td>
+                </tr>
+
                 <tr>
                     <td>Decoration Cost</td>
-                    <td><input type="text" name="decorationCost" id="decorationCost"/></td>
+                    <td><input readonly type="text" name="decorationCost" id="decorationCost"/></td>
                 </tr>
                 <tr>
                     <td>Requested Date</td>
-                    <td><input type="text" name="requestDate"/>(Ex:yyyy-mm-dd)</td>
+                    <td><input type="text" name="requestDate"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
                 <tr>
                     <td>Bargaining</td>

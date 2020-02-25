@@ -22,7 +22,7 @@ public class FlowerDecoratorController extends HttpServlet {
         RequestDispatcher rd;
         FlowerDecorationDao flowerDecorationDao = new FlowerDecorationDaoImpl();
         EmployeeDao employeeDao = new EmployeeDaoImpl();
-        String pattern = "yyyy-mm-dd";
+        String pattern = "dd-mm-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
         int row = 0;

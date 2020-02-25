@@ -110,7 +110,7 @@
                 </tr>
                 <tr>
                     <td>DateOfJoin</td>
-                    <td><input type="text" name="dateOfJoin"/>(Ex:yyyy-mm-dd)</td>
+                    <td><input type="text" name="dateOfJoin"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
                 <tr>
                     <td>Qualification</td>
@@ -138,7 +138,7 @@
                 </tr>
                 <tr>
                     <td>Dob</td>
-                    <td><input type="text" name="dob"/>(Ex:yyyy-mm-dd)</td>
+                    <td><input type="text" name="dob"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
 
                 <tr>
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <td>RelievingDate</td>
-                    <td><input type="text" name="relievingDate"/>(Ex:yyyy-mm-dd)</td>
+                    <td><input type="text" name="relievingDate"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
 
                 <tr>

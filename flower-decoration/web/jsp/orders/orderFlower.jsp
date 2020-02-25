@@ -16,12 +16,10 @@
         }
 
         function setCost() {
-
-            /*selectElement = document.querySelector('#flowerName');
+            selectElement = document.querySelector('#flowerShowName');
             output = selectElement.options[selectElement.selectedIndex].value;
-            var cost = document.getElementById('cost');
-            document.orderFlower.flowerCost = cost;*/
-
+            document.getElementById('flowerCost').value = output.split('-')[1].trim();
+            document.getElementById('flowerName').value = output.split('-')[0].trim();
         }
 
     </script>
@@ -43,27 +41,30 @@
                 <tr>
                     <td>Flower Name</td>
                     <td width="172px">
-                        <select name="flowerName" id="flowerName" style="width: 172px" onchange="setCost()">
+                        <select name="flowerShowName" id="flowerShowName" style="width: 172px" onchange="setCost()">
                             <option></option>
                             <%
                                 for (int i = 0; i < flowers.size(); i++) {
                                     String flower = flowers.get(i).getFlowerName();
                                     String cost = flowers.get(i).getFlowerCost();
                             %>
-                            <option value="<%=flower%>"><%=flower%></option>
+                                <option value="<%=flower%> - <%=cost%> "><%=flower%></option>
                             <% } %>
                         </select>
-
                     </td>
+                </tr>
+
+                <tr style="display:none;">
+                    <td><input type="hidden" id="flowerName" name="flowerName"  /> </td>
                 </tr>
 
                 <tr>
                     <td>Flower Cost</td>
-                    <td><input type="text" name="flowerCost" id="flowerCost"/></td>
+                    <td><input readonly type="text" name="flowerCost" id="flowerCost"/></td>
                 </tr>
                 <tr>
                     <td>Requested Date</td>
-                    <td><input type="text" name="requestDate"/>(Ex:yyyy-mm-dd)</td>
+                    <td><input type="text" name="requestDate"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
                 <tr>
                     <td>Bargaining</td>
