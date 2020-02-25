@@ -9,48 +9,14 @@
     <title>View Flower</title>
     <script type="text/javascript">
         function cancelFlower() {
-            var chk = document.flowers.flowerId;
-            var count = 0;
-            var id = 0;
-            if (chk.length == undefined) {
-                if (chk.checked == true) {
-                    count++;
-                }
-            }
-            for (var i = 0; i < chk.length; i++) {
-                if (chk[i].checked == true) {
-                    id = chk[i].value;
-                    count++;
-                }
-            }
-
-            if (count == 0) {
-                alert("Please selected at least one checkbox");
-                return false;
-            }
-            if (count > 1) {
-                alert("Please select only one checkbox");
-                return false;
-            }
-
             document.flowers.action = "/cancelFlower?anchor=cancelFlower";
             document.flowers.submit();
         }
     </script>
 </head>
 <style>
-    .viewHeader {
-        font-weight: bold;
-        background-color: lightgrey;
-    }
-
     .viewHeader>td {
         padding: 10px 20px;
-    }
-
-    .viewData {
-        text-align: center;
-        font-size: 14px;
     }
 
     .viewData>td{

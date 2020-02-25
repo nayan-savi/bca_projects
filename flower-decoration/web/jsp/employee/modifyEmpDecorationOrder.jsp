@@ -1,6 +1,3 @@
-<%@page import="college.custom.model.Employee" %>
-<%@ page import="college.custom.model.FlowerOrder" %>
-<%@ page import="java.util.List" %>
 <%@ page import="college.custom.model.DecorationOrder" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
@@ -11,13 +8,8 @@
     <title>Modify Employee</title>
     <script type="text/javascript">
         function navigate() {
-            document.updateFlowerOrder.action = "/cancelEmployee?anchor=cancelEmployee";
-            document.updateFlowerOrder.submit();
-        }
-
-        function setValue() {
-            element = document.querySelector("#status").value;
-            console.log(element)
+            document.updateDecorationOrder.action = "/cancelEmployee?anchor=cancelEmployee";
+            document.updateDecorationOrder.submit();
         }
     </script>
 </head>
@@ -68,8 +60,9 @@
                 <tr>
                     <td>Status</td>
                     <td>
-                        <select name="status" id="status" value="<%=decorationOrder.getStatus()%>" >
+                        <select name="status" id="status">
                             <option></option>
+                            <option value="<%=decorationOrder.getStatus()%>" hidden selected><%=decorationOrder.getStatus()%></option>
                             <option value="Pending">Pending</option>
                             <option value="Inprogress" selected>Inprogress</option>
                             <option value="Done">Done</option>

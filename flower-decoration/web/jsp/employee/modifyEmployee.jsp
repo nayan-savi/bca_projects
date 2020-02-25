@@ -82,17 +82,14 @@
                     <td>Relieving Date</td>
                     <td><input type="text" name="relievingDate" value="<%=employee.getRelievingDate() %>"/></td>
                 </tr>
-                <%--<tr>
-                    <td>Level</td>
-                    <td><input type="text" name="level" value="<%=employee.getLevel() %>"/></td>
-                </tr>--%>
+
                 <tr>
                     <td>Level</td>
-                    <td><select name="level" value="<%=employee.getLevel() %>">
-                            <option value="-1">--select--</option>
+                    <td><select name="level">
+                        <option value="<%=employee.getLevel()%>" hidden selected><%=employee.getLevel()%></option>
+                            <option value=""></option>
                             <option value="1">Manager</option>
                             <option value="2">Employee</option>
-                            <%--<option value="3">User</option>--%>
                         </select>
                     </td>
                 </tr>

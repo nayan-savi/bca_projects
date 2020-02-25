@@ -23,7 +23,6 @@
                     count++;
                 }
             }
-
             if (count == 0) {
                 alert("Please selected at least one checkbox");
                 return false;
@@ -32,7 +31,6 @@
                 alert("Please select only one checkbox");
                 return false;
             }
-
             document.flowerOrder.action = "/deleteFlowerRequest?anchor=deleteFlowerRequest&id="+id;
             document.flowerOrder.submit();
         }
@@ -84,7 +82,9 @@
                     %>
                     <tr class="viewData">
                         <td>
-                            <input type="checkbox" name="orderId" value="<%=flowerOrders.get(i).getOrderId() %>"/>
+                            <% if(!status.equalsIgnoreCase("Done")) {%>
+                                <input type="checkbox" name="orderId" value="<%=flowerOrders.get(i).getOrderId() %>"/>
+                            <%}%>
                             <%=flowerOrders.get(i).getOrderId()%>
                         </td>
                         <td><%=flowerOrders.get(i).getFlowerName()%></td>
@@ -93,13 +93,13 @@
                         <td><%=flowerOrders.get(i).getBargaining() %></td>
                         <td><%=flowerOrders.get(i).getDeliveredDate() %></td>
                         <% if(status.equalsIgnoreCase("Pending")) {%>
-                        <td style="color:yellowgreen"><%= status%></td>
+                        <td style="color:yellowgreen"><label name="status"><%= status%></label></td>
                         <%} else if(status.equalsIgnoreCase("Inprogress")) {%>
-                        <td style="color:blue"><%= status%></td>
+                        <td style="color:blue"><label name="status"><%= status%></label></td>
                         <%} else if(status.equalsIgnoreCase("Done")) {%>
-                        <td style="color:green"><%= status%></td>
+                        <td style="color:green"><label name="status"><%= status%></label></td>
                         <%} else if(status.equalsIgnoreCase("Rejected")) {%>
-                        <td style="color:red"><%= status%></td>
+                        <td style="color:red"><label name="status"><%= status%></label></td>
                         <%}%>
                         <td><%=flowerOrders.get(i).getFinalRate()%></td>
                         <td><%=flowerOrders.get(i).getComment()%></td>

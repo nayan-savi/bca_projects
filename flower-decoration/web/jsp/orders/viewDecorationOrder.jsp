@@ -80,8 +80,12 @@
                     %>
                     <tr class="viewData">
                         <td>
-                            <input type="checkbox" name="orderId" value="<%=decorationOrder.get(i).getOrderId() %>"/>
-                            <%=decorationOrder.get(i).getOrderId()%>
+                            <div style="display: inline">
+                                <% if(!status.equalsIgnoreCase("Done")) {%>
+                                    <input type="checkbox" name="orderId" value="<%=decorationOrder.get(i).getOrderId() %>"/>
+                                <%}%>
+                                <%=decorationOrder.get(i).getOrderId()%>
+                            </div>
                         </td>
                         <td><%=decorationOrder.get(i).getDecorationName()%></td>
                         <td><%=decorationOrder.get(i).getDecorationCost()%></td>

@@ -1,6 +1,4 @@
-<%@page import="college.custom.model.Employee" %>
 <%@ page import="college.custom.model.FlowerOrder" %>
-<%@ page import="java.util.List" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -14,10 +12,6 @@
             document.updateFlowerOrder.submit();
         }
 
-        function setValue() {
-            element = document.querySelector("#status").value;
-            console.log(element)
-        }
     </script>
 </head>
 <body>
@@ -67,8 +61,9 @@
                 <tr>
                     <td>Status</td>
                     <td>
-                        <select name="status" id="status" value="<%=flowerOrder.getStatus()%>" >
+                        <select name="status" id="status">
                             <option></option>
+                            <option value="<%=flowerOrder.getStatus()%>" hidden selected><%=flowerOrder.getStatus()%></option>
                             <option value="Pending">Pending</option>
                             <option value="Inprogress" selected>Inprogress</option>
                             <option value="Done">Done</option>
