@@ -1,5 +1,3 @@
-CREATE DATABASE `flowerdecoration`;
-
 DROP TABLE IF EXISTS `employeedetails`;
 CREATE TABLE `employeedetails` (
   `EMPLOYEE_ID` INT(10) AUTO_INCREMENT,
