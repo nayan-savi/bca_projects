@@ -42,7 +42,7 @@
                     count++;
                 }
             }
-            for (var i = 0; i < chk.length; i++) {
+            for (var i = 0; i < chk.length; i++) {S
                 if (chk[i].checked == true) {
                     count++;
                 }

@@ -29,12 +29,12 @@
                 <table border="0" align="center">
                     <tr>
                         <td>
-                            <input name="username" type="text" placeholder="username" />
+                            <input name="username" type="text" placeholder="username" value="nayan" style="font-size: 20px" />
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input name="password" type="password" placeholder="password" />
+                            <input name="password" type="password" placeholder="password" value="nayan" style="font-size: 20px" />
                         </td>
                     </tr>
                     <tr>
@@ -45,7 +45,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" style="padding-top: 40px;" ><a class="reg" href="jsp/login/registration.jsp">Register here</a></td>
+                        <td align="center" style="padding-top: 40px;" ><a class="reg" href="/registration">Signup for Facebook</a></td>
                     </tr>
                 </table>
             </form>
