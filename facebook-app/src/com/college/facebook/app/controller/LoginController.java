@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
         LoginDao loginDao = new LoginDaoImpl();
         Login login = loginDao.login(username, password);
         session.setAttribute("user", login);
-        if(null != login) {
+        if(null != login.getUserId()) {
             rd = request.getRequestDispatcher("jsp/user/userHome.jsp");
         } else {
             rd = request.getRequestDispatcher("jsp/login/login.jsp");

@@ -41,5 +41,36 @@
         <url-pattern>/send</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>com.college.facebook.app.controller.LogoutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>NotificationController</servlet-name>
+        <servlet-class>com.college.facebook.app.controller.NotificationController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>NotificationController</servlet-name>
+        <url-pattern>/notification</url-pattern>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PostController</servlet-name>
+        <servlet-class>com.college.facebook.app.controller.PostController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PostController</servlet-name>
+        <url-pattern>/post</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>

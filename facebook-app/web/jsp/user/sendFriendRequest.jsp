@@ -7,7 +7,7 @@
 
     <script type="text/javascript">
         function sendRequest() {
-            var chk = document.user.id;
+            var chk = document.user.friendId;
             var count = 0;
             if (chk.length == undefined) {
                 if (chk.checked == true) {
@@ -52,11 +52,9 @@
             <% for (int i = 0; i < registrations.size(); i++) {%>
             <tr>
                 <td>
-                    <input type="checkbox" name="id" />
+                    <input type="checkbox" name="friendId" value="<%=registrations.get(i).getUserId()%>" />
                 </td>
-                <td style="display: none;">
-                    <input type="hidden" value="<%=registrations.get(i).getUserId()%>" name="friendId"/>
-                </td>
+
                 <td><%=registrations.get(i).getUsername()%></td>
                 <td><%=registrations.get(i).getEmailId()%></td>
                 <td><%=registrations.get(i).getContactNo()%></td>

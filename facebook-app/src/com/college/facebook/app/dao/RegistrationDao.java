@@ -8,5 +8,5 @@ import java.util.List;
 public interface RegistrationDao {
     int save(Registration registration);
 
-    List<Registration> getActiveUsers();
+    List<Registration> getActiveUsers(String userId);
 }

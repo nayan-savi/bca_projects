@@ -45,11 +45,11 @@ public class RegistrationDaoImpl implements RegistrationDao {
     }
 
     @Override
-    public List<Registration> getActiveUsers() {
+    public List<Registration> getActiveUsers(String userId) {
         try {
             List<Registration> registrations = new ArrayList<>();
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM REGISTRATION WHERE ACTIVE = TRUE";
+            String query = "SELECT * FROM REGISTRATION WHERE ACTIVE = TRUE AND userid <> '"+userId+"'";
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
                 Registration registration = new Registration();
@@ -62,7 +62,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
             return registrations;
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
         return null;
     }

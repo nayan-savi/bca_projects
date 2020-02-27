@@ -46,8 +46,9 @@ public class SendFriendRequestController extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession httpSession = request.getSession();
+        Login login = (Login) httpSession.getAttribute("user");
         RegistrationDao registrationDao = new RegistrationDaoImpl(request);
-        List<Registration> registrations = registrationDao.getActiveUsers();
+        List<Registration> registrations = registrationDao.getActiveUsers(login.getUserId());
         RequestDispatcher rd = request.getRequestDispatcher("jsp/user/sendFriendRequest.jsp");
         request.setAttribute("users", registrations);
         httpSession.setAttribute("users", registrations);
