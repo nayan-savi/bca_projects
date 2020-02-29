@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Title</title>
-
+    <link rel="stylesheet" type="text/css" href="../../css/post.css"/>
     <script type="text/javascript">
         function sendRequest() {
             var chk = document.user.friendId;
@@ -33,6 +33,23 @@
             document.user.submit();
         }
     </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: silver;
+        }
+    </style>
 </head>
 <%@include file="userHeader.jsp" %>
 <body>
@@ -51,7 +68,7 @@
         <% List<Registration> registrations = (List<Registration>) request.getAttribute("users"); %>
             <% for (int i = 0; i < registrations.size(); i++) {%>
             <tr>
-                <td>
+                <td style="width:20px">
                     <input type="checkbox" name="friendId" value="<%=registrations.get(i).getUserId()%>" />
                 </td>
 
@@ -60,10 +77,11 @@
                 <td><%=registrations.get(i).getContactNo()%></td>
             </tr>
         <%}%>
-        <tr>
-            <td><input type="button" value="Send Request" onclick="sendRequest()" /></td>
-        </tr>
+
     </table>
+    <div>
+        <input class="button button2" type="button" value="Send Request" onclick="sendRequest()" />
+    </div>
 </form>
 </body>
 </html>

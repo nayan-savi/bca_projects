@@ -3,6 +3,8 @@ package com.college.facebook.app.model;
 import java.sql.Date;
 
 public class PostDetails {
+
+    private String postId;
     private String userId;
     private String username;
     private String title;
@@ -11,6 +13,15 @@ public class PostDetails {
     private String message;
     private int visibilityLevel;
     private int like;
+    private boolean enable;
+
+    public String getPostId() {
+        return postId;
+    }
+
+    public void setPostId(String postId) {
+        this.postId = postId;
+    }
 
     public String getUserId() {
         return userId;
@@ -74,5 +85,13 @@ public class PostDetails {
 
     public void setLike(int like) {
         this.like = like;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
     }
 }

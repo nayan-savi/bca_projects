@@ -60,6 +60,23 @@
             document.user.submit();
         }
     </script>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 70%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: silver;
+        }
+    </style>
 </head>
 <%@include file="../user/userHeader.jsp" %>
 <body>
@@ -87,11 +104,12 @@
             <td><%=friendRequests.get(i).getContactNo()%></td>
         </tr>
         <%}%>
-        <tr>
-            <td><input type="button" value="Confirm" onclick="confirmRequest()" /></td>
-            <td><input type="button" value="Delete" onclick="deleteRequest()" /></td>
-        </tr>
+
     </table>
+    <div>
+        <input class="button button2" type="button" value="Confirm" onclick="confirmRequest()" />
+        <input class="button button3" type="button" value="Delete" onclick="deleteRequest()" />
+    </div>
 </form>
 </body>
 </html>

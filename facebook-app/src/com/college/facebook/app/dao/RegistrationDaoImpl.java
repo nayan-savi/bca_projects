@@ -24,7 +24,7 @@ public class RegistrationDaoImpl implements RegistrationDao {
     @Override
     public int save(Registration reg) {
         try {
-            UUID uuid = UUID.randomUUID();
+            final UUID uuid = UUID.randomUUID();
             Statement statement = connection.createStatement();
             String regQuery = "INSERT INTO REGISTRATION(USERID, NAME, ADDRESS, CONTACTNO, EMAILID, USERNAME, PASSWORD, ACTIVE) " +
                     "VALUES ('" + uuid + "','" + reg.getName() + "','" + reg.getAddress() + "','" + reg.getContactNo() + "','"

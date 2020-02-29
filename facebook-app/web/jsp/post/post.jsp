@@ -3,7 +3,14 @@
 <html>
 <head>
     <title>Title</title>
-
+    <script>
+        function postBlog() {
+            //var path = document.getElementById("path").value;
+            //alert(path)
+            document.user.action = "/post";
+            document.user.submit();
+        }
+    </script>
 
 </head>
 <%@include file="../user/userHeader.jsp" %>
@@ -15,7 +22,7 @@
 <%
     Login login = (Login) session.getAttribute("user");
 %>
-<form action="/post" name="user" method="post">
+<form action="" name="user" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Username</td>
@@ -29,6 +36,11 @@
             <td>Message</td>
             <td><input type="text" name="message"> </td>
         </tr>
+
+       <%-- <tr>
+            <td>Choose Image:</td>
+            <td><input type="file" name="path" id="path"></td>
+        </tr>--%>
 
         <tr>
             <td>
@@ -50,7 +62,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Post" /></td>
+            <td><input type="button" value="Post" onclick="postBlog()"/></td>
         </tr>
     </table>
 </form>

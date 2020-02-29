@@ -1,23 +1,35 @@
+<%@ page import="com.college.facebook.app.model.Login" %>
 <!DOCTYPE html>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="../../js/facebook.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../../css/header.css"/>
 </head>
 <body>
+<% Login user = (Login)session.getAttribute("user"); %>
+
 <div class="navbar">
     <a href="/home">Home</a>
-    <a href="/notification">Notifications</a>
+    <%--<a href="#news">News</a>--%>
     <div class="dropdown">
-        <button class="dropbtn" onclick="myFunction()">Actions</button>
-        <div class="dropdown-content" id="myDropdown">
+        <button class="dropbtn">Notifications</button>
+        <div class="dropdown-content">
+            <a href="/notification">Accept Request</a>
+            <a href="/friends">My Friends</a>
+        </div>
+    </div>
+    <div class="dropdown">
+        <button class="dropbtn">Actions</button>
+        <div class="dropdown-content">
             <a href="/send">Send Friend Request</a>
             <a href="/post">Post</a>
-            <a href="/blogs">My Blogs</a>
+            <a href="/myblog">My Blogs</a>
         </div>
     </div>
     <a href="/logout">Logout</a>
+</div>
+<div style="padding-top: 10px;padding-right: 10px; text-align: right; font-weight: bold; color:green">
+<label>Welcome <%=user.getUsername()%></label>
 </div>
 </body>
 </html>

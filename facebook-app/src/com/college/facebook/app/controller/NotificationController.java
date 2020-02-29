@@ -42,7 +42,7 @@ public class NotificationController extends HttpServlet {
             }
         }
         rd = request.getRequestDispatcher("jsp/notification/userNotification.jsp");
-        request.setAttribute("friendRequests", session.getAttribute("friendRequests"));
+        request.setAttribute("friendRequests", notificationDao.getNotification(user));
         rd.forward(request, response);
 
     }

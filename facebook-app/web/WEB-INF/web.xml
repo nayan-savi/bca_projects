@@ -72,5 +72,27 @@
         <url-pattern>/post</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>com.college.facebook.app.controller.HomeController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+        <url-pattern>/like</url-pattern>
+        <url-pattern>/unlike</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>MyBlogController</servlet-name>
+        <servlet-class>com.college.facebook.app.controller.MyBlogController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MyBlogController</servlet-name>
+        <url-pattern>/myblog</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
