@@ -9,4 +9,10 @@ public interface PostDetailsDao {
     int postDetails(PostDetails postDetails);
 
     List<PostDetails> getMyBlogs(Login user);
+
+    int deletePost(String postId);
+
+    PostDetails editPost(String postId);
+
+    int updatePostDetails(PostDetails postDetails);
 }

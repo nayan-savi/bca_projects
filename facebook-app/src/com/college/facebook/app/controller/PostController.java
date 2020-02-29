@@ -20,17 +20,22 @@ public class PostController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         PostDetails postDetails = new PostDetails();
         Login user = (Login) request.getSession().getAttribute("user");
-        postDetails.setUserId(user.getUserId());
-        postDetails.setUsername(request.getParameter("username"));
+        String postId = request.getParameter("postId");
         postDetails.setTitle(request.getParameter("title"));
-        postDetails.setPath("");
         postDetails.setMessage(request.getParameter("message"));
         postDetails.setVisibilityLevel(Integer.parseInt(request.getParameter("visibilityLevel")));
-        postDetails.setLike(0);
-
         PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
-        int row = postDetailsDao.postDetails(postDetails);
-
+        postDetails.setUserId(user.getUserId());
+        postDetails.setUsername(request.getParameter("username"));
+        postDetails.setPath("");
+        int row;
+        if(null == postId) {
+            postDetails.setLike(0);
+            row = postDetailsDao.postDetails(postDetails);
+        } else {
+            postDetails.setPostId(request.getParameter("postId"));
+            row = postDetailsDao.updatePostDetails(postDetails);
+        }
         if(row > 0) {
             request.setAttribute("success", "Posted successfully.");
         } else {

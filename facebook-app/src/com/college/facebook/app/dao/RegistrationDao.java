@@ -9,4 +9,6 @@ public interface RegistrationDao {
     int save(Registration registration);
 
     List<Registration> getActiveUsers(String userId);
+    List<Registration> getMyFriends(String userId);
+
 }

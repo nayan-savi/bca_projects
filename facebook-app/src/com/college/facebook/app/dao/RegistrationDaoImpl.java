@@ -52,11 +52,36 @@ public class RegistrationDaoImpl implements RegistrationDao {
             String query = "SELECT * FROM REGISTRATION WHERE ACTIVE = TRUE AND userid <> '"+userId+"'";
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()) {
-                Registration registration = new Registration();
-                registration.setUserId(rs.getString("USERID"));
-                registration.setUsername(rs.getString("USERNAME"));
-                registration.setEmailId(rs.getString("EMAILID"));
-                registration.setContactNo(rs.getString("CONTACTNO"));
+                Registration registration = getRegistration(rs);
+                registrations.add(registration);
+            }
+            return registrations;
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    private Registration getRegistration(ResultSet rs) throws SQLException {
+        Registration registration = new Registration();
+        registration.setUserId(rs.getString("USERID"));
+        registration.setUsername(rs.getString("USERNAME"));
+        registration.setEmailId(rs.getString("EMAILID"));
+        registration.setContactNo(rs.getString("CONTACTNO"));
+        return registration;
+    }
+
+    @Override
+    public List<Registration> getMyFriends(String userId) {
+        try {
+            List<Registration> registrations = new ArrayList<>();
+            Statement statement = connection.createStatement();
+            String query = "SELECT * FROM REGISTRATION WHERE ACTIVE = TRUE " +
+                    " AND USERID IN ( SELECT REQUESTORID FROM LINKEDFRIENDS WHERE USERID='"+userId+"')";
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()) {
+                Registration registration = getRegistration(rs);
                 registrations.add(registration);
             }
             return registrations;

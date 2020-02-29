@@ -48,10 +48,19 @@ public class SendFriendRequestController extends HttpServlet {
         HttpSession httpSession = request.getSession();
         Login login = (Login) httpSession.getAttribute("user");
         RegistrationDao registrationDao = new RegistrationDaoImpl(request);
-        List<Registration> registrations = registrationDao.getActiveUsers(login.getUserId());
-        RequestDispatcher rd = request.getRequestDispatcher("jsp/user/sendFriendRequest.jsp");
-        request.setAttribute("users", registrations);
-        httpSession.setAttribute("users", registrations);
+        String uri = request.getRequestURI();
+        RequestDispatcher rd = null;
+        if (uri.equals("/send")) {
+            List<Registration> registrations = registrationDao.getActiveUsers(login.getUserId());
+            rd = request.getRequestDispatcher("jsp/user/sendFriendRequest.jsp");
+            request.setAttribute("users", registrations);
+            httpSession.setAttribute("users", registrations);
+
+        } else if (uri.equals("/friends")) {
+            List<Registration> myFriends = registrationDao.getMyFriends(login.getUserId());
+            rd = request.getRequestDispatcher("jsp/user/myFriends.jsp");
+            request.setAttribute("friends", myFriends);
+        }
         rd.forward(request, response);
     }
 }
