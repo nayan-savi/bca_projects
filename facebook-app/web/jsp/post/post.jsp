@@ -3,14 +3,14 @@
 <html>
 <head>
     <title>Title</title>
-    <script>
+    <%--<script>
         function postBlog() {
             //var path = document.getElementById("path").value;
             //alert(path)
             document.user.action = "/post";
             document.user.submit();
         }
-    </script>
+    </script>--%>
 
 </head>
 <%@include file="../user/userHeader.jsp" %>
@@ -22,7 +22,7 @@
 <%
     Login login = (Login) session.getAttribute("user");
 %>
-<form action="" name="user" method="post" enctype="multipart/form-data">
+<form action="/post" name="user" method="post" enctype="multipart/form-data">
     <table>
         <tr>
             <td>Username</td>
@@ -37,17 +37,17 @@
             <td><input type="text" name="message"> </td>
         </tr>
 
-       <%-- <tr>
+        <tr>
             <td>Choose Image:</td>
             <td><input type="file" name="path" id="path"></td>
-        </tr>--%>
+        </tr>
 
         <tr>
             <td>
                 <fieldset>
                     <legend>Access level</legend>
                     <div>
-                        <input type="radio" name="visibilityLevel" id="private" value="1" checked />
+                        <input type="radio" name="visibilityLevel" id="private" value="1" />
                         <label for="private">Only to me</label>
                     </div>
                     <div>
@@ -62,7 +62,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="button" value="Post" onclick="postBlog()"/></td>
+            <td><input type="submit" value="Post" /></td>
         </tr>
     </table>
 </form>
