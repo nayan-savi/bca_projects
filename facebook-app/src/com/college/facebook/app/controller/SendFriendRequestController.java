@@ -58,7 +58,7 @@ public class SendFriendRequestController extends HttpServlet {
 
         } else if (uri.equals("/friends")) {
             List<Registration> myFriends = registrationDao.getMyFriends(login.getUserId());
-            rd = request.getRequestDispatcher("jsp/user/myFriends.jsp");
+            rd = request.getRequestDispatcher("jsp/user/myfriends.jsp");
             request.setAttribute("friends", myFriends);
         }
         rd.forward(request, response);

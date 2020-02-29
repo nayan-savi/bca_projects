@@ -68,20 +68,12 @@
         <% List<Registration> registrations = (List<Registration>) request.getAttribute("friends"); %>
         <% for (int i = 0; i < registrations.size(); i++) {%>
         <tr>
-            <td style="width:20px">
-                <input type="checkbox" name="friendId" value="<%=registrations.get(i).getUserId()%>" />
-            </td>
-
             <td><%=registrations.get(i).getUsername()%></td>
             <td><%=registrations.get(i).getEmailId()%></td>
             <td><%=registrations.get(i).getContactNo()%></td>
         </tr>
         <%}%>
-
     </table>
-    <div>
-        <input class="button button2" type="button" value="Send Request" onclick="sendRequest()" />
-    </div>
 </form>
 </body>
 </html>
