@@ -29,7 +29,7 @@ public class PostController extends HttpServlet {
         PostDetails postDetails = new PostDetails();
         UUID uuid = UUID.randomUUID();
         String postId = request.getParameter("postId");
-        String uploadPath = "E:\\WORKSPACE\\projects\\bca_projects\\facebook-app\\web\\upload\\";
+        String uploadPath = "E:\\softwares\\apache-tomcat-8.5.51\\bin\\upload\\";
         postDetails.setUserId(user.getUserId());
         DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
         diskFileItemFactory.setRepository(new File("C:\\Users\\NAYAN\\AppData\\Local\\Temp"));
@@ -50,19 +50,14 @@ public class PostController extends HttpServlet {
                     }
                 } else {
                     File source = new File(uploadPath+uuid+fileItem.getName());
-                    source.setExecutable(true);
-                    File dest = new File(uploadPath+uuid+".jpg");
-                    source.renameTo(dest);
-                    postDetails.setPath(uuid+".jpg");
-                    fileItem.write(dest);
+                    postDetails.setPath(uuid+fileItem.getName());
+                    fileItem.write(source);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
-
         int row;
         if (null == postId) {
             postDetails.setPostId(uuid.toString());
