@@ -5,6 +5,9 @@ import com.college.facebook.app.dao.PostDetailsDaoImpl;
 import com.college.facebook.app.model.Login;
 import com.college.facebook.app.model.PostDetails;
 import com.oreilly.servlet.MultipartRequest;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.UUID;
 
 @WebServlet(name = "PostController")
@@ -22,22 +26,47 @@ import java.util.UUID;
 public class PostController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Login user = (Login) request.getSession().getAttribute("user");
-        String uploadPath = request.getServletContext().getRealPath(File.separator);
-        MultipartRequest multipartRequest = new MultipartRequest(request, new File("upload").getAbsoluteFile().toString());
         PostDetails postDetails = new PostDetails();
+        UUID uuid = UUID.randomUUID();
         String postId = request.getParameter("postId");
-        postDetails.setTitle(multipartRequest.getParameter("title"));
-        postDetails.setMessage(multipartRequest.getParameter("message"));
-        postDetails.setVisibilityLevel(Integer.parseInt(multipartRequest.getParameter("visibilityLevel")));
-        PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
+        String uploadPath = "E:\\WORKSPACE\\projects\\bca_projects\\facebook-app\\web\\upload\\";
         postDetails.setUserId(user.getUserId());
-        postDetails.setUsername(multipartRequest.getParameter("username"));
+        DiskFileItemFactory diskFileItemFactory = new DiskFileItemFactory();
+        diskFileItemFactory.setRepository(new File("C:\\Users\\NAYAN\\AppData\\Local\\Temp"));
+        ServletFileUpload upload = new ServletFileUpload(diskFileItemFactory);
+        try {
+            List<FileItem> fileItems = upload.parseRequest(request);
+            for (FileItem fileItem : fileItems) {
+                if(fileItem.isFormField()) {
+                    String fieldName = fileItem.getFieldName();
+                    if(fieldName.equals("username")) {
+                        postDetails.setUsername(fileItem.getString());
+                    } else if (fieldName.equals("title")) {
+                        postDetails.setTitle(fileItem.getString());
+                    } else if (fieldName.equals("message")) {
+                        postDetails.setMessage(fileItem.getString());
+                    } else if (fieldName.equals("visibilityLevel")) {
+                        postDetails.setVisibilityLevel(Integer.parseInt(fileItem.getString()));
+                    }
+                } else {
+                    File source = new File(uploadPath+uuid+fileItem.getName());
+                    source.setExecutable(true);
+                    File dest = new File(uploadPath+uuid+".jpg");
+                    source.renameTo(dest);
+                    postDetails.setPath(uuid+".jpg");
+                    fileItem.write(dest);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
+
         int row;
         if (null == postId) {
-            UUID uuid = UUID.randomUUID();
             postDetails.setPostId(uuid.toString());
             postDetails.setLike(0);
-            uploadImage(multipartRequest, postDetails.getPostId(), postDetails);
             row = postDetailsDao.postDetails(postDetails);
         } else {
             postDetails.setPostId(request.getParameter("postId"));
