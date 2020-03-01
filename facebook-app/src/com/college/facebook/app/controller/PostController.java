@@ -4,10 +4,7 @@ import com.college.facebook.app.dao.PostDetailsDao;
 import com.college.facebook.app.dao.PostDetailsDaoImpl;
 import com.college.facebook.app.model.Login;
 import com.college.facebook.app.model.PostDetails;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import com.oreilly.servlet.MultipartRequest;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,33 +13,37 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.util.List;
+import java.io.*;
+import java.util.Enumeration;
+import java.util.UUID;
 
 @WebServlet(name = "PostController")
+@MultipartConfig(location = "/upload")
 public class PostController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        PostDetails postDetails = new PostDetails();
         Login user = (Login) request.getSession().getAttribute("user");
+        String uploadPath = request.getServletContext().getRealPath(File.separator);
+        MultipartRequest multipartRequest = new MultipartRequest(request, new File("upload").getAbsoluteFile().toString());
+        PostDetails postDetails = new PostDetails();
         String postId = request.getParameter("postId");
-        postDetails.setTitle(request.getParameter("title"));
-        postDetails.setMessage(request.getParameter("message"));
-        postDetails.setVisibilityLevel(Integer.parseInt(request.getParameter("visibilityLevel")));
+        postDetails.setTitle(multipartRequest.getParameter("title"));
+        postDetails.setMessage(multipartRequest.getParameter("message"));
+        postDetails.setVisibilityLevel(Integer.parseInt(multipartRequest.getParameter("visibilityLevel")));
         PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
         postDetails.setUserId(user.getUserId());
-        postDetails.setUsername(request.getParameter("username"));
-        postDetails.setPath("/upload");
+        postDetails.setUsername(multipartRequest.getParameter("username"));
         int row;
-        if(null == postId) {
+        if (null == postId) {
+            UUID uuid = UUID.randomUUID();
+            postDetails.setPostId(uuid.toString());
             postDetails.setLike(0);
+            uploadImage(multipartRequest, postDetails.getPostId(), postDetails);
             row = postDetailsDao.postDetails(postDetails);
         } else {
             postDetails.setPostId(request.getParameter("postId"));
             row = postDetailsDao.updatePostDetails(postDetails);
         }
-        if(row > 0) {
-            uploadImage(request, postId);
+        if (row > 0) {
             request.setAttribute("success", "Posted successfully.");
         } else {
             request.setAttribute("errmsg", "Post data failed.");
@@ -56,24 +57,35 @@ public class PostController extends HttpServlet {
         rd.forward(request, response);
     }
 
-    void uploadImage(HttpServletRequest request, String postId) {
-        if(!ServletFileUpload.isMultipartContent(request)) {
-            return;
-        }
-        ServletFileUpload upload = new ServletFileUpload(new DiskFileItemFactory());
-        try {
-            List<FileItem> items = upload.parseRequest(request);
-            for(FileItem item : items) {
-                File uploadDir = new File("upload");
-                File file = File.createTempFile(postId, ".png", uploadDir);
-                item.write(file);
+    private void uploadImage(MultipartRequest request, String postId, PostDetails postDetails) {
+        Enumeration files = request.getFileNames();
+        while (files.hasMoreElements()) {
+            String name = (String) files.nextElement();
+            String type = request.getContentType(name);
+            if(type.contains("image")) {
+                File uploadedFile = request.getFile("path");
+                try {
+                    FileInputStream fis = new FileInputStream(uploadedFile);
+                    BufferedReader in = new BufferedReader(new InputStreamReader(fis));
+                    FileWriter fstream = new FileWriter("upload" + name, true);
+                    BufferedWriter out11 = new BufferedWriter(fstream);
+                    String aLine;
+                    while ((aLine = in.readLine()) != null) {
+                        out11.write(aLine);
+                    }
+                    in.close();
+                    out11.close();
+                    File rename = new File("upload/" + postId + ".jpg").getAbsoluteFile();
+                    boolean done = uploadedFile.renameTo(rename);
+                    if (done) {
+                        postDetails.setPath(rename.getPath().replaceAll("\\\\", "/"));
+                    }
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-        } catch (FileUploadException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

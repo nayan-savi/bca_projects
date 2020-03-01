@@ -43,9 +43,11 @@ public class MyBlogController extends HttpServlet {
 
     private void dispactchTo(HttpServletRequest request, HttpServletResponse response, PostDetailsDao postDetailsDao) throws ServletException, IOException {
         Login user = (Login)request.getSession().getAttribute("user");
+        response.setContentType("image/jpg");
         List<PostDetails> details = postDetailsDao.getMyBlogs(user);
         RequestDispatcher rd = request.getRequestDispatcher("jsp/post/myblog.jsp");
         request.setAttribute("posts", details);
+
         rd.forward(request, response);
     }
 }

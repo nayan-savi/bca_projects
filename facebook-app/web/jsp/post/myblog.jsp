@@ -1,9 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="com.college.facebook.app.model.PostDetails" %>
 <%@ page import="java.util.List" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>MyBolgs</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <link rel="stylesheet" type="text/css" href="../../css/post.css"/>
     <script>
         function deletePost(postId) {
@@ -33,12 +34,12 @@
     <div class="rightcolumn">
         <div class="card">
             <div style="text-align: right">
-                <img src="../../images/edit-icon.png" style="width: 20px"  onclick="editPost('<%=postDetails.get(i).getPostId()%>')">
-                <img src="../../images/delete-icon.png" style="width: 20px" onclick="deletePost('<%=postDetails.get(i).getPostId()%>')">
+                <img src="../../images/edit-icon.png" style="width: 20px"  onclick="editPost('<%=postDetails.get(i).getPostId()%>')" />
+                <img src="../../images/delete-icon.png" style="width: 20px" onclick="deletePost('<%=postDetails.get(i).getPostId()%>')" />
             </div>
             <h3><%=postDetails.get(i).getUsername()%></h3>
             <h2><%=postDetails.get(i).getTitle()%></h2>
-            <img class="fakeimg" src="../../images/nature.jpeg" />
+            <img class="fakeimg" src="file:///<%=postDetails.get(i).getPath()%>" alt="image" />
             <p><%=postDetails.get(i).getMessage()%></p>
             <div style="display: inline-flex">
                 <label><b>Likes: </b><%=postDetails.get(i).getLike()%></label>

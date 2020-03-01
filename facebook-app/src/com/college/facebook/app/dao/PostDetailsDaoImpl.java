@@ -25,7 +25,7 @@ public class PostDetailsDaoImpl implements PostDetailsDao {
         try {
             Statement statement = connection.createStatement();
             String query = "INSERT INTO POSTDETAILS (POSTID, USERID, USERNAME, TITLE,CREATEDDATE,PATH,MESSAGE,VISIBILITYLEVEL,LIKECOUNT) " +
-                    "VALUES (UUID(), '"+postDetails.getUserId()+"','"+postDetails.getUsername()+"','"+postDetails.getTitle()
+                    "VALUES ('"+postDetails.getPostId()+"', '"+postDetails.getUserId()+"','"+postDetails.getUsername()+"','"+postDetails.getTitle()
                     +"',NOW(),'"+postDetails.getPath()
                     +"','"+postDetails.getMessage()+"','"+postDetails.getVisibilityLevel()+"','"+postDetails.getLike()+"')";
             return statement.executeUpdate(query);
@@ -73,6 +73,7 @@ public class PostDetailsDaoImpl implements PostDetailsDao {
         postDetails.setUserId(rs.getString("USERID"));
         postDetails.setUsername(rs.getString("USERNAME"));
         postDetails.setTitle(rs.getString("TITLE"));
+        postDetails.setPath(rs.getString("PATH"));
         postDetails.setMessage(rs.getString("MESSAGE"));
         postDetails.setVisibilityLevel(rs.getInt("VISIBILITYLEVEL"));
         postDetails.setLike(rs.getInt("LIKECOUNT"));

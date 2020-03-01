@@ -3,18 +3,16 @@
 <html>
 <head>
     <title>Title</title>
-    <%--<script>
-        function postBlog() {
-            //var path = document.getElementById("path").value;
-            //alert(path)
-            document.user.action = "/post";
-            document.user.submit();
+    <script>
+
+        function init() {
+            document.getElementById('private').value = 1;
         }
-    </script>--%>
+    </script>
 
 </head>
 <%@include file="../user/userHeader.jsp" %>
-<body>
+<body onload="init()">
 <div align="center">
     <h3 style="color: green">${success}</h3>
     <h3 style="color: red">${errmsg}</h3>
@@ -39,7 +37,7 @@
 
         <tr>
             <td>Choose Image:</td>
-            <td><input type="file" name="path" id="path"></td>
+            <td><input type="file" name="path" id="path" multiple accept="image/*"></td>
         </tr>
 
         <tr>
@@ -47,7 +45,7 @@
                 <fieldset>
                     <legend>Access level</legend>
                     <div>
-                        <input type="radio" name="visibilityLevel" id="private" value="1" />
+                        <input type="radio" name="visibilityLevel" id="private" value="1" checked/>
                         <label for="private">Only to me</label>
                     </div>
                     <div>
