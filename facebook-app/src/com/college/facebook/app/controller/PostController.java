@@ -22,6 +22,11 @@ public class PostController extends HttpServlet {
         PostDetails postDetails = new PostDetails();
         UUID uuid = UUID.randomUUID();
         String postId = request.getParameter("postId");
+        postDetails.setUsername(request.getParameter("username"));
+        postDetails.setTitle(request.getParameter("title"));
+        postDetails.setMessage(request.getParameter("message"));
+        postDetails.setVisibilityLevel(Integer.parseInt(request.getParameter("visibilityLevel")));
+        postDetails.setUserId(user.getUserId());
         PostDetailsDao postDetailsDao = new PostDetailsDaoImpl(request);
         int row;
         if (null == postId) {
