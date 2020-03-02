@@ -41,7 +41,6 @@
                 <div class="card">
                     <h3><%=postDetails.get(i).getUsername()%></h3>
                     <h2><%=postDetails.get(i).getTitle()%></h2>
-                    <img class="fakeimg" src="E:/softwares/apache-tomcat-8.5.51/bin/upload/<%=postDetails.get(i).getPath()%>" alt="image" />
                     <p><%=postDetails.get(i).getMessage()%></p>
                     <div>
                         <label><b>Likes: </b><%=postDetails.get(i).getLike()%></label>

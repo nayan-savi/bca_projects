@@ -3,13 +3,12 @@
 <html>
 <head>
     <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../../css/postform.css"/>
     <script>
-
         function init() {
             document.getElementById('private').value = 1;
         }
     </script>
-
 </head>
 <%@include file="../user/userHeader.jsp" %>
 <body onload="init()">
@@ -23,27 +22,27 @@
 <form action="/post" name="user" method="post" enctype="multipart/form-data">
     <table>
         <tr>
-            <td>Username</td>
+            <td class="headerName">Username</td>
             <td><input readonly type="text" value="<%=login.getUsername()%>" name="username"> </td>
         </tr>
         <tr>
-            <td>Title</td>
+            <td class="headerName">Title</td>
             <td><input type="text" name="title"> </td>
         </tr>
         <tr>
-            <td>Message</td>
+            <td class="headerName">Message</td>
             <td><input type="text" name="message"> </td>
         </tr>
 
         <tr>
-            <td>Choose Image:</td>
+            <td class="headerName">Choose Image:</td>
             <td><input type="file" name="path" id="path" multiple accept="image/*"></td>
         </tr>
 
         <tr>
             <td>
                 <fieldset>
-                    <legend>Access level</legend>
+                    <legend class="headerName">Access level</legend>
                     <div>
                         <input type="radio" name="visibilityLevel" id="private" value="1" checked/>
                         <label for="private">Only to me</label>
@@ -60,7 +59,7 @@
             </td>
         </tr>
         <tr>
-            <td><input type="submit" value="Post" /></td>
+            <td><input class="button button2" type="submit" value="Post" /></td>
         </tr>
     </table>
 </form>

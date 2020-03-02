@@ -60,7 +60,6 @@
 <form action="" name="user" method="post">
     <table>
         <tr>
-            <td></td>
             <td>Username</td>
             <td>EmailId</td>
             <td>ContactNo</td>

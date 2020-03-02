@@ -4,7 +4,7 @@
 <html>
 <head>
     <title>Title</title>
-
+    <link rel="stylesheet" type="text/css" href="../../css/post.css"/>
     <script type="text/javascript">
         function confirmRequest() {
             var chk = document.user.friendId;
