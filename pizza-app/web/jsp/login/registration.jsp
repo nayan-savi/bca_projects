@@ -9,9 +9,7 @@
 </head>
 <body class="main">
 <div id="header">
-    <div class="logo">
-        <label>User Registration</label>
-    </div>
+
     <!-- end header -->
     <div id="wrapper">
         <!-- start page -->
@@ -22,7 +20,9 @@
             <form action="/registration" method="post">
 
                 <table border="0" align="center">
-
+                    <tr>
+                        <td colspan="2" align="center"><h1>User Registration</h1></td>
+                    </tr>
                     <tr>
                         <td>
                             <div align="center">Name</div>
@@ -80,7 +80,7 @@
                             <td><input type="reset" value="Reset" /></td>
                         </tr>
                         <tr>
-                            <td><a href="jsp/login/login.jsp">Click here for Login</a></td>
+                            <td><a href="login.jsp">Click here for Login</a></td>
                         </tr>
                     </table>
 
@@ -91,7 +91,7 @@
         <!-- end page -->
     </div>
     <div id="footer">
-        <p class="copyright">&copy;&nbsp;&nbsp;2020 All Rights Reserved &nbsp;&bull;&nbsp; Design by Facebook app team</a>.</p>
+        <p class="copyright">&copy;&nbsp;&nbsp;2020 All Rights Reserved &nbsp;&bull;&nbsp; Design by Pizza app team</a>.</p>
     </div>
 </div>
 </body>
