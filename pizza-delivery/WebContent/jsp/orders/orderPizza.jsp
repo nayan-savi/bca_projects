@@ -14,6 +14,12 @@
 
         function addValue() {
             document.orderPizza.action="orderPizza?anchor=orderPizza";
+            var pizzaName = document.orderPizza.pizzaName.value;
+        	if(pizzaName == null || pizzaName == "") {
+    			alert('Pizza Name is mandatory');
+    			document.orderPizza.pizzaName.focus();
+    			return false;
+    		} 
             document.orderPizza.submit();
         }
 
@@ -23,7 +29,7 @@
             document.getElementById('pizzaCost').value = output.split('-')[1].trim();
             document.getElementById('pizzaName').value = output.split('-')[0].trim();
         }
-
+        
     </script>
 
 </head>

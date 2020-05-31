@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Pizza Delivery</title>
 
-    <link href="../../css/default.css" rel="stylesheet" type="text/css" media="screen"/>
-    <script src="../../js/dropdowntabs.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/ddcolortabs.css"/>
+    <link href="././css/default.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="././js/dropdowntabs.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="././css/ddcolortabs.css"/>
 </head>
 <body>
 <!-- start header -->
@@ -26,7 +26,6 @@
                             <li><a href="#" rel="dropmenu2"><span>Employee Details</span></a></li>
                             <li><a href="#" rel="dropmenu5"><span>Pizza & Amt</span></a></li>
                             <li><a href="#" rel="dropmenu4"><span>Customer Request</span></a></li>
-                            <li><a href="ManagerController?anchor=viewSupportRequest"><span>Feedback</span></a></li>
                             <li><a href="logoff?anchor=logoff"><span>Logoff</span></a></li>
                         </ul>
                     </div>

@@ -51,7 +51,10 @@ public class RegistrationController extends HttpServlet {
 		if (anchor.equalsIgnoreCase("reg")) {
             RequestDispatcher rd = request.getRequestDispatcher("jsp/login/registration.jsp");
             rd.forward(request, response);
-        } 
+        } else if(anchor.equalsIgnoreCase("log")) {
+        	RequestDispatcher rd = request.getRequestDispatcher("jsp/login/login.jsp");
+            rd.forward(request, response);
+        }
 	}
 
 }

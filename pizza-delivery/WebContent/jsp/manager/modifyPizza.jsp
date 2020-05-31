@@ -43,11 +43,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Flower Name</td>
+                        <td>Pizza Name</td>
                         <td><input readonly="true" type="text" name="pizzaName" value="<%=pizza.getPizzaName() %>"/></td>
                     </tr>
                     <tr>
-                        <td>Flower Cost</td>
+                        <td>Pizza Cost</td>
                         <td><input type="text" name="pizzaCost" value="<%=pizza.getPizzaCost() %>"/></td>
                     </tr>
 

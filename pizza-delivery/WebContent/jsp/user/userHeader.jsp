@@ -5,9 +5,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Pizza Delivery</title>
-    <link href="../../css/default.css" rel="stylesheet" type="text/css" media="screen"/>
-    <script src="../../js/dropdowntabs.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/ddcolortabs.css"/>
+    <link href="././css/default.css" rel="stylesheet" type="text/css" media="screen"/>
+    <script src="././js/dropdowntabs.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="././css/ddcolortabs.css"/>
 </head>
 <body>
 <!-- start header -->

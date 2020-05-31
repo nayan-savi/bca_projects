@@ -6,11 +6,32 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Pizza Delivery</title>
 
-    <link href="../../css/default.css" rel="stylesheet" type="text/css" media="screen" />
-    <script src="../../js/dropdowntabs.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/ddcolortabs.css" />
-
+    <link href="././css/default.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="././js/dropdowntabs.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="././css/ddcolortabs.css" />
 </head>
+
+<script type="text/javascript">
+	function validateForm() {
+		var username = document.reg.username.value;
+		var pwd = document.reg.password.value;
+		var email = document.reg.emailId.value;
+		if(username == null || username == "") {
+			alert('Username is manadatory');
+			document.reg.username.focus();
+			return false;
+		} else if(pwd == null || pwd == "") {
+			alert('Password is mandatory');
+			document.reg.password.focus();
+			return false;
+		} else if(email == null || email == "") {
+			alert('Email is mandatory');
+			document.reg.email.focus();
+			return false;
+		}
+	}
+</script>
+
 <body>
 <div id="header">
     <div id="logo">
@@ -24,8 +45,7 @@
             <div align="center">
                 <h3 style="color: red">${errmsg}</h3>
             </div>
-            <form action="registration" method="post">
-
+            <form action="registration" name="reg" method="post" onSubmit="return validateForm()">
                 <table width="333" height="188" border="0" align="center">
                     <tr>
                         <td colspan="2" align="center"><h1>Registration page</h1></td>
@@ -78,17 +98,6 @@
                             <input name="password" type="password" />
                         </td>
                     </tr>
-                    <%--<tr>
-                        <td>Level</td>
-                        <td>
-                            <select name="level">
-                                <option value="-1">-- select --</option>
-                                <option value="1">Manager</option>
-                                <option value="2">Employee</option>
-                                <option value="3">User</option>
-                            </select>
-                        </td>
-                    </tr>--%>
                     <tr>
                         <td>Status</td>
                         <td>
@@ -118,7 +127,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="right"><a href="login.jsp">Click here for Login</a></td>
+                        <td align="right"><a href="log?anchor=log">Click here to Login</a></td>
                     </tr>
                 </table>
             </form>
@@ -127,7 +136,7 @@
         <!-- end page -->
     </div>
     <div id="footer">
-        <p class="copyright">&copy;&nbsp;&nbsp;2020 All Rights Reserved &nbsp;&bull;&nbsp; Design by Flower Decoration team</a>.</p>
+        <p class="copyright">&copy;&nbsp;&nbsp;2020 All Rights Reserved &nbsp;&bull;&nbsp; Design by Pizza team.</p>
     </div>
 </div>
 </body>

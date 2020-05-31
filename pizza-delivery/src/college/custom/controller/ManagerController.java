@@ -15,12 +15,14 @@ import java.util.List;
 
 @WebServlet(name = "ManagerController")
 public class ManagerController extends HttpServlet {
-    private RequestDispatcher rd;
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher rd;
         String anchor = request.getParameter("anchor");
+        String pizzaId = request.getParameter("id");
         PizzaDao pizzaDao = new PizzaDaoImpl();
-        int row = 0;
+        int row = -1;
         String data = "";
         if(anchor.equalsIgnoreCase("updatePizza")) {
             Pizza pizza = getPizza(request);
@@ -32,13 +34,27 @@ public class ManagerController extends HttpServlet {
             rd = request.getRequestDispatcher("jsp/manager/modifyPizza.jsp");
             rd.forward(request, response);
             data = "Pizza";
+        } else if (anchor.equalsIgnoreCase("deletePizza")) {
+	       	row = pizzaDao.deletePizzaById(Integer.parseInt(pizzaId));
+            data = "delete";
+        } else if(anchor.equalsIgnoreCase("cancelPizza")) {
+        	rd = request.getRequestDispatcher("jsp/manager/viewPizza.jsp");
+            response.sendRedirect(request.getContextPath()+"/viewPizza?anchor=viewPizza");
+        } else if(anchor.equalsIgnoreCase("cancelManager")) {
+        	rd = request.getRequestDispatcher("jsp/manager/viewAssignPizza.jsp");
+            response.sendRedirect(request.getContextPath()+"/viewAssignPizza?anchor=viewAssignPizza");
         } 
 
         if (row > 0) {
-            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
-            request.setAttribute("success", data +" details saved successfully.");
-            rd.forward(request, response);
-        } else {
+        	if(data.equalsIgnoreCase("delete")) {
+        		rd = request.getRequestDispatcher("jsp/manager/viewPizza.jsp");
+	            response.sendRedirect(request.getContextPath()+"/viewPizza?anchor=viewPizza");
+        	} else {
+	            rd = request.getRequestDispatcher("jsp/manager/viewPizza.jsp");
+	            request.setAttribute("success", data +" details saved successfully.");
+	            response.sendRedirect(request.getContextPath()+"/viewPizza?anchor=viewPizza");
+        	}
+        } else if(row == 0)  {
             rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
             request.setAttribute("errmsg", data+ " already exits.");
             rd.forward(request, response);
@@ -56,18 +72,19 @@ public class ManagerController extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	RequestDispatcher rd;
         String anchor = request.getParameter("anchor");
         HttpSession session = request.getSession();
         EmployeeDao employeeDao;
         PizzaDao pizzaDao = new PizzaDaoImpl();
         if (anchor.equalsIgnoreCase("logoff")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/logout.jsp");
+            rd = request.getRequestDispatcher("jsp/logout.jsp");
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("addEmployee")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
+            rd = request.getRequestDispatcher("jsp/manager/addEmployee.jsp");
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("addPizza")) {
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/addPizza.jsp");
+            rd = request.getRequestDispatcher("jsp/manager/addPizza.jsp");
             rd.forward(request, response);
         } else if (anchor.equalsIgnoreCase("viewEmployee")) {
             employeeDao = new EmployeeDaoImpl();
@@ -82,7 +99,7 @@ public class ManagerController extends HttpServlet {
             rd.forward(request, response);
         } else if(anchor.equalsIgnoreCase("viewPizza")) {
             List<Pizza> pizza = pizzaDao.getAllPizza();
-            RequestDispatcher rd = request.getRequestDispatcher("jsp/manager/viewPizza.jsp");
+            rd = request.getRequestDispatcher("jsp/manager/viewPizza.jsp");
             request.setAttribute("pizza", pizza);
             rd.forward(request, response);
         } 

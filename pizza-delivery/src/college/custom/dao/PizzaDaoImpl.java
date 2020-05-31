@@ -56,7 +56,7 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public int savePizzaRequest(PizzaOrder pizzaOrder) {
         try {
-            String query = "INSERT INTO PIZZAORDERS (PIZZANAME, PIZZACOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS, ORDERBY) " +
+            String query = "INSERT INTO PIZZAORDERS (PIZZANAME, PIZZACOST, REQUEST_DATE, BARGAINING, FINAL_RATE, COMMENT, STATUS, BYCUSTOMER) " +
                     "VALUES ('" + pizzaOrder.getPizzaName() + "','" + pizzaOrder.getPizzaCost()
                     + "','" + pizzaOrder.getRequestDate() + "','" + pizzaOrder.getBargaining()
                     + "','" + pizzaOrder.getFinalRate() + "','" + pizzaOrder.getComment() + "','" + pizzaOrder.getStatus() + "','" +
@@ -206,7 +206,7 @@ public class PizzaDaoImpl implements PizzaDao {
     @Override
     public int updatePizza(Pizza pizza, String id) {
         try {
-            String query = "UPDATE PIZZA SET PIZZACOST = '"+pizza.getPizzaCost()+"', STATUS ='"+pizza.getStatus()+"', COMMENT = '"+pizza.getComment()+"' WHERE FLOWERID = "+id;
+            String query = "UPDATE PIZZA SET PIZZACOST = '"+pizza.getPizzaCost()+"', STATUS ='"+pizza.getStatus()+"', COMMENT = '"+pizza.getComment()+"' WHERE PIZZAID = "+id;
             return stmt.executeUpdate(query);
         } catch (Exception e) {
             e.printStackTrace();
@@ -228,6 +228,17 @@ public class PizzaDaoImpl implements PizzaDao {
         }
         return null;
     }
+
+	@Override
+	public int deletePizzaById(int pizzaId) {
+		try {
+            String query = "DELETE FROM PIZZA WHERE PIZZAID = "+pizzaId;
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+	}
 
 
 

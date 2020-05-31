@@ -19,5 +19,6 @@ public interface PizzaDao {
     List<Pizza> getAllPizza();
     int updatePizza(Pizza pizza, String id);
     Pizza getPizzaById(String pizzaId);
+    int deletePizzaById(int pizzaId);
 
 }

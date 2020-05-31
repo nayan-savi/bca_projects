@@ -8,48 +8,23 @@
     <script type="text/javascript">
 
         function addValue() {
-           /* if(document.addShops.shopName.value==null || document.addShops.shopName.value=="")
-            {
-                alert("Please Enter Shop name ");
-                document.addShops.shopName.focus();
-                return false;
-            }
-            if(document.addShops.address.value==null || document.addShops.address.value=="")
-            {
-                alert("Please select  address");
-                document.addShops.address.focus();
-                return false;
-            }
-            if(document.addShops.city.value==null || document.addShops.city.value=="")
-            {
-                alert("Please Enter city ");
-                document.addShops.city.focus();
-                return false;
-            }
-            if(document.addShops.state.value==null || document.addShops.state.value=="")
-            {
-                alert("Please Enter state ");
-                document.addShops.state.focus();
-                return false;
-            }
-            if(document.addShops.country.value==null || document.addShops.country.value=="")
-            {
-                alert("Please Enter country ");
-                document.addShops.country.focus();
-                return false;
-            }
-            if(document.addShops.pincode.value==null || document.addShops.pincode.value=="")
-            {
-                alert("Please Enter pincode ");
-                document.addShops.pincode.focus();
-                return false;
-            }
-            if(document.addShops.startdate.value==null || document.addShops.startdate.value=="")
-            {
-                alert("Please Enter startdate ");
-                document.addShops.startdate.focus();
-                return false;
-            }*/
+        	var pizzaName = document.addPizza.pizzaName.value;
+        	var pizzaCost = document.addPizza.pizzaCost.value;
+        	var status = document.addPizza.status.value;
+        	
+        	if(pizzaName == null || pizzaName == "") {
+        		alert('Pizza Name is mandatory');
+        		document.addPizza.pizzaName.focus();
+        		return false;
+        	} else if(pizzaCost == null || pizzaCost == "") {
+        		alert('Pizza Cost is mandatory');
+        		document.addPizza.pizzaCost.focus();
+        		return false;
+        	} else if(status == null || status == "") {
+        		alert('Status is mandatory');
+        		document.addPizza.status.focus();
+        		return false;
+        	}
 
             document.addPizza.action="pizza?anchor=addPizza";
             document.addPizza.submit();
@@ -76,7 +51,7 @@
                 <tr>
                     <td>Status</td>
                     <td>
-                        <select name="status">
+                        <select name="status" id="status">
                             <option value="-1">--select--</option>
                             <option value="YES">YES</option>
                             <option value="NO">NO</option>

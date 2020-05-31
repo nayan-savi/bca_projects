@@ -10,7 +10,7 @@
     <title>Modify Employee</title>
     <script type="text/javascript">
         function navigate() {
-            document.updatePizzaOrder.action="cancelEmployee?anchor=cancelEmployee";
+            document.updatePizzaOrder.action="cancelManager?anchor=cancelManager";
             document.updatePizzaOrder.submit();
         }
     </script>

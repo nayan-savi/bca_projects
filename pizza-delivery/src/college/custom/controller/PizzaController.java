@@ -25,7 +25,7 @@ public class PizzaController extends HttpServlet {
         String pattern = "dd-mm-yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
         String date = simpleDateFormat.format(new Date());
-        int row = 0;
+        int row = -1;
         String data = null;
         String fromData = "";
         if(anchor.equals("addPizza")) {
@@ -71,12 +71,13 @@ public class PizzaController extends HttpServlet {
         if (row > 0) {
             if(fromData.equals("empData")) {
                 rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
+                request.setAttribute("success", data + " details saved successfully.");
+                rd.forward(request, response);
             } else {
-                rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
+                rd = request.getRequestDispatcher("jsp/manager/viewAssignPizza.jsp");
+                response.sendRedirect(request.getContextPath()+"/viewAssignPizza?anchor=viewAssignPizza");
             }
-            request.setAttribute("success", data + " details saved successfully.");
-            rd.forward(request, response);
-        } else {
+        } else if(row == 0){
             rd = request.getRequestDispatcher("jsp/manager/"+anchor+".jsp");
             request.setAttribute("errmsg", data +" already exits.");
             rd.forward(request, response);

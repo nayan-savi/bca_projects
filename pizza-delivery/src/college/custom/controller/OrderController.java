@@ -23,12 +23,12 @@ public class OrderController extends HttpServlet {
         HttpSession session = request.getSession();
         PizzaDao pizzaDao = new PizzaDaoImpl();
         RequestDispatcher rd;
-        int row = 0;
+        int row = -1;
         String data = null;
         String username = (String) session.getAttribute("username");
         if (anchor.equalsIgnoreCase("orderPizza")) {
-            PizzaOrder flowerOrder = getFlowerOrder(request, username);
-            row = pizzaDao.savePizzaRequest(flowerOrder);
+            PizzaOrder pizzaOrder = getPizzaOrder(request, username);
+            row = pizzaDao.savePizzaRequest(pizzaOrder);
             data = "Pizza";
         } else if (anchor.equalsIgnoreCase("deleteFlowerRequest")) {
             String orderIdQuery = request.getParameter("orderId");
@@ -43,7 +43,7 @@ public class OrderController extends HttpServlet {
             rd = request.getRequestDispatcher("jsp/user/userHome.jsp");
             request.setAttribute("success", data+ " order saved successfully.");
             rd.forward(request, response);
-        } else {
+        } else if(row == 0) {
             rd = request.getRequestDispatcher("jsp/orders/" + anchor + ".jsp");
             request.setAttribute("errmsg", data +" ordered already, please check in view to check status.");
             rd.forward(request, response);
@@ -57,7 +57,7 @@ public class OrderController extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private PizzaOrder getFlowerOrder(HttpServletRequest request, String username) {
+    private PizzaOrder getPizzaOrder(HttpServletRequest request, String username) {
         PizzaOrder pizzaOrder = new PizzaOrder();
         pizzaOrder.setPizzaName(request.getParameter("pizzaName"));
         pizzaOrder.setPizzaCost(request.getParameter("pizzaCost"));

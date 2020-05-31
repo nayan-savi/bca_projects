@@ -9,9 +9,8 @@
     <title>View Pizza</title>
     <script type="text/javascript">
         function modifyPizza() {
-            var chk = document.pizza.flowerId;
+            var chk = document.pizza.pizzaId;
             var count = 0;
-            var id = 0;
             if (chk.length == undefined) {
                 if (chk.checked == true) {
                     count++;
@@ -19,7 +18,6 @@
             }
             for (var i = 0; i < chk.length; i++) {
                 if (chk[i].checked == true) {
-                    id = chk[i].value;
                     count++;
                 }
             }
@@ -32,13 +30,12 @@
                 alert("Please select only one checkbox");
                 return false;
             }
-
-            document.pizza.action = "/modifyPizza?anchor=modifyPizza&id="+id;
+            document.pizza.action = "modifyPizza?anchor=modifyPizza&id="+chk.value;
             document.pizza.submit();
         }
 
         function deletePizza() {
-            var chk = document.pizza.flowerId;
+            var chk = document.pizza.pizzaId;
             var count = 0;
             var id = 0;
             if (chk.length == undefined) {
@@ -48,7 +45,7 @@
             }
             for (var i = 0; i < chk.length; i++) {
                 if (chk[i].checked == true) {
-                    id = chk[i].value;
+                	id = chk[i].value;
                     count++;
                 }
             }
@@ -62,7 +59,7 @@
                 return false;
             }
 
-            document.pizza.action = "/deletePizza?anchor=deletePizza";
+            document.pizza.action = "deletePizza?anchor=deletePizza&id="+id;
             document.pizza.submit();
         }
     </script>
@@ -90,7 +87,10 @@
 <body>
 <%@include file="managerHeader.jsp" %>
 <div id="wrapper">
-
+	<div align="center">
+        <h3 style="color: green">${success}</h3>
+        <h3 style="color: red">${errmsg}</h3>
+    </div>
     <div id="page">
         <%@include file="../login/loginDetails.jsp" %>
         <%

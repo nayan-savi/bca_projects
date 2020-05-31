@@ -5,10 +5,26 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Pizza Delivery</title>
-    <link href="../../css/default.css" rel="stylesheet" type="text/css" media="screen" />
-    <script src="../../js/dropdowntabs.js" type="text/javascript"></script>
+    <link href="././css/default.css" rel="stylesheet" type="text/css" media="screen" />
+    <script src="././js/dropdowntabs.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="../../css/ddcolortabs.css" />
 </head>
+<script type="text/javascript">
+	function loginValidation() {
+		var username = document.login.username.value;
+		var pwd = document.login.password.value;
+		if(username == null || username == "") {
+			alert('Username is mandatory');
+			document.login.username.focus();
+			return false;
+		} else if(pwd == null || pwd == "") {
+			alert('Password is mandatory');
+			document.login.password.focus();
+			return false;
+		}
+	}
+</script>
+
 <body>
 <div id="header">
     <div id="logo">
@@ -23,7 +39,7 @@
                 <h3 style="color: green">${success}</h3>
                 <h3 style="color: red">${errmsg}</h3>
             </div>
-            <form action="login" method="post">
+            <form action="login" name="login" method="post" onSubmit="return loginValidation()">
                 <table width="333" height="188" border="0" align="center">
                     <tr>
                         <td colspan="2" align="center"><h1>User Login page</h1></td>
@@ -33,7 +49,7 @@
                             <div align="right">Username</div>
                         </td>
                         <td width="213">
-                            <input name="username" type="text" value="xyz" />
+                            <input name="username" type="text" value="admin" />
                         </td>
                     </tr>
                     <tr>
@@ -41,7 +57,7 @@
                             <div align="right">Password</div>
                         </td>
                         <td>
-                            <input name="password" type="password" value="xyz"/>
+                            <input name="password" type="password" value="admin"/>
                         </td>
                     </tr>
                     <tr>

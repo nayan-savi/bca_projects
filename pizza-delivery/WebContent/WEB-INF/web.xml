@@ -29,6 +29,7 @@
     <servlet-mapping>
         <servlet-name>RegistrationController</servlet-name>
         <url-pattern>/registration</url-pattern>
+        <url-pattern>/log</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -47,6 +48,9 @@
         <url-pattern>/viewPizza</url-pattern>
         <url-pattern>/modifyPizza</url-pattern>
         <url-pattern>/updatePizza</url-pattern>
+        <url-pattern>/deletePizza</url-pattern>
+        <url-pattern>/cancelPizza</url-pattern>
+        <url-pattern>/cancelManager</url-pattern>
         <url-pattern>/addDecoration</url-pattern>
         <url-pattern>/viewDecoration</url-pattern>
         <url-pattern>/modifyDecoration</url-pattern>

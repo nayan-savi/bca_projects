@@ -58,8 +58,8 @@ public class EmployeeController extends HttpServlet {
                 rd.forward(request, response);
             }
         } else if (anchor.equalsIgnoreCase("cancelEmployee")) {
-            rd = request.getRequestDispatcher("jsp/manager/managerHome.jsp");
-            rd.forward(request, response);
+        	rd = request.getRequestDispatcher("jsp/manager/viewAssignPizza.jsp");
+            response.sendRedirect(request.getContextPath()+"/viewEmpPizzaOrder?anchor=viewEmpPizzaOrder");
         }
     }
 
