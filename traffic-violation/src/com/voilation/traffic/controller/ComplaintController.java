@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.voilation.traffic.dao.ComplaintDao;
 import com.voilation.traffic.dao.ComplaintDaoImpl;
+import com.voilation.traffic.dao.VehicleDao;
+import com.voilation.traffic.dao.VehicleDaoImpl;
 import com.voilation.traffic.model.Complaint;
+import com.voilation.traffic.model.Vehicle;
 
 @WebServlet(name = "ComplaintController")
 public class ComplaintController extends HttpServlet {
@@ -21,11 +24,17 @@ public class ComplaintController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String anchor = request.getParameter("anchor");
 		String complaintId = request.getParameter("id");
+		String vehicleNo = request.getParameter("no");
 		String data = "";
 		int row = -1;
 		ComplaintDao complaintDao = new ComplaintDaoImpl();
+		VehicleDao vehicleDao = new VehicleDaoImpl();
+		Vehicle vehicle = null;
 		if (anchor.equals("addComplaint")) {
 			Complaint complaint = getComplaint(request);
+			if(complaint.getStatus().equalsIgnoreCase("notpaid")) {
+				//sendMailNotification(complaint);
+			}
 			row = complaintDao.saveComplaint(complaint);
 			data = "Complaint";
 		} else if (anchor.equals("modifyComplaint")) {
@@ -40,13 +49,23 @@ public class ComplaintController extends HttpServlet {
             data = "update";
 		} else if (anchor.equalsIgnoreCase("cancelComplaint")) {
             response.sendRedirect(request.getContextPath()+"/viewComplaint?anchor=viewComplaint");
-        } 
+        } else if(anchor.equals("lookup")) {
+        	vehicle = vehicleDao.getVehicleByNo(vehicleNo);
+        	RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/addComplaint.jsp");
+        	if(null == vehicle) {
+        		request.setAttribute("notFound", null);
+        	} else {
+        		request.setAttribute("vehicle", vehicle);
+        	}
+            rd.forward(request, response);
+        }
 		
 		if (row > 0) {
 			if("update".equals(data)) {
 	            response.sendRedirect(request.getContextPath()+"/viewComplaint?anchor=viewComplaint");
 			} else {
 				RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
+				request.setAttribute("success", "Complaint registered successfully.");
 				rd.forward(request, response);
 			}
 		} else if (row == 0) {
@@ -74,6 +93,7 @@ public class ComplaintController extends HttpServlet {
 		ComplaintDao complaintDao = new ComplaintDaoImpl();
 		if (anchor.equals("addComplaint")) {
 			RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/addComplaint.jsp");
+			request.setAttribute("notFound", "");
 			rd.forward(request, response);
 		} else if(anchor.equals("viewComplaint")) {
 			List<Complaint> complaints = complaintDao.viewComplaints();

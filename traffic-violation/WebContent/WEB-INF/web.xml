@@ -45,6 +45,7 @@
 		<url-pattern>/updateComplaint</url-pattern>
 		<url-pattern>/cancelComplaint</url-pattern>
 		<url-pattern>/paidComplaint</url-pattern>
+		<url-pattern>/lookup</url-pattern>
 	</servlet-mapping>
 
 	<servlet>
