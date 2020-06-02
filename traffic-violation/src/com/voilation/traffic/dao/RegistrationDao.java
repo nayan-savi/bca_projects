@@ -4,4 +4,5 @@ import com.voilation.traffic.model.Registration;
 
 public interface RegistrationDao {
     int save(Registration registration);
+    int updatePwd(Registration reg);
 }

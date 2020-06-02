@@ -98,7 +98,7 @@
                             <input name="password" type="password" />
                         </td>
                     </tr>
-                    <tr>
+                    <!-- <tr>
                         <td>Status</td>
                         <td>
                             <select name="status">
@@ -107,15 +107,15 @@
                                 <option value="NO">NO</option>
                             </select>
                         </td>
-                    </tr>
-                    <tr>
+                    </tr> -->
+                    <!-- <tr>
                         <td width="110">
                             <div align="center">Designation</div>
                         </td>
                         <td width="213">
                             <input name="designation" type="text" />
                         </td>
-                    </tr>
+                    </tr> -->
                     <tr>
                         <td>
                             <div align="center">

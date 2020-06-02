@@ -39,6 +39,8 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("employeeId", login.getEmployeeId());
 				session.setAttribute("active", login.getActive());
 				rd = request.getRequestDispatcher("jsp/employee/employeeHome.jsp");
+			} else if (level == 3) {
+				rd = request.getRequestDispatcher("jsp/user/userHome.jsp");
 			}
 		} else {
 			rd = request.getRequestDispatcher("jsp/login/login.jsp");

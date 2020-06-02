@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.voilation.traffic.model.Registration;
 import com.voilation.traffic.model.Vehicle;
 import com.voilation.traffic.util.ConnectionDb;
 
@@ -60,6 +61,30 @@ public class VehicleDaoImpl implements VehicleDao {
             e.printStackTrace();
         }
         return vehicles;
+    }
+	
+	@Override
+    public List<Registration> viewEmployees() {
+        List<Registration> registrations = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM REGISTRATION WHERE LEVEL = 2";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+            	Registration registration = new Registration();
+            	registration.setName(rs.getString("NAME"));
+            	registration.setAddress(rs.getString("ADDRESS"));
+            	registration.setContactNo(rs.getString("CONTACT_NO"));
+            	registration.setEmailId(rs.getString("EMAIL_ID"));
+            	registration.setUsername(rs.getString("USERNAME"));
+            	registration.setLevel(rs.getInt("LEVEL"));
+            	registration.setStatus(rs.getString("ACTIVE"));
+            	registration.setDesignation(rs.getString("DESIGNATION"));
+				registrations.add(registration);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return registrations;
     }
 
 	@Override
@@ -126,6 +151,64 @@ public class VehicleDaoImpl implements VehicleDao {
             e.printStackTrace();
         }
         return vehicle;
+	}
+
+	@Override
+	public int saveEmployee(Registration employee) {
+		try {
+            String query = "INSERT INTO REGISTRATION (NAME,ADDRESS,CONTACTNO,EMAILID,USERNAME,LEVEL,STATUS,DESIGNATION) VALUES ('"
+            				+employee.getName()+ "','" 
+            				+employee.getAddress()+ "','" 
+            				+employee.getContactNo()+ "','" 
+            				+employee.getEmailId()+ "','" 
+            				+employee.getUsername()+ "','" 
+            				+employee.getLevel()+ "','" 
+            				+employee.getStatus()+ "','" 
+            				+employee.getDesignation()+"')";
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return 0;
+	}
+
+	@Override
+	public Registration getEmployeeByUsername(String username) {
+		Registration registration = null;
+        try {
+            String query = "SELECT * FROM REGISTRATION WHERE USERNAME = '"+username+"'";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+            	registration = new Registration();
+            	registration.setName(rs.getString("NAME"));
+            	registration.setAddress(rs.getString("ADDRESS"));
+            	registration.setContactNo(rs.getString("CONTACT_NO"));
+            	registration.setEmailId(rs.getString("EMAIL_ID"));
+            	registration.setUsername(rs.getString("USERNAME"));
+            	registration.setLevel(rs.getInt("LEVEL"));
+            	registration.setStatus(rs.getString("ACTIVE"));
+            	registration.setDesignation(rs.getString("DESIGNATION"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return registration;
+	}
+	
+	@Override
+	public int updateEmployee(Registration employee) {
+		try {
+            String query = "UPDATE REGISTRATION SET NAME = '"+employee.getName()
+            				+"',ADDRESS='"+employee.getAddress()
+            				+"' ,CONTACT_NO='"+employee.getContactNo()+"',EMAIL_ID ='"+employee.getEmailId()
+            				+"', ACTIVE ='"+employee.getStatus()
+            				+"' ,DESIGNATION ='"+employee.getDesignation()+"' where username = '"+employee.getUsername()+"'";
+            				
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return 0;
 	}
 
 

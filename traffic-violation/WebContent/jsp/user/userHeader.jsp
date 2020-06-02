@@ -22,28 +22,16 @@
                 <div style="background-color:#C11BC0" align="center">
                     <div id="colortab" class="navigation">
                         <ul>
-                            <li><a href="#" rel="dropmenu1"><span>Complaint</span></a></li>
-                            <li><a href="#" rel="dropmenu2"><span>Vehicle</span></a></li>
-                            <li><a href="#" rel="dropmenu3"><span>Profile</span></a></li>
+                            <li><a href="#" rel="dropmenu1"><span>Complaints</span></a></li>
                             <li><a href="logOff?anchor=logOff"><span>LogOff</span></a></li>
                         </ul>
                     </div>
 
                     <!--1st drop down menu -->
                     <div id="dropmenu1" class="dropmenudiv_a">
-                        <a href="addComplaint?anchor=addComplaint">Register Complaint</a>
-                        <a href="viewComplaint?anchor=viewComplaint">View/Modify Complaint</a>
+                        <a href="myComplaint?anchor=myComplaint">My Complaints</a>
                     </div>
                     
-                    <!--1st drop down menu -->
-                    <div id="dropmenu2" class="dropmenudiv_a">
-                        <a href="searchVehicle?anchor=searchVehicle">Search Vehicle</a>
-                    </div>
-                    
-                    <div id="dropmenu3" class="dropmenudiv_a">
-                        <a href="changePwd?anchor=changePwd">Change Password</a>
-                    </div>
-
                     <script type="text/javascript">
                         //SYNTAX: tabdropdown.init("menu_id", [integer OR "auto"])
                         tabdropdown.init("colortab", 3)

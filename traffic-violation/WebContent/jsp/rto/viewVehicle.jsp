@@ -11,7 +11,6 @@
         function modifyVehicle() {
             var chk = document.vehicle.vehicleId;
             var count = 0;
-            var id = 0;
             if (chk.length == undefined) {
                 if (chk.checked == true) {
                     count++;
@@ -19,7 +18,6 @@
             }
             for (var i = 0; i < chk.length; i++) {
                 if (chk[i].checked == true) {
-                	id = chk[i].value;
                     count++;
                 }
             }
@@ -32,7 +30,7 @@
                 alert("Please select only one checkbox");
                 return false;
             }
-            document.vehicle.action = "modifyVehicle?anchor=modifyVehicle&id="+id;
+            document.vehicle.action = "modifyVehicle?anchor=modifyVehicle";
             document.vehicle.submit();
         }
 

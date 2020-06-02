@@ -6,6 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.mysql.cj.util.StringUtils;
 import com.voilation.traffic.model.Complaint;
 import com.voilation.traffic.util.ConnectionDb;
 
@@ -116,6 +117,34 @@ public class ComplaintDaoImpl implements ComplaintDao {
             e.printStackTrace();
         }
         return 0;
+	}
+	
+	@Override
+	public List<Complaint> viewUserComplaints(String regNo, String status) {
+		List<Complaint> complaints = new ArrayList<>();
+        try {
+        	String query = "SELECT * FROM COMPLAINT WHERE REGNO = '"+regNo+"'";
+        	
+        	if(!StringUtils.isNullOrEmpty(status)) {
+        		query += " AND STATUS IN ('"+status+"')";
+        	}
+            
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                Complaint complaint = new Complaint();
+                complaint.setComplaintId(rs.getInt("COMPLAINTID"));
+				complaint.setRegNo(rs.getString("REGNO"));
+				complaint.setPaymentType(rs.getString("PAYMENTTYPE"));
+				complaint.setPaymentDate(rs.getString("PAYMENTDATE"));
+				complaint.setFee(rs.getDouble("FEE"));
+				complaint.setReason(rs.getString("REASON"));
+				complaint.setStatus(rs.getString("STATUS"));
+                complaints.add(complaint);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return complaints;
 	}
 	
 	

@@ -23,6 +23,7 @@
                 <div style="background-color:#C11BC0" align="center">
                     <div id="colortab" class="navigation">
                         <ul>
+                        	<li><a href="#" rel="dropmenu1"><span>Employee</span></a></li>
                             <li><a href="#" rel="dropmenu2"><span>RTO Vehicle</span></a></li>
                             <li><a href="#" rel="dropmenu5"><span>Complaints</span></a></li>
                            <!--  <li><a href="#" rel="dropmenu5"><span>Pizza & Amt</span></a></li>
@@ -30,7 +31,10 @@
                             <li><a href="logOff?anchor=logOff"><span>LogOff</span></a></li>
                         </ul>
                     </div>
-
+					<div id="dropmenu1" class="dropmenudiv_a">
+                        <a href="addEmployee?anchor=addEmployee">Add Police</a>
+                        <a href="viewEmployee?anchor=viewEmployee">View Police</a>
+                    </div>
 
                     <div id="dropmenu2" class="dropmenudiv_a">
                         <a href="addVehicle?anchor=addVehicle">Register Vehicle</a>

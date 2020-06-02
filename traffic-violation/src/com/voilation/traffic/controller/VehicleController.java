@@ -11,9 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.voilation.traffic.dao.RegistrationDao;
+import com.voilation.traffic.dao.RegistrationDaoImpl;
 import com.voilation.traffic.dao.VehicleDao;
 import com.voilation.traffic.dao.VehicleDaoImpl;
 import com.voilation.traffic.model.Complaint;
+import com.voilation.traffic.model.Registration;
 import com.voilation.traffic.model.Vehicle;
 
 @WebServlet(name = "VehicleController")
@@ -22,7 +25,7 @@ public class VehicleController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String anchor = request.getParameter("anchor");
-		String vehicleId = request.getParameter("id");
+		String vehicleId = request.getParameter("vehicleId");
 		String vehicleNo = request.getParameter("no");
 		String data = "";
 		int row = -1;
@@ -48,12 +51,32 @@ public class VehicleController extends HttpServlet {
         	RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/searchVehicle.jsp");
             request.setAttribute("vehicle", vehicle);
             rd.forward(request, response);
-        }
+        } else if (anchor.equals("addEmployee")) {
+        	Registration employee = getRegistration(request);
+        	row = vehicleDao.saveEmployee(employee);
+        	data = "employee"; 
+        } else if(anchor.equals("modifyEmployee")) {
+        	String username = request.getParameter("username");
+        	Registration employee = vehicleDao.getEmployeeByUsername(username);
+        	request.setAttribute("employee", employee);
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/modifyEmployee.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equals("updateEmployee")) {
+			Registration employee = getRegistration(request);
+			row = vehicleDao.updateEmployee(employee);
+            data = "updateEmp";
+		} 
 
 		if (row > 0) {
-			if(data.equals("update")) {
+			if(data.equals("updateEmp")) {
+				response.sendRedirect(request.getContextPath()+"/viewEmployee?anchor=viewEmployee");
+			} else if(data.equals("update")) {
 				response.sendRedirect(request.getContextPath()+"/viewVehicle?anchor=viewVehicle");
-			} else {
+			} else if(data.equals("employee")) {
+				request.setAttribute("success", "Employee added successfully.");
+				RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/adminRtoHome.jsp");
+				rd.forward(request, response);
+			}	else {
 				request.setAttribute("success", "Vehicle added successfully.");
 				RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/adminRtoHome.jsp");
 				rd.forward(request, response);
@@ -63,6 +86,20 @@ public class VehicleController extends HttpServlet {
 			request.setAttribute("errmsg", data + " already exits.");
 			rd.forward(request, response);
 		}
+	}
+	
+	private Registration getRegistration(HttpServletRequest request) {
+		Registration registration = new Registration();
+		registration.setName(request.getParameter("name"));
+		registration.setAddress(request.getParameter("address"));
+		registration.setContactNo(request.getParameter("contactNo"));
+		registration.setEmailId(request.getParameter("emailId"));
+		registration.setUsername(request.getParameter("username"));
+		registration.setPassword(request.getParameter("password"));
+		registration.setLevel(2); // this is user registration
+		registration.setStatus("YES");
+		registration.setDesignation(request.getParameter("designation"));
+		return registration;
 	}
 
 	private Vehicle getVehicle(HttpServletRequest request) {
@@ -96,6 +133,14 @@ public class VehicleController extends HttpServlet {
         } else if(anchor.equals("searchVehicle")) {
         	RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/searchVehicle.jsp");
         	request.setAttribute("search", "search");
+            rd.forward(request, response);
+        } else if (anchor.equals("addEmployee")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/addEmployee.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equals("viewEmployee")) {
+        	List<Registration> employees = vehicleDao.viewEmployees();
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/viewEmployee.jsp");
+            request.setAttribute("employees", employees);
             rd.forward(request, response);
         }
     } 

@@ -14,4 +14,6 @@ public interface ComplaintDao {
 	Complaint getComplaintById(String parameter);
 
 	int updateComplaint(Complaint complaint);
+	
+	List<Complaint> viewUserComplaints(String regNo, String status);
 }

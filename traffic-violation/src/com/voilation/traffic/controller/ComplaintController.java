@@ -23,7 +23,7 @@ public class ComplaintController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String anchor = request.getParameter("anchor");
-		String complaintId = request.getParameter("id");
+		String complaintId = request.getParameter("complaintId");
 		String vehicleNo = request.getParameter("no");
 		String data = "";
 		int row = -1;
@@ -32,9 +32,6 @@ public class ComplaintController extends HttpServlet {
 		Vehicle vehicle = null;
 		if (anchor.equals("addComplaint")) {
 			Complaint complaint = getComplaint(request);
-			if(complaint.getStatus().equalsIgnoreCase("notpaid")) {
-				//sendMailNotification(complaint);
-			}
 			row = complaintDao.saveComplaint(complaint);
 			data = "Complaint";
 		} else if (anchor.equals("modifyComplaint")) {
@@ -57,6 +54,17 @@ public class ComplaintController extends HttpServlet {
         	} else {
         		request.setAttribute("vehicle", vehicle);
         	}
+            rd.forward(request, response);
+        } else if(anchor.equals("myComplaint")) {
+        	String regNo = request.getParameter("regNo");
+        	String status = request.getParameter("status");
+        	List<Complaint> complaints = complaintDao.viewUserComplaints(regNo, status);
+            if(null == complaints || complaints.isEmpty()) {
+        		request.setAttribute("notFound", null);
+        	} else {
+        		request.setAttribute("complaints", complaints);
+        	}
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/user/myComplaint.jsp");
             rd.forward(request, response);
         }
 		
@@ -104,6 +112,10 @@ public class ComplaintController extends HttpServlet {
 			List<Complaint> complaints = complaintDao.getPaidComplaints();
 			RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/paidComplaint.jsp");
 			request.setAttribute("complaints", complaints);
+			rd.forward(request, response);
+		} else if (anchor.equals("myComplaint")) {
+			RequestDispatcher rd = request.getRequestDispatcher("jsp/user/myComplaint.jsp");
+			request.setAttribute("notFound", "");
 			rd.forward(request, response);
 		}
 	}

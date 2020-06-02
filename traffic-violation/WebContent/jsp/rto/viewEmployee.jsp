@@ -1,17 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.voilation.traffic.model.Complaint" %>
+<%@ page import="com.voilation.traffic.model.Registration" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>View Complaints</title>
+    <title>View Pizza</title>
     <script type="text/javascript">
-        function modifyComplaint() {
-            var chk = document.complaint.complaintId;
+        function modifyEmployee() {
+            var chk = document.employee.username;
             var count = 0;
-            var id = 0;
             if (chk.length == undefined) {
                 if (chk.checked == true) {
                     count++;
@@ -31,10 +30,10 @@
                 alert("Please select only one checkbox");
                 return false;
             }
-            document.complaint.action = "modifyComplaint?anchor=modifyComplaint";
-            document.complaint.submit();
+            document.employee.action = "modifyEmployee?anchor=modifyEmployee";
+            document.employee.submit();
         }
-        
+
     </script>
 </head>
 <style>
@@ -58,7 +57,7 @@
     }
 </style>
 <body>
-<%@include file="employeeHeader.jsp" %>
+<%@include file="adminRtoHeader.jsp" %>
 <div id="wrapper">
 	<div align="center">
         <h3 style="color: green">${success}</h3>
@@ -67,40 +66,43 @@
     <div id="page">
         <%@include file="../login/loginDetails.jsp" %>
         <%
-        	List<Complaint> complaint = (List<Complaint>) request.getAttribute("complaints");
+        	List<Registration> employees = (List<Registration>) request.getAttribute("employees");
         %>
-        <form action="" name="complaint" method="post">
+        <form action="" name="employee" method="post">
             <div style="height:auto;width:auto;border:1px solid #ccc;overflow:auto;">
                 <table border="0">
                     <tr class="viewHeader">
-                        <td>Complaint Id</td>
-						<td>Reg No</td>
-						<td>Payment Type</td>
-						<td>Payment Date</td>
-						<td>Fee</td>
-						<td>Reason</td>
+                    	<td></td>
+                        <td>Name</td>
+						<td>Address</td>
+						<td>Contact No</td>
+						<td>Email Id</td>
+						<td>Username</td>
+						<td>Level</td>
 						<td>Status</td>
+						<td>Designation</td>
+
                     </tr>
-                    <%for (int i = 0; i < complaint.size(); i++) { %>
+                    <%for (int i = 0; i < employees.size(); i++) { %>
                     <tr class="viewData">
-                    	<td>
-                            <input type="checkbox" name="complaintId" value="<%=complaint.get(i).getComplaintId() %>"/>
-                            <%=complaint.get(i).getComplaintId()%>
+                        <td>
+                            <input type="checkbox" name="username" value="<%=employees.get(i).getUsername() %>"/>
                         </td>
-						<td><%=complaint.get(i).getRegNo()%></td>
-						<td><%=complaint.get(i).getPaymentType()%></td>
-						<td><%=complaint.get(i).getPaymentDate()%></td>
-						<td><%=complaint.get(i).getFee()%></td>
-						<td><%=complaint.get(i).getReason()%></td>
-						<td><%=complaint.get(i).getStatus()%></td>
+                        <td><%=employees.get(i).getName()%></td>
+						<td><%=employees.get(i).getAddress()%></td>
+						<td><%=employees.get(i).getContactNo()%></td>
+						<td><%=employees.get(i).getEmailId()%></td>
+						<td><%=employees.get(i).getUsername()%></td>
+						<td><%=employees.get(i).getLevel()%></td>
+						<td><%=employees.get(i).getStatus()%></td>
+						<td><%=employees.get(i).getDesignation()%></td>
                     </tr>
                     <% } %>
                 </table>
             </div>
             <table>
                 <tr>
-                    <td><input type="button" value="Modify" onclick="modifyComplaint()"></td>
-                    <!-- <td><input type="button" value="Delete" onclick="deleteComplaint()"></td> -->
+                    <td><input type="button" value="Modify" onclick="modifyEmployee()"></td>
                 </tr>
             </table>
         </form>

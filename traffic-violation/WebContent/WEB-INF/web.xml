@@ -46,6 +46,8 @@
 		<url-pattern>/cancelComplaint</url-pattern>
 		<url-pattern>/paidComplaint</url-pattern>
 		<url-pattern>/lookup</url-pattern>
+		<url-pattern>/myComplaint</url-pattern>
+		
 	</servlet-mapping>
 
 	<servlet>
@@ -61,6 +63,21 @@
 		<url-pattern>/updateVehicle</url-pattern>
 		<url-pattern>/cancelVehicle</url-pattern>
 		<url-pattern>/searchVehicle</url-pattern>
+		<url-pattern>/addEmployee</url-pattern>
+		<url-pattern>/viewEmployee</url-pattern>
+		<url-pattern>/modifyEmployee</url-pattern>
+		<url-pattern>/updateEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>EmployeeController</display-name>
+		<servlet-name>EmployeeController</servlet-name>
+		<servlet-class>com.voilation.traffic.controller.EmployeeController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeController</servlet-name>
+		<url-pattern>/changePwd</url-pattern>
+		<url-pattern>/updatePwd</url-pattern>
 	</servlet-mapping>
 
 </web-app>
