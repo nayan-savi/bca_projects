@@ -1,0 +1,57 @@
+.main {
+    background-color: #3399ff;
+    font-family: Calibri;
+}
+
+.logo {
+    color: white;
+    font-size: 65px;
+    font-family: Calibri;
+    text-align: center;
+    padding-top: 90px;
+    font-weight: 700;
+}
+
+
+input[type=text], input[type=password], input[type=number] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+input[type=submit], input[type=reset] {
+    width: 100%;
+    background-color: #003399;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bolder;
+}
+
+table {
+    width: 30%;
+
+}
+
+::placeholder {
+    font-size: 16px;
+}
+
+.reg {
+    color : white;
+    font-family: Calibri;
+    font-size: 14px;
+}
+
+#footer .copyright {
+    float: left;
+}
+
