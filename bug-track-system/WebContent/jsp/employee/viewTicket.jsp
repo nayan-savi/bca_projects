@@ -71,11 +71,12 @@
 <body>
 <%@include file="employeeHeader.jsp" %>
 <div id="wrapper">
-	<div align="center">
-        <h3 style="color: green">${success}</h3>
-        <h3 style="color: red">${errmsg}</h3>
-    </div>
+	
     <div id="page">
+	    <div align="center">
+	        <h3 style="color: green">${success}</h3>
+	        <h3 style="color: red">${errmsg}</h3>
+	    </div>
         <%@include file="../login/loginDetails.jsp" %>
         <form action="" name="searchTicket" method="post" style="padding-left: 50px;">
             <h1>Search Ticket</h1>

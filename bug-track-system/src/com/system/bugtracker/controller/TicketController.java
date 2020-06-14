@@ -86,7 +86,7 @@ public class TicketController extends HttpServlet {
 					System.out.println(ex.getMessage());
 				}
 			} else {
-				request.setAttribute("error", "Sorry this Servlet only handles file upload request");
+				request.setAttribute("errmsg", "Sorry this Servlet only handles file upload request");
 			}
 			//request.getRequestDispatcher("jsp/employee/employeeHome.jsp").forward(request, response);
 		} else if (anchor.equals("modifyTicket")) {
@@ -142,8 +142,12 @@ public class TicketController extends HttpServlet {
 			request.setAttribute("employees", employees);
 			rd.forward(request, response);
 		} else if(anchor.equals("viewTicket")) {
+			String error = request.getParameter("err");
             RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/viewTicket.jsp");
     		request.setAttribute("notFound", null);
+    		if(error != null) {
+    			request.setAttribute("errmsg", "File doesnot exists to download.");
+    		}
             rd.forward(request, response);
         }
 	}
