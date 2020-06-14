@@ -39,12 +39,14 @@ public class TicketDaoImpl implements TicketDao {
 	}
 
 	@Override
-    public List<Ticket> viewTickets(String byName) {
+    public List<Ticket> viewTickets(String byName, String status) {
         List<Ticket> tickets = new ArrayList<>();
         try {
-            String query = "SELECT * FROM TICKET";
+            String query = "SELECT * FROM TICKET WHERE";
             if(byName != "") {
-            	query += " WHERE ASSIGNTO ='"+byName+"'";
+            	query += " ASSIGNTO ='"+byName+"' AND STATUS='"+status+"'";
+            } else {
+            	query += " STATUS='"+status+"'";
             }
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {

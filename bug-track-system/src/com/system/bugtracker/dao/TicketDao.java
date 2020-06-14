@@ -7,7 +7,7 @@ import com.system.bugtracker.model.Ticket;
 public interface TicketDao {
 	int saveTicket(Ticket ticket);
 
-    List<Ticket> viewTickets(String byName);
+    List<Ticket> viewTickets(String byName, String status);
 
     Ticket getTicketById(String parameter);
 

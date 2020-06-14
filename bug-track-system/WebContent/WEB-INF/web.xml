@@ -46,6 +46,9 @@
 		<url-pattern>/modifyTicket</url-pattern>
 		<url-pattern>/updateTicket</url-pattern>
 		<url-pattern>/cancelTicket</url-pattern>
+		<url-pattern>/closedTicket</url-pattern>
+		<url-pattern>/searchTicket</url-pattern>
+		
 	</servlet-mapping>
 	
 	<servlet>

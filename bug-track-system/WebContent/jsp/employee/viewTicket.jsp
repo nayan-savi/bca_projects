@@ -1,3 +1,4 @@
+<%@page import="com.system.bugtracker.model.Employee"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ page import="java.util.List" %>
@@ -34,32 +35,17 @@
             document.ticket.submit();
         }
 
-        function deleteTicket() {
-            var chk = document.ticket.ticketId;
-            var count = 0;
-            if (chk.length == undefined) {
-                if (chk.checked == true) {
-                    count++;
-                }
-            }
-            for (var i = 0; i < chk.length; i++) {
-                if (chk[i].checked == true) {
-                    count++;
-                }
-            }
-
-            if (count == 0) {
-                alert("Please selected at least one checkbox");
-                return false;
-            }
-            if (count > 1) {
-                alert("Please select only one checkbox");
-                return false;
-            }
-
-            document.ticket.action = "deleteTicket?anchor=deleteTicket";
-            document.ticket.submit();
-        }
+		function searchValidate() {
+	    	var status = document.searchTicket.status.value;
+	    	if(status == null || status == "") {
+	    		alert('Status is mandatory');
+	    		document.searchTicket.status.focus();
+	    		return false;
+	    	} 
+	
+	        document.searchTicket.action="searchTicket?anchor=searchTicket";
+	        document.searchTicket.submit();
+	    }
     </script>
 </head>
 <style>
@@ -91,10 +77,31 @@
     </div>
     <div id="page">
         <%@include file="../login/loginDetails.jsp" %>
+        <form action="" name="searchTicket" method="post" style="padding-left: 50px;">
+            <h1>Search Ticket</h1>
+            <table>
+				<tr><th>Search:</th>
+					<td>Status</td>
+						<td>
+							<select name="status">
+	                             <option value=""></option>
+	                             <option value="OPEN">Open</option>
+	                             <option value="INPROGRESS">In-progress</option>
+	                             <option value="ASSIGNED">Assigned</option>
+	                             <option value="DONE">Done</option>
+	                             <option value="CLOSED">Closed</option>
+                         	</select>
+						<input type="button" value="Search" onclick="searchValidate()">
+					</td>
+				</tr>
+            </table>
+        </form>
         <%
         	List<Ticket> ticket = (List<Ticket>) request.getAttribute("tickets");
+        	String notFound = (String) request.getAttribute("notFound");
+        	if(ticket != null && !ticket.isEmpty()) {
         %>
-        <form action="" name="ticket" method="post">
+        <form action="" name="ticket" method="post" style="padding-left: 50px;">
             <div style="height:auto;width:auto;border:1px solid #ccc;overflow:auto;">
                 <table border="0">
                     <tr class="viewHeader">
@@ -112,7 +119,9 @@
                     <%for (int i = 0; i < ticket.size(); i++) { %>
                     <tr class="viewData">
                         <td>
-                            <input type="checkbox" name="ticketId" value="<%=ticket.get(i).getTicketId() %>"/>
+                        	<% if(!ticket.get(i).getStatus().equalsIgnoreCase("CLOSED")) { %>
+                            	<input type="checkbox" name="ticketId" value="<%=ticket.get(i).getTicketId() %>"/>
+                            <%} %>
                             <%=ticket.get(i).getTicketId()%>
                         </td>
 						<td><%=ticket.get(i).getTitle()%></td>
@@ -146,6 +155,11 @@
                 </tr>
             </table>
         </form>
+        <%} else {
+			 if(notFound == "") {%>
+			 	<br/>
+        		<h2 style="padding-left:50px">Ticket not found</h2>
+		<%}} %>
     </div>
 </div>
 <%@include file="../footer.jsp" %>

@@ -34,6 +34,8 @@ public class TicketController extends HttpServlet {
 		TicketDao ticketDao = new TicketDaoImpl();
 		EmployeeDao employeeDao = new EmployeeDaoImpl();
 		String ticketId = request.getParameter("ticketId");
+		int level = (int) session.getAttribute("designation");
+		String byName = (String) session.getAttribute("username");
 		String id = request.getParameter("id");
 		String data = "";
 		int row = -1;
@@ -94,12 +96,24 @@ public class TicketController extends HttpServlet {
 			request.setAttribute("ticket", ticket);
 			RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/modifyTicket.jsp");
 			rd.forward(request, response);
-		} /*
-			 * else if (anchor.equals("updateTicket")) { Ticket ticket = getTicket(request);
-			 * ticket.setTicketId(Integer.parseInt(request.getParameter("ticketId"))); row =
-			 * ticketDao.updateTicket(ticket); data = "update"; }
-			 */ else if (anchor.equalsIgnoreCase("cancelTicket")) {
+		} else if (anchor.equalsIgnoreCase("cancelTicket")) {
 			response.sendRedirect(request.getContextPath() + "/viewTicket?anchor=viewTicket");
+		} else if(anchor.equalsIgnoreCase("searchTicket")) {
+			List<Ticket> tickets = null;
+			String status = request.getParameter("status");
+			if(level == 3) {
+				tickets = ticketDao.viewTickets(byName, status);
+			} else {
+				tickets = ticketDao.viewTickets("", status);
+			}
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/viewTicket.jsp");
+            request.setAttribute("tickets", tickets);
+            if(!tickets.isEmpty()) {
+	            request.setAttribute("notFound", null);
+            } else {
+            	request.setAttribute("notFound", "");
+            }
+            rd.forward(request, response);
 		}
 		
 		if (row > 0) {
@@ -128,30 +142,11 @@ public class TicketController extends HttpServlet {
 			request.setAttribute("employees", employees);
 			rd.forward(request, response);
 		} else if(anchor.equals("viewTicket")) {
-			List<Ticket> tickets = null;
-			if(level == 3) {
-				tickets = ticketDao.viewTickets(byName);
-			} else {
-				tickets = ticketDao.viewTickets("");
-			}
             RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/viewTicket.jsp");
-            request.setAttribute("tickets", tickets);
+    		request.setAttribute("notFound", null);
             rd.forward(request, response);
         }
 	}
 
 	
-	private Ticket getTicket(HttpServletRequest request) {
-		Ticket ticket = new Ticket();
-		ticket.setTitle(request.getParameter("title"));
-		ticket.setAssignTo(request.getParameter("assignTo"));
-		ticket.setFilePath(request.getParameter("filePath"));
-		ticket.setFileName(request.getParameter("fileName"));
-		ticket.setAssignFrom(request.getParameter("assignFrom"));
-		ticket.setLastDate(request.getParameter("lastDate"));
-		ticket.setRootCause(request.getParameter("rootCause"));
-		ticket.setStatus(request.getParameter("status"));
-		ticket.setComment(request.getParameter("comment"));
-		return ticket;
-	}
 }
