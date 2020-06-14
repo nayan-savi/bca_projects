@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>bug-track-system</display-name>
+  
+  <welcome-file-list>
+		<welcome-file>jsp/login/login.jsp</welcome-file>
+	</welcome-file-list>
+	
+	<servlet>
+		<display-name>LoginController</display-name>
+		<servlet-name>LoginController</servlet-name>
+		<servlet-class>com.system.bugtracker.controller.LoginController</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>LoginController</servlet-name>
+		<url-pattern>/login</url-pattern>
+		<url-pattern>/logOff</url-pattern>
+	</servlet-mapping>
+
+	<servlet>
+		<display-name>EmployeeController</display-name>
+		<servlet-name>EmployeeController</servlet-name>
+		<servlet-class>com.system.bugtracker.controller.EmployeeController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>EmployeeController</servlet-name>
+		<url-pattern>/changePwd</url-pattern>
+		<url-pattern>/updatePwd</url-pattern>
+		<url-pattern>/addEmployee</url-pattern>
+		<url-pattern>/viewEmployee</url-pattern>
+		<url-pattern>/modifyEmployee</url-pattern>
+		<url-pattern>/updateEmployee</url-pattern>
+		<url-pattern>/cancelEmployee</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>TicketController</display-name>
+		<servlet-name>TicketController</servlet-name>
+		<servlet-class>com.system.bugtracker.controller.TicketController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TicketController</servlet-name>
+		<url-pattern>/addTicket</url-pattern>
+		<url-pattern>/viewTicket</url-pattern>
+		<url-pattern>/modifyTicket</url-pattern>
+		<url-pattern>/updateTicket</url-pattern>
+		<url-pattern>/cancelTicket</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<display-name>DownloadController</display-name>
+		<servlet-name>DownloadController</servlet-name>
+		<servlet-class>com.system.bugtracker.controller.DownloadController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DownloadController</servlet-name>
+		<url-pattern>/download</url-pattern>
+	</servlet-mapping>
+	
+</web-app>
