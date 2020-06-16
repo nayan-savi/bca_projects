@@ -1,0 +1,41 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+         pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <title>Insert title here</title>
+    <script type="text/javascript">
+
+        function addValue() {
+
+			${javascriptValidation}
+
+            document.${name}.action="add${className}?anchor=add${className}";
+            document.${name}.submit();
+        }
+
+    </script>
+</head>
+<body>
+	<%@include file="managerHeader.jsp" %>
+	<div id="wrapper">
+		<div id="page">
+			<%@include file="../login/loginDetails.jsp" %>
+			<div align="center">
+				<h3 style="color: green">${success}</h3>
+				<h3 style="color: red">${errmsg}</h3>
+			</div>
+			<form action="" name="${name}" method="post" style="padding-left: 40px;">
+				<h1></h1>
+				<table>
+					${trData}
+					<tr ><td colspan="3" align="center"><input type="button" value="Save" onclick="addValue()"></td></tr>
+				</table>
+			</form>
+
+		</div>
+	</div>
+	<%@include file="../footer.jsp" %>
+</body>
+</html>

@@ -1,0 +1,68 @@
+import java.io.IOException;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet(name = "${className}Controller")
+public class ${className}Controller extends HttpServlet {
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String anchor = request.getParameter("anchor");
+		String ${declareName}Id = request.getParameter("id");
+		String data = "";
+		int row = -1;
+		${className}Dao ${declareName}Dao = new ${className}DaoImpl();
+		if (anchor.equals("add${className}")) {
+			${className} ${declareName} = new ${className}();
+			${setData}
+			row = ${declareName}Dao.save${className}(${declareName});
+			data = "${className}";
+		} else if(anchor.equals("modify${className}")) {
+            ${className} ${declareName} = ${declareName}Dao.get${className}ById(${declareName}Id);
+              request.setAttribute("${declareName}", ${declareName});
+              RequestDispatcher rd = request.getRequestDispatcher("jsp/rto/modify${className}.jsp");
+              rd.forward(request, response);
+        } else if(anchor.equals("update${className}")) {
+            ${className} ${declareName} = get${className}(request);
+            ${declareName}.set${className}Id(Integer.parseInt(request.getParameter("${declareName}Id")));
+            row = ${declareName}Dao.update${className}(${declareName});
+            data = "update";
+        } else if (anchor.equalsIgnoreCase("cancel${className}")) {
+            response.sendRedirect(request.getContextPath()+"/view${className}?anchor=view${className}");
+        }
+
+		if (row > 0) {
+		    if("update".equals(data)) {
+                response.sendRedirect(request.getContextPath()+"/view${className}?anchor=view${className}");
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("");
+                response.sendRedirect(request.getContextPath() + "");
+            }
+		} else if (row == 0) {
+			RequestDispatcher rd = request.getRequestDispatcher("");
+			request.setAttribute("errmsg", data + " already exits.");
+			rd.forward(request, response);
+		}
+	}
+
+	@Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String anchor = request.getParameter("anchor");
+        ${className}Dao ${declareName}Dao = new ${className}DaoImpl();
+        if (anchor.equals("add${className}")) {
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/add${className}.jsp");
+            rd.forward(request, response);
+        } else if(anchor.equals("view${className}")) {
+            List<${className}> ${declareName}s = ${declareName}Dao.view${className}s();
+            RequestDispatcher rd = request.getRequestDispatcher("jsp/employee/view${className}.jsp");
+            request.setAttribute("${declareName}s", ${declareName}s);
+            rd.forward(request, response);
+        }
+    }
+}

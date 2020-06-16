@@ -1,0 +1,75 @@
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ${className}DaoImpl implements ${className}Dao {
+
+	private Statement stmt;
+
+    public ${className}DaoImpl() {
+        try {
+            stmt = ConnectionDb.getConnection().createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+	@Override
+	public int save${className}(${className} ${declareName}) {
+		try {
+            String query = "${insert}";
+            return stmt.executeUpdate(query);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+		return 0;
+	}
+
+	@Override
+    public List<${className}> view${className}s() {
+        List<${className}> ${declareName}s = new ArrayList<>();
+        try {
+            String query = "SELECT * FROM ${view}";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ${className} ${declareName} = new ${className}();
+                ${setDbData}
+                ${declareName}s.add(${declareName});
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ${declareName}s;
+    }
+
+    @Override
+    public ${className} get${className}ById(String id) {
+        ${className} ${declareName} = new ${className}();
+        try {
+            String query = "SELECT * FROM ${className} WHERE ${className}ID = ('"+id+"')";
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                ${setDbData}
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ${declareName};
+    }
+
+    @Override
+    public int update${className}(${className} ${declareName}) {
+        try {
+            String query = "UPDATE ${className} SET MODEL = '"+${declareName}.getModel()+"', COLOR = '"
+            +${declareName}.getColor()+"', COMMENT = '"+${declareName}.getComment()
+            +"', ADDRESS= '"+${declareName}.getAddress()+"' where ${declareName}Id = '"+${declareName}.getVehicleId()+"'";
+            return stmt.executeUpdate(query);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+}

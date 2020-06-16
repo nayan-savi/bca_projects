@@ -1,0 +1,12 @@
+import java.util.List;
+
+public interface ${className}Dao {
+
+	int save${className}(${className} ${declareName});
+
+    List<${className}> view${className}s();
+
+    ${className} get${className}ById(String parameter);
+
+    int update${className}(${className} ${declareName});
+}

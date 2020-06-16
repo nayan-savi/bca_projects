@@ -1,0 +1,7 @@
+package ${packageName}.dao;
+
+import ${packageName}.model.Login;
+
+public interface LoginDao {
+    Login login(String username, String password);
+}

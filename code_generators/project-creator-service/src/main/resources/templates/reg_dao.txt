@@ -1,0 +1,8 @@
+package ${packageName}.dao;
+
+import ${packageName}.model.Registration;
+
+public interface RegistrationDao {
+    int save(Registration registration);
+    int updatePwd(Registration reg);
+}
