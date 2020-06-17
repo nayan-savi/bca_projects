@@ -39,6 +39,8 @@
             </div>
             <h3><%=postDetails.get(i).getUsername()%></h3>
             <h2><%=postDetails.get(i).getTitle()%></h2>
+            
+            <img class="fakeimg" src="display?name=<%=postDetails.get(i).getPath()%>" alt="image" />
             <p><%=postDetails.get(i).getMessage()%></p>
             <div style="display: inline-flex">
                 <label><b>Likes: </b><%=postDetails.get(i).getLike()%></label>

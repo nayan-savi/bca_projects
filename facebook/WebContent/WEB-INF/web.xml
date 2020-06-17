@@ -95,5 +95,15 @@
         <url-pattern>/deletePost</url-pattern>
         <url-pattern>/editPost</url-pattern>
     </servlet-mapping>
+    
+    <servlet>
+		<display-name>DisplayImages</display-name>
+		<servlet-name>DisplayImages</servlet-name>
+		<servlet-class>com.college.facebook.app.controller.DisplayImages</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>DisplayImages</servlet-name>
+		<url-pattern>/display</url-pattern>
+	</servlet-mapping>
 
 </web-app>

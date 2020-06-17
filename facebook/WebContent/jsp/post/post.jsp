@@ -34,7 +34,7 @@
 <%
     Login login = (Login) session.getAttribute("user");
 %>
-<form action="post" name="user" method="post" onSubmit="return validateForm()" >
+<form action="post" name="user" method="post" enctype="multipart/form-data" onSubmit="return validateForm()" >
     <table>
         <tr>
             <td class="headerName">Username</td>
@@ -49,10 +49,10 @@
             <td><input type="text" name="message"> </td>
         </tr>
 
-        <%--<tr>
+        <tr>
             <td class="headerName">Choose Image:</td>
             <td><input type="file" name="path" id="path" multiple accept="image/*"></td>
-        </tr>--%>
+        </tr>
 
         <tr>
             <td>

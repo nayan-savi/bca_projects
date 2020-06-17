@@ -32,8 +32,8 @@
     <h3 style="color: red">${errmsg}</h3>
 </div>
 
-<form action="" name="user" method="post" >
-    <table>
+<form action="" name="user" method="post" enctype="multipart/form-data" >
+    <table border="0">
         <tr>
             <td>Username</td>
             <td>
@@ -49,8 +49,18 @@
             <td>Message</td>
             <td><input type="text" name="message" value="<%=postDetails.getMessage()%>"> </td>
         </tr>
+        <tr>
+        <td></td>
+         <td ><img style="width: 40%;height: 30%;" src="display?name=<%=postDetails.getPath()%>" alt="image" /><br /><br />
+        </td>
+        </tr>
+        <tr>
+            <td class="headerName">Choose Image:</td>
+            <td><input type="file" name="path" id="path" multiple accept="image/*"></td>
+        </tr>
 
         <tr>
+        	<td></td>
             <td>
                 <fieldset>
                     <legend>Access level</legend>

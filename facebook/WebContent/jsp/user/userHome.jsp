@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>User</title>
     <link rel="stylesheet" type="text/css" href="./css/post.css"/>
     <script type="text/javascript">
 
@@ -41,7 +41,7 @@
                 <div class="card">
                     <h3><%=postDetails.get(i).getUsername()%></h3>
                     <h2><%=postDetails.get(i).getTitle()%></h2>
-                    <!-- <img class="fakeimg" src="./images/08404759-15b9-49ce-8f88-a205d3813824.jpg" alt="image" /> -->
+                    <img class="fakeimg" src="display?name=<%=postDetails.get(i).getPath()%>" alt="image" style="height: 50%"/>
                     <p><%=postDetails.get(i).getMessage()%></p>
                     <div>
                         <label><b>Likes: </b><%=postDetails.get(i).getLike()%></label>

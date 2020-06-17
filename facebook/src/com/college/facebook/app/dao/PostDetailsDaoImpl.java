@@ -40,8 +40,9 @@ public class PostDetailsDaoImpl implements PostDetailsDao {
         try {
             Statement statement = connection.createStatement();
             String query = "UPDATE POSTDETAILS SET TITLE ='"+postDetails.getTitle()
-                    +"',CREATEDDATE = NOW() ,MESSAGE = '"+postDetails.getMessage()+"', VISIBILITYLEVEL = '"+postDetails.getVisibilityLevel()+"' " +
-                    "WHERE POSTID = '"+postDetails.getPostId()+"'";
+                    +"',CREATEDDATE = NOW() ,MESSAGE = '"+postDetails.getMessage()
+                    +"', VISIBILITYLEVEL = '"+postDetails.getVisibilityLevel()+"' " 
+                    + "WHERE POSTID = '"+postDetails.getPostId()+"'";
             return statement.executeUpdate(query);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
