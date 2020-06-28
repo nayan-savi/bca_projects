@@ -156,12 +156,13 @@ public class VehicleDaoImpl implements VehicleDao {
 	@Override
 	public int saveEmployee(Registration employee) {
 		try {
-            String query = "INSERT INTO REGISTRATION (NAME,ADDRESS,CONTACT_NO,EMAIL_ID,USERNAME,LEVEL,ACTIVE,DESIGNATION) VALUES ('"
+            String query = "INSERT INTO REGISTRATION (NAME,ADDRESS,CONTACT_NO,EMAIL_ID,USERNAME,PASSWORD,LEVEL,ACTIVE,DESIGNATION) VALUES ('"
             				+employee.getName()+ "','" 
             				+employee.getAddress()+ "','" 
             				+employee.getContactNo()+ "','" 
             				+employee.getEmailId()+ "','" 
             				+employee.getUsername()+ "','" 
+            				+employee.getPassword()+ "','" 
             				+employee.getLevel()+ "','" 
             				+employee.getStatus()+ "','" 
             				+employee.getDesignation()+"')";
