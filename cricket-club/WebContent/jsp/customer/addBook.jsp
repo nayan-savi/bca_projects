@@ -35,6 +35,14 @@
             document.book.submit();
         }
         
+        function calPrice() {
+        	var bookings = document.getElementById("booking").value;
+        	var price = document.getElementById("price").value;
+        	var totalPrice = bookings * price;
+        	console.log(totalPrice);
+        	document.getElementById("totalPrice").value = totalPrice;
+        }
+        
         function setPrice() {
             selectElement = document.querySelector('#ticketShowName');
             output = selectElement.options[selectElement.selectedIndex].value;
@@ -63,7 +71,7 @@
 				<table>
 					<tr><td>Event Name</td>
 						<td width="170px">
-							<select name="ticketShowName" id="ticketShowName" style="width: 170px" onchange="setPrice()">
+							<select name="ticketShowName" id="ticketShowName" style="width: 165px" onchange="setPrice()">
 								<option></option>
 								<%
 									for (int i = 0; i < tickets.size(); i++) {
@@ -87,7 +95,11 @@
 					<tr><td>Event Time</td><td><input readonly type="text" name="eventTime" id="eventTime"/></td></tr>
 					<tr><td>Event Place</td><td><input readonly type="text" name="eventPlace" id="eventPlace"/></td></tr>
 					<tr><td>Price<td><input readonly type="text" name="price" id="price"/></td></tr>
-					<tr><td>No. of Booking<td><input type="number" name="booking" id="booking"/></td></tr>
+					<tr>
+						<td>No. of Booking</td>
+						<td><input type="number" name="booking" id="booking" onchange="calPrice()"/></td>
+						<td>Total Price</td><td><input disabled id="totalPrice" name="totalPrice" />
+					</tr>
 					<tr ><td colspan="3" align="center"><input type="button" value="Book" onclick="addValue()"></td></tr>
 				</table>
 			</form>

@@ -6,7 +6,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mysql.cj.util.StringUtils;
+
 import com.voilation.traffic.model.Complaint;
 import com.voilation.traffic.util.ConnectionDb;
 
@@ -125,7 +125,7 @@ public class ComplaintDaoImpl implements ComplaintDao {
         try {
         	String query = "SELECT * FROM COMPLAINT WHERE REGNO = '"+regNo+"'";
         	
-        	if(!StringUtils.isNullOrEmpty(status)) {
+        	if(status != null || status != "") {
         		query += " AND STATUS IN ('"+status+"')";
         	}
             

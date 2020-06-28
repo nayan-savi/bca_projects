@@ -31,6 +31,9 @@ public class BookController extends HttpServlet {
 		BookDao bookDao = new BookDaoImpl();
 		if (anchor.equals("addBook")) {
 			Book book = getBook(request);
+			double price = Double.parseDouble(request.getParameter("price"));
+			int bookings = Integer.parseInt(request.getParameter("booking"));
+			book.setPrice(price * bookings);
 			book.setUsername((String)session.getAttribute("username"));
 			row = bookDao.saveBook(book);
 			data = "Book";

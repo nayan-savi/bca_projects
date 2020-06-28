@@ -1,7 +1,6 @@
 package com.voilation.traffic.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -11,11 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.voilation.traffic.dao.RegistrationDao;
-import com.voilation.traffic.dao.RegistrationDaoImpl;
 import com.voilation.traffic.dao.VehicleDao;
 import com.voilation.traffic.dao.VehicleDaoImpl;
-import com.voilation.traffic.model.Complaint;
 import com.voilation.traffic.model.Registration;
 import com.voilation.traffic.model.Vehicle;
 

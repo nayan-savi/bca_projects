@@ -37,7 +37,7 @@
             <h3 style="color: green">${success}</h3>
             <h3 style="color: red">${errmsg}</h3>
         </div>
-		<form action="registration" name="reg" method="post" onSubmit="return validateForm()">
+		<form action="addEmployee?anchor=addEmployee" name="reg" method="post" onSubmit="return validateForm()">
              <table width="333" height="188" border="0" align="center">
                  <tr>
                      <td colspan="2" align="center"><h1>Registration</h1></td>
@@ -111,7 +111,7 @@
                  <tr>
                      <td>
                          <div align="center">
-                             <input  type="submit" value="Register" />
+                             <input  type="submit" value="Save Employee" />
                          </div>
                      </td>
                      <td>
