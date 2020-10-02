@@ -8,7 +8,8 @@ Released for free under a Creative Commons Attribution 2.5 License
 body {
 	margin-top: 50px;
 	padding: 0;
-	background: #CFAACF;
+	background: url(../images/pizza.jpg) no-repeat left top;
+	background-size: cover;
 	text-align: justify;
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-size: 12px;
@@ -62,18 +63,18 @@ img.right {
 #header {
 	width: 1000px;
 	margin: 0 auto;
-	height: 150px;
 	background: url(images/img02.jpg) repeat-x left top;
 }
 
 /* Header */
 
 #logo {
-	width: 1000px;
+	width: 1010px;
 	height: 100px;
 	margin: 0 auto;
 	padding: 0 10px 0 70px;
 	background: url(../images/img01.jpg) no-repeat left top;
+	border-top-left-radius: 20px;
 }
 
 #logo h1, #logo p {
@@ -156,8 +157,14 @@ img.right {
 
 /* Page */
 
+#loginPage {
+	width: 990px;
+	padding: 20px 5px;
+	background: #FFFFFF;
+}
+
 #page {
-	width: 1000px;
+	width: 990px;
 	margin: 0 auto;
 	padding: 20px 5px;
 	background: #FFFFFF;
@@ -363,8 +370,8 @@ img.right {
 	width: 1000px;
 	height: 70px;
 	margin: 0 auto;
-	padding: 0 20px;
 	background: url(../images/img04.jpg) no-repeat left top;
+	border-bottom-right-radius: 20px;
 }
 
 #footer p {
@@ -382,9 +389,10 @@ img.right {
 }
 
 #footer .copyright {
-	float: left;
+	float: center;
 }
 
 .flower {
 	padding-left: 20px;
 }
+

@@ -72,7 +72,7 @@
                 </tr>
                 <tr>
                     <td>Requested Date</td>
-                    <td><input type="text" name="requestDate"/>(Ex:dd-mm-yyyy)</td>
+                    <td><input type="date" name="requestDate" style="width: 172px;"/>(Ex:dd-mm-yyyy)</td>
                 </tr>
                 <tr>
                     <td>Bargaining</td>

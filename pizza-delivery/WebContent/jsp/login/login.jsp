@@ -7,7 +7,7 @@
     <title>Pizza Delivery</title>
     <link href="././css/default.css" rel="stylesheet" type="text/css" media="screen" />
     <script src="././js/dropdowntabs.js" type="text/javascript"></script>
-    <link rel="stylesheet" type="text/css" href="../../css/ddcolortabs.css" />
+    <link rel="stylesheet" type="text/css" href="././css/ddcolortabs.css" />
 </head>
 <script type="text/javascript">
 	function loginValidation() {
@@ -34,13 +34,13 @@
     <!-- end header -->
     <div id="wrapper">
         <!-- start page -->
-        <div id="page">
+        <div id="loginPage">
             <div align="center">
                 <h3 style="color: green">${success}</h3>
                 <h3 style="color: red">${errmsg}</h3>
             </div>
             <form action="login" name="login" method="post" onSubmit="return loginValidation()">
-                <table width="333" height="188" border="0" align="center">
+                <table width="333" height="188" border="0" align="center" style="border: solid; font-size: 13px">
                     <tr>
                         <td colspan="2" align="center"><h1>User Login page</h1></td>
                     </tr>
@@ -49,7 +49,7 @@
                             <div align="right">Username</div>
                         </td>
                         <td width="213">
-                            <input name="username" type="text" value="admin" />
+                            <input name="username" type="text" value="" />
                         </td>
                     </tr>
                     <tr>
@@ -57,7 +57,7 @@
                             <div align="right">Password</div>
                         </td>
                         <td>
-                            <input name="password" type="password" value="admin"/>
+                            <input name="password" type="password" value=""/>
                         </td>
                     </tr>
                     <tr>
@@ -70,8 +70,8 @@
                             <input name="reset" type="reset" />
                         </td>
                     </tr>
-                    <tr>
-                        <td align="right"><a href="registration?anchor=reg">User Registration</a></td>
+                    <tr align="right">
+                        <td colspan="2"><a href="registration?anchor=reg">User Registration</a></td>
                     </tr>
                 </table>
             </form>
